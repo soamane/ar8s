@@ -8,23 +8,20 @@ find_package(CURL REQUIRED)
 find_package(nlohmann_json REQUIRED)
 
 add_executable(${PROJECT_NAME} 
-    src/ServiceParser/ServiceParser.cpp
     src/main/main.cpp
 )
 
-# Укажите директории заголовков
-target_include_directories(${PROJECT_NAME}
-    PRIVATE 
-        ${CMAKE_SOURCE_DIR}/src/Service      
-        ${CMAKE_SOURCE_DIR}/src/ServiceParser 
-        ${CMAKE_SOURCE_DIR}/lib/MyCurl/include   
+target_include_directories(${PROJECT_NAME} PRIVATE 
+    ${CMAKE_SOURCE_DIR}/lib/MyCurl/include   
+    ${CURL_INCLUDE_DIRS} 
 )
 
-set(CURL_DEFAULT_LIB Ws2_32 Crypt32 Wldap32 Normaliz)
-
 target_link_libraries(${PROJECT_NAME} 
-    PRIVATE CURL::libcurl
+    PRIVATE ${CURL_LIBRARIES} 
     PRIVATE ${CMAKE_SOURCE_DIR}/lib/MyCurl/lib/MyCurl_x64.lib
-    PRIVATE ${CURL_DEFAULT_LIB}
+    PRIVATE Ws2_32
+    PRIVATE Wldap32
+    PRIVATE Normaliz
+    PRIVATE Crypt32
     PRIVATE nlohmann_json::nlohmann_json
 )
