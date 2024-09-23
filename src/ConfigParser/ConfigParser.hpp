@@ -1,7 +1,9 @@
 #ifndef CONFIG_PARSER_HPP
 #define CONFIG_PARSER_HPP
 
+#include <memory>
 #include <filesystem>
+
 #include "../JsonParser/JsonParser.hpp"
 
 struct Config
@@ -18,7 +20,13 @@ public:
     ConfigParser();
     ~ConfigParser();
 
-    const Config ParseConfig();
+    const Config &GetParsedConfig();
+
+private:
+    void ParseConfig();
+
+private:
+    Config m_config;
 };
 
 #endif // !CONFIG_PARSER_HPP
