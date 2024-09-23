@@ -19,11 +19,11 @@ void ConfigParser::ParseConfig()
     nlohmann::json data = this->Parse();
     if (data.empty())
     {
-        throw std::runtime_error("Json data is empty.");
+        throw std::runtime_error("Config's data is empty.");
     }
 
-    this->m_config.useProxy = data["use-proxy"];
-    this->m_config.proxyAddress = data["proxy"]["address"];
-    this->m_config.proxyPassword = data["proxy"]["password"];
-    this->m_config.targetPhone = data["target-phone"];
+    this->m_config.useProxy = data.value("use-proxy", false);
+    this->m_config.proxyAddress = data.value("proxy", nlohmann::json{{"address", ""}}).value("address", "");
+    this->m_config.proxyPassword = data.value("proxy", nlohmann::json{{"password", ""}}).value("password", "");
+    this->m_config.targetPhone = data.value("phone", "");
 }
