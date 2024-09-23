@@ -4,7 +4,7 @@
 #include <memory>
 #include <filesystem>
 
-#include "../Parser/JsonParser/JsonParser.hpp"
+#include "../JsonParser/JsonParser.hpp"
 
 struct Config
 {

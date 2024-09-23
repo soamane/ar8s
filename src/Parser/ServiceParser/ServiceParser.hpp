@@ -4,7 +4,7 @@
 #include <vector>
 #include <MyCurl.hpp>
 
-#include "../Parser/JsonParser/JsonParser.hpp"
+#include "../JsonParser/JsonParser.hpp"
 
 struct Service
 {
