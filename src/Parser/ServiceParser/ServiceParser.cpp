@@ -1,5 +1,7 @@
 #include "ServiceParser.hpp"
 
+#include <iostream>
+
 ServiceParser::ServiceParser() : JsonParser("services.json")
 {
     this->ParseServices();
@@ -21,6 +23,8 @@ const std::vector<Service> &ServiceParser::GetParsedServices()
 
 void ServiceParser::ParseServices()
 {
+    std::cout << "[#] Parsing services.json file" << std::endl;
+
     nlohmann::json data = this->Parse();
     if (data.empty())
     {
