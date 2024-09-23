@@ -17,6 +17,10 @@ const Config &ConfigParser::GetParsedConfig()
 void ConfigParser::ParseConfig()
 {
     nlohmann::json data = this->Parse();
+    if (data.empty())
+    {
+        throw std::runtime_error("Json data is empty.");
+    }
 
     this->m_config.useProxy = data["use-proxy"];
     this->m_config.proxyAddress = data["proxy"]["address"];
