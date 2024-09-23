@@ -1,7 +1,5 @@
 #include "ServiceParser.hpp"
 
-#include <iostream>
-
 ServiceParser::ServiceParser() : JsonParser("services.json")
 {
     this->ParseServices();

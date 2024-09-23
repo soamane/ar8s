@@ -9,16 +9,16 @@ find_package(nlohmann_json REQUIRED)
 
 add_executable(${PROJECT_NAME} 
     src/main/main.cpp
-    src/JsonParser/JsonParser.cpp
-    src/ConfigParser/ConfigParser.cpp
-    src/ServiceParser/ServiceParser.cpp
+    src/Parser/JsonParser/JsonParser.cpp
+    src/Parser/ConfigParser/ConfigParser.cpp
+    src/Parser/ServiceParser/ServiceParser.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
     ${CMAKE_SOURCE_DIR}/lib/MyCurl/include  
-    ${CMAKE_SOURCE_DIR}/src/JsonParser/ 
-    ${CMAKE_SOURCE_DIR}/src/ConfigParser/ 
-    ${CMAKE_SOURCE_DIR}/src/ServiceParser/ 
+    ${CMAKE_SOURCE_DIR}/src/Parser/JsonParser/ 
+    ${CMAKE_SOURCE_DIR}/src/Parser/ConfigParser/ 
+    ${CMAKE_SOURCE_DIR}/src/Parser/ServiceParser/ 
     ${CURL_INCLUDE_DIRS} 
 )
 
