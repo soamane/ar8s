@@ -12,6 +12,7 @@ add_executable(${PROJECT_NAME}
     src/Parser/JsonParser/JsonParser.cpp
     src/Parser/ConfigParser/ConfigParser.cpp
     src/Parser/ServiceParser/ServiceParser.cpp
+    src/ServiceExecutor/ServiceExecutor.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
@@ -19,6 +20,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_SOURCE_DIR}/src/Parser/JsonParser/ 
     ${CMAKE_SOURCE_DIR}/src/Parser/ConfigParser/ 
     ${CMAKE_SOURCE_DIR}/src/Parser/ServiceParser/ 
+    ${CMAKE_SOURCE_DIR}/src/ServiceExecutor/ServiceExecutor/ 
     ${CURL_INCLUDE_DIRS} 
 )
 
