@@ -38,9 +38,9 @@ void ServiceParser::ParseServices()
     {
         Service service;
 
-        service.name = obj.value("name", "Google");
-        service.url = obj.value("url", "https://google.com/");
-        service.payload = obj.value("payload", "payload");
+        service.name = obj.value("name", "");
+        service.url = obj.value("url", "");
+        service.payload = obj.value("payload", "");
         service.headers = obj.value("headers", std::vector<std::string>{});
         service.protocolType = static_cast<ProtocolType>(obj.value("protocolType", ProtocolType::HTTPS));
         service.requestType = static_cast<RequestType>(obj.value("requestType", RequestType::GET));
