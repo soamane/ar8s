@@ -17,6 +17,7 @@ public:
 
 private:
     void Setup();
+    std::string ReplacePhonePlaceholder(const std::string &str, std::string_view value);
 
 private:
     MyCurl m_myCurl;
