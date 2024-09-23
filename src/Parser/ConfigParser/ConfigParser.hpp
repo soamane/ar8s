@@ -13,6 +13,7 @@ struct Config
     std::string proxyUsername;
     std::string proxyPassword;
     std::string phone;
+    int attacks;
 };
 
 class ConfigParser : public JsonParser

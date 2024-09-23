@@ -30,4 +30,5 @@ void ConfigParser::ParseConfig()
     this->m_config.proxyUsername = data.value("proxy", nlohmann::json{{"username", ""}}).value("username", "");
     this->m_config.proxyPassword = data.value("proxy", nlohmann::json{{"password", ""}}).value("password", "");
     this->m_config.phone = data.value("phone", "");
+    this->m_config.attacks = data.value("attacks", 1);
 }
