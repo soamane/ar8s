@@ -1,5 +1,7 @@
 #include "ConfigParser.hpp"
 
+#include <iostream>
+
 ConfigParser::ConfigParser() : JsonParser("config.json")
 {
     this->ParseConfig();
@@ -16,6 +18,7 @@ const Config &ConfigParser::GetParsedConfig()
 
 void ConfigParser::ParseConfig()
 {
+    std::cout << "[#] Parsing config.json file" << std::endl;
     nlohmann::json data = this->Parse();
     if (data.empty())
     {
@@ -24,6 +27,7 @@ void ConfigParser::ParseConfig()
 
     this->m_config.useProxy = data.value("use-proxy", false);
     this->m_config.proxyAddress = data.value("proxy", nlohmann::json{{"address", ""}}).value("address", "");
+    this->m_config.proxyUsername = data.value("proxy", nlohmann::json{{"username", ""}}).value("username", "");
     this->m_config.proxyPassword = data.value("proxy", nlohmann::json{{"password", ""}}).value("password", "");
-    this->m_config.targetPhone = data.value("phone", "");
+    this->m_config.phone = data.value("phone", "");
 }
