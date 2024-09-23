@@ -1,17 +1,17 @@
 #include <iostream>
-#include "../ConfigParser/ConfigParser.hpp"
+
+#include "../ServiceParser/ServiceParser.hpp"
 
 int main()
 {
     try
     {
-        ConfigParser config;
-        Config cfg = config.GetParsedConfig();
+        ServiceParser parser;
+        std::vector<Service> services = parser.GetParsedServices();
 
-        std::cout << "use-proxy: " << cfg.useProxy << std::endl;
-        std::cout << "\taddress: " << cfg.proxyAddress << std::endl;
-        std::cout << "\tproxyPassword: " << cfg.proxyPassword << std::endl;
-        std::cout << "phone: " << cfg.targetPhone << std::endl;
+        for (const auto &service : services)
+        {
+                }
     }
     catch (const std::exception &e)
     {
