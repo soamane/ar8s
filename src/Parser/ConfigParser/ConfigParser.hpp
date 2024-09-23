@@ -10,8 +10,9 @@ struct Config
 {
     bool useProxy;
     std::string proxyAddress;
+    std::string proxyUsername;
     std::string proxyPassword;
-    std::string targetPhone;
+    std::string phone;
 };
 
 class ConfigParser : public JsonParser
