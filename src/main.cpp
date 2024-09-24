@@ -14,7 +14,7 @@ int main() {
         std::cout << settings.var << std::endl;
 
         ServiceParser serviceParser("services.json");
-        std::vector<Service> services = serviceParser.GetServices();
+        const std::vector<Service>& services = serviceParser.GetServices();
 
         std::cout << "services.json >" << std::endl;
         for (const auto& service : services) {
