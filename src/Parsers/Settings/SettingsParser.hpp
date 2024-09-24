@@ -9,6 +9,7 @@ struct Placeholder {
 };
 
 struct Settings {
+    int attacksCount;
     bool usePlaceholders;
     std::vector<Placeholder> placeholders;
 };
