@@ -1,19 +1,19 @@
-#include "JsonParser.hpp"
+#include "ConfigParser.hpp"
 
 #include <fstream>
 
-JsonParser::JsonParser(const std::filesystem::path &path) : m_path(path)
+ConfigParser::ConfigParser(const std::filesystem::path &path) : m_path(path)
 {
 }
 
-JsonParser::~JsonParser()
+ConfigParser::~ConfigParser()
 {
 }
 
-nlohmann::json JsonParser::Parse()
+nlohmann::json ConfigParser::Parse()
 {
     if (this->m_path.empty()) {
-        throw std::invalid_argument("Empty path for parsing file.");
+        throw std::invalid_argument("Empty configuration path.");
     }
 
     if (!std::filesystem::exists(this->m_path)) {
