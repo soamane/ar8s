@@ -6,10 +6,13 @@
 
 class JsonParser {
 public:
+    JsonParser(const std::filesystem::path& path);
+    
     virtual ~JsonParser();
-    virtual nlohmann::json Parse(const std::filesystem::path& path);
+    virtual nlohmann::json Parse();
 
 private:
+    std::filesystem::path m_path;
 };
 
 #endif // !JSON_PARSER_HPP

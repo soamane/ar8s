@@ -2,23 +2,27 @@
 
 #include <fstream>
 
+JsonParser::JsonParser(const std::filesystem::path &path) : m_path(path)
+{
+}
+
 JsonParser::~JsonParser()
 {
 }
 
-nlohmann::json JsonParser::Parse(const std::filesystem::path& path)
+nlohmann::json JsonParser::Parse()
 {
-    if (path.empty()) {
+    if (this->m_path.empty()) {
         throw std::invalid_argument("Empty path for parsing file.");
     }
 
-    if (!std::filesystem::exists(path)) {
-        throw std::runtime_error("File " + path.string() + " doesn't exists.");
+    if (!std::filesystem::exists(this->m_path)) {
+        throw std::runtime_error("File " + this->m_path.string() + " doesn't exists.");
     }
 
-    std::ifstream file(path);
+    std::ifstream file(this->m_path);
     if (!file.is_open()) {
-        throw std::runtime_error("Failed open " + path.string() + " to parsing.");
+        throw std::runtime_error("Failed open " + this->m_path.string() + " to parsing.");
     }
 
     nlohmann::json data;
