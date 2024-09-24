@@ -18,7 +18,7 @@ add_executable(${PROJECT_NAME}
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
-    lib/MyCurl/include
+    ${CMAKE_SOURCE_DIR}/lib/MyCurl/include/
     src/Parsers/Config/
     src/Parsers/Settings/
     src/Parsers/Service/
