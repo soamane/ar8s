@@ -10,11 +10,17 @@ find_package(CURL REQUIRED)
 find_package(nlohmann_json REQUIRED)
 
 add_executable(${PROJECT_NAME} 
+    src/Parsers/Config/ConfigParser.cpp
+    src/Parsers/Settings/SettingsParser.cpp
+    src/Parsers/Service/ServiceParser.cpp
     src/main.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
-    ${CMAKE_SOURCE_DIR}/lib/MyCurl/include
+    lib/MyCurl/include
+    src/Parsers/Config/
+    src/Parsers/Settings/
+    src/Parsers/Service/
     ${CURL_INCLUDE_DIRS} 
 )
 
