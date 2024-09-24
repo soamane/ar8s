@@ -3,8 +3,14 @@
 
 #include "../Config/ConfigParser.hpp"
 
+struct Placeholder {
+    std::string key;
+    std::string value;
+};
+
 struct Settings {
-    bool var;
+    bool usePlaceholders;
+    std::vector<Placeholder> placeholders;
 };
 
 class SettingsParser : public ConfigParser {
@@ -14,6 +20,7 @@ public:
     
 private:
     void Load() override;
+    void ParsePlaceholders(const nlohmann::json& data);
 
 private:
     Settings m_settings;
