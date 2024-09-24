@@ -13,6 +13,7 @@ add_executable(${PROJECT_NAME}
     src/Parsers/Config/ConfigParser.cpp
     src/Parsers/Settings/SettingsParser.cpp
     src/Parsers/Service/ServiceParser.cpp
+    src/Executor/Executor.cpp
     src/main.cpp
 )
 
@@ -21,6 +22,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     src/Parsers/Config/
     src/Parsers/Settings/
     src/Parsers/Service/
+    src/Executor/
     ${CURL_INCLUDE_DIRS} 
 )
 
