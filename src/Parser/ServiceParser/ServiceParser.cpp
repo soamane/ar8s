@@ -2,42 +2,31 @@
 
 #include <iostream>
 
-ServiceParser::ServiceParser() : JsonParser("services.json")
-{
-    this->ParseServices();
-}
+ServiceParser::ServiceParser() : JsonParser("services.json") { }
 
-ServiceParser::~ServiceParser()
-{
-}
+ServiceParser::~ServiceParser() { }
 
-const std::vector<Service> &ServiceParser::GetParsedServices()
-{
-    if (this->services.empty())
-    {
+const std::vector<Service>& ServiceParser::GetParsedServices() {
+    if (this->services.empty()) {
         throw std::runtime_error("Service's array is empty.");
     }
 
     return this->services;
 }
 
-void ServiceParser::ParseServices()
-{
+void ServiceParser::ParseServices() {
     std::cout << "[#] Parsing services.json file" << std::endl;
 
     nlohmann::json data = this->Parse();
-    if (data.empty())
-    {
+    if (data.empty()) {
         throw std::runtime_error("Service's data is empty.");
     }
 
-    if (!data.contains("services") || !data["services"].is_array())
-    {
+    if (!data.contains("services") || !data["services"].is_array()) {
         throw std::invalid_argument("Key 'services' is missing or not an array.");
     }
 
-    for (const auto &obj : data["services"])
-    {
+    for (const auto& obj : data["services"]) {
         Service service;
 
         service.name = obj.value("name", "");

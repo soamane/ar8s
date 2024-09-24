@@ -5,14 +5,13 @@
 #include <filesystem>
 #include <nlohmann/json.hpp>
 
-class JsonParser
-{
+class JsonParser {
 protected:
-    JsonParser(const std::filesystem::path &path);
+    JsonParser(const std::filesystem::path& path);
     ~JsonParser();
 
 private:
-    void OpenFile(const std::filesystem::path &path);
+    void OpenFile(const std::filesystem::path& path);
     void CloseFile();
 
 protected:

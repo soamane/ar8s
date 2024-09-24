@@ -6,8 +6,7 @@
 
 #include "../JsonParser/JsonParser.hpp"
 
-struct Service
-{
+struct Service {
     std::string name;
     std::string url;
 
@@ -18,13 +17,12 @@ struct Service
     RequestType requestType;
 };
 
-class ServiceParser : JsonParser
-{
+class ServiceParser : JsonParser {
 public:
     ServiceParser();
     ~ServiceParser();
 
-    const std::vector<Service> &GetParsedServices();
+    const std::vector<Service>& GetParsedServices();
 
 private:
     void ParseServices();

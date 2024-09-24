@@ -6,8 +6,7 @@
 
 #include "../JsonParser/JsonParser.hpp"
 
-struct Config
-{
+struct Config {
     bool useProxy;
     std::string proxyAddress;
     std::string proxyUsername;
@@ -16,13 +15,12 @@ struct Config
     int attacks;
 };
 
-class ConfigParser : public JsonParser
-{
+class ConfigParser : public JsonParser {
 public:
     ConfigParser();
     ~ConfigParser();
 
-    const Config &GetParsedConfig();
+    const Config& GetParsedConfig();
 
 private:
     void ParseConfig();

@@ -7,8 +7,7 @@
 #include "../Parser/ConfigParser/ConfigParser.hpp"
 #include "../Parser/ServiceParser/ServiceParser.hpp"
 
-class ServiceExecutor
-{
+class ServiceExecutor {
 public:
     ServiceExecutor();
     ~ServiceExecutor();
@@ -16,8 +15,9 @@ public:
     void Execute();
 
 private:
-    void Setup();
-    std::string ReplacePhonePlaceholder(const std::string &str, std::string_view value);
+    void SetupSettings();
+    std::string ReplacePhonePlaceholder(const std::string& str, std::string_view value);
+    void ShowServiceInfo(const Service& service);
 
 private:
     MyCurl m_myCurl;

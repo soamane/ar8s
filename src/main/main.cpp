@@ -2,8 +2,7 @@
 
 #include "../ServiceExecutor/ServiceExecutor.hpp"
 
-int main()
-{
+int main() {
 
     std::cout << R"(  
          _____    ____     __     ____       
@@ -15,13 +14,11 @@ int main()
             \/_/\/_/\/_/\/ /\/___/   \/_____/
     )" << std::endl;
 
-    try
-    {
+    try {
         ServiceExecutor executor;
         executor.Execute();
     }
-    catch (const std::exception &e)
-    {
+    catch (const std::exception& e) {
         std::cerr << "[Exception]: " << e.what() << std::endl;
     }
 
