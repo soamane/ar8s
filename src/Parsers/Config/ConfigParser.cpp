@@ -1,6 +1,7 @@
 #include "ConfigParser.hpp"
 
 #include <fstream>
+#include <iostream>
 
 ConfigParser::ConfigParser(const std::filesystem::path &path) : m_path(path)
 {
@@ -30,8 +31,9 @@ nlohmann::json ConfigParser::Parse()
     try {
         file >> data;
     } catch(const nlohmann::json::parse_error& e) {
-        throw e.what();
+        throw std::runtime_error("Failed to parse configuration.");
     }
 
+    std::cout << "Successful" << std::endl;
     return data;
 }

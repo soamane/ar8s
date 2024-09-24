@@ -14,16 +14,25 @@ const Settings &SettingsParser::GetSettings()
 
 void SettingsParser::Load()
 {
+    std::cout << "[~] Loading settings config: ";
+
     nlohmann::json data = this->Parse();
     if (data.empty()) {
         throw std::runtime_error("Settings data is empty.");
     }
+
+    if (!data.contains("attacks-count")) {
+        throw std::runtime_error("Failed to parse 'use-placeholders', please check the correctness of the file.");
+    }
     
+    this->m_settings.attacksCount = data["attacks-count"];
     this->ParsePlaceholders(data);
 }
 
 void SettingsParser::ParsePlaceholders(const nlohmann::json& data)
 {
+    std::cout << "[~] Parse placeholders: ";
+
     if (!data.contains("use-placeholders")) {
         throw std::runtime_error("Failed to parse 'use-placeholders', please check the correctness of the file.");
     }
@@ -43,4 +52,6 @@ void SettingsParser::ParsePlaceholders(const nlohmann::json& data)
 
         this->m_settings.placeholders.push_back(placeholder);
     }
+
+    std::cout << "Successful" << std::endl;
 }

@@ -1,5 +1,7 @@
 #include "ServiceParser.hpp"
 
+#include <iostream>
+
 ServiceParser::ServiceParser(const Settings& settings, const std::filesystem::path &path) : m_settings(settings), ConfigParser(path)
 {
     this->Load();
@@ -16,6 +18,8 @@ const std::vector<Service> &ServiceParser::GetServices()
 
 void ServiceParser::Load()
 {
+    std::cout << "[~] Loading services config: ";
+    
     nlohmann::json data = this->Parse();
     if (data.empty()) {
         throw std::runtime_error("Service's data is empty.");
