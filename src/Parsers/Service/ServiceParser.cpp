@@ -1,6 +1,6 @@
 #include "ServiceParser.hpp"
 
-ServiceParser::ServiceParser(const std::filesystem::path &path) : ConfigParser(path)
+ServiceParser::ServiceParser(const Settings& settings, const std::filesystem::path &path) : m_settings(settings), ConfigParser(path)
 {
     this->Load();
 }
@@ -23,13 +23,42 @@ void ServiceParser::Load()
 
     const auto& services = data["services"];
     if (!data.contains("services") || !services.is_array() || services.empty()) {
-        throw std::runtime_error("Failed to parse services, please check the correctness of the file.");
+        throw std::runtime_error("Failed to parse 'services', please check the correctness of the file.");
     }
 
     for (const auto& object : services) {
         Service service;   
-        service.var = object["variable"];
+
+        service.name = object["name"];
+        service.url = object["url"];
+        service.payload = object["payload"];
+        service.headers = object["headers"];
+
+        if (this->m_settings.usePlaceholders) {
+            this->ReplacePlaceholders(service.url);
+            this->ReplacePlaceholders(service.payload);
+            
+            for (auto& header : service.headers) {
+                this->ReplacePlaceholders(header);
+            }
+        }
+
+        service.requestType = object["request-type"];
+        service.protocolType = object["protocol-type"];
 
         this->m_services.push_back(service);
+    }
+}
+
+void ServiceParser::ReplacePlaceholders(std::string &source)
+{
+    std::size_t pos;
+
+    for (const auto& placeholder : this->m_settings.placeholders) {
+        while((pos = source.find(placeholder.key, pos)) != std::string::npos) {
+            source.replace(pos, placeholder.key.length(), placeholder.value);
+            pos += placeholder.value.length();
+        } 
+        pos = 0;
     }
 }
