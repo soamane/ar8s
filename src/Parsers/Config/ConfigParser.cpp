@@ -30,8 +30,7 @@ nlohmann::json ConfigParser::Parse()
     try {
         file >> data;
     } catch(const nlohmann::json::parse_error& e) {
-        file.close();
-        throw e;
+        throw e.what();
     }
 
     return data;
