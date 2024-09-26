@@ -56,13 +56,11 @@ void ServiceParser::Load()
 
 void ServiceParser::ReplacePlaceholders(std::string &source)
 {
-    std::size_t pos;
-
     for (const auto& placeholder : this->m_settings.placeholders) {
+        std::size_t pos = 0;
         while((pos = source.find(placeholder.key, pos)) != std::string::npos) {
             source.replace(pos, placeholder.key.length(), placeholder.value);
             pos += placeholder.value.length();
         } 
-        pos = 0;
     }
 }
