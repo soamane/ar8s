@@ -1,0 +1,11 @@
+{
+	"attacks-count": 1,
+	
+	"use-placeholders": true,
+	"placeholders": [
+		{
+			"key": "${phone}",
+			"value": "9959105260"
+		}
+	]
+}
