@@ -25,7 +25,6 @@
             "request-type": 1,
             "protocol-type": 1
         },
-
         {
             "name": "IDOL",
             "url": "https://idol.ru/api/auth/code",
@@ -43,7 +42,6 @@
             "request-type": 1,
             "protocol-type": 1
         },
-
         {
             "name": "Litres",
             "url": "https://api.litres.ru/foundation/api/auth/send-otp",
@@ -58,6 +56,18 @@
                 "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
                 "x-request-id:df0ab3ce5292e9e0e2d45b7a5322b8ac",
                 "app-id: 115"
+            ],
+            "request-type": 1,
+            "protocol-type": 1
+        },
+        {
+            "name": "Telegram",
+            "url": "https://my.telegram.org/auth/send_password",
+            "payload": "phone=%2B7${phone}",
+            "headers": [
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0",
+                "Accept: application/json, text/javascript, */*; q=0.01",
+                "Content-Type: application/x-www-form-urlencoded; charset=UTF-8"
             ],
             "request-type": 1,
             "protocol-type": 1
