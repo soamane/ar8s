@@ -15,7 +15,7 @@ void Executor::Execute() {
             std::cout << "\t[URL]: " << service.url << std::endl;
 
             MyCurl myCurl;
-            myCurl.UseProxyServer("46.38.128.6:5319", "user214609", "7owera");
+           // myCurl.UseProxyServer("46.38.128.6:5319", "user214609", "7owera");
             RESPONSE response = this->ExecuteRequest(myCurl, service);
             this->ProcessServiceResponse(response);
         }
