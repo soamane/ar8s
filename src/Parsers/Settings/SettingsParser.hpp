@@ -3,6 +3,12 @@
 
 #include "../Config/ConfigParser.hpp"
 
+struct Proxy {
+    std::string address;
+    std::string username;
+    std::string password;
+};
+
 struct Placeholder {
     std::string key;
     std::string value;
@@ -10,7 +16,10 @@ struct Placeholder {
 
 struct Settings {
     int attacksCount;
+    int loopTimeout;
+    bool useProxy;
     bool usePlaceholders;
+    std::vector<Proxy> proxies;
     std::vector<Placeholder> placeholders;
 };
 
@@ -21,7 +30,10 @@ public:
 
 private:
     void Load() override;
+
+    void ParseAdditionals(const nlohmann::json& data);
     void ParsePlaceholders(const nlohmann::json& data);
+    void ParseProxies(const nlohmann::json& data);
 
 private:
     Settings m_settings;
