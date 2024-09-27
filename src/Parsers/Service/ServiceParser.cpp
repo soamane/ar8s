@@ -15,7 +15,7 @@ const std::vector<Service>& ServiceParser::GetServices() {
 }
 
 void ServiceParser::Load() {
-    std::cout << "[~] Loading services config: ";
+    std::cout << "\n[~] Loading services config: ";
 
     nlohmann::json data = this->Parse();
     if (data.empty()) {

@@ -20,6 +20,7 @@ private:
     const RESPONSE ExecuteRequest(const MyCurl& myCurl, const Service& service);
     void ProcessServiceResponse(RESPONSE response);
     const Proxy GetRandomProxy(const std::vector<Proxy>& proxies);
+    void ShowConfigs();
 private:
     Settings m_settings;
     std::vector<Service> m_services;

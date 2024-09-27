@@ -24,7 +24,7 @@ void SettingsParser::Load() {
 }
 
 void SettingsParser::ParsePlaceholders(const nlohmann::json& data) {
-    std::cout << "[~] Parse placeholders: ";
+    std::cout << "\t[~] Parse placeholders: ";
 
     if (!data.contains("use-placeholders")) {
         throw std::runtime_error("Failed to parse 'use-placeholders', please check the correctness of the file.");
@@ -64,7 +64,7 @@ void SettingsParser::ParseAdditionals(const nlohmann::json& data) {
 }
 
 void SettingsParser::ParseProxies(const nlohmann::json& data) {
-    std::cout << "[~] Parse proxies: ";
+    std::cout << "\t[~] Parse proxies: ";
 
     if (!data.contains("use-proxy")) {
         throw std::runtime_error("Failed to parse 'use-proxy', please check the correctness of the file.");

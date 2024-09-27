@@ -9,6 +9,7 @@ Executor::Executor(const Settings& settings, const std::vector<Service>& service
 Executor::~Executor() { }
 
 void Executor::Execute() {
+    this->ShowConfigs();
     std::cout << "[!] Execute services..." << std::endl;
     for (auto i = 0; i < this->m_settings.attacksCount; ++i) {
         for (const auto& service : this->m_services) {
@@ -72,5 +73,17 @@ const Proxy Executor::GetRandomProxy(const std::vector<Proxy>& proxies) {
     int index = dis(generator);
 
     return proxies.at(index);
+}
+
+void Executor::ShowConfigs() {
+    std::cout << "\n[!] Your config's settings:" << std::endl;
+
+    std::cout << "\t[Settings]:" << std::boolalpha << std::endl;
+    std::cout << "\t\t[Proxies]: " << this->m_settings.useProxy << ' ' << '[' << this->m_settings.proxies.size() << ']' << std::endl;
+    std::cout << "\t\t[Placeholders]: " << this->m_settings.usePlaceholders << ' ' << '[' << this->m_settings.placeholders.size() << ']' << std::endl;
+
+    std::cout << "\t[Services]: " << this->m_services.size() << " object(-s)" << std::endl;
+    std::cout << "\n[ar8s] Enter any key to execute services" << std::endl;
+    std::cin.get();
 }
 
