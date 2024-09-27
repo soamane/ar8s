@@ -61,38 +61,6 @@
             ],
             "request-type": 1,
             "protocol-type": 1
-        },
-
-        {
-            "name": "Invitro",
-            "url": "https://lk3.invitro.ru/site/api/login-confirmation/send",
-            "payload": "{\"territory\":\"RUSSIA\",\"login\":\"+7${phone}\"}",
-            "headers": [
-                "Accept: application/json, text/plain, */*",
-                "Content-Type: application/json",
-                "Cookie: __ddg1_=4pliMmHoxKiVfuccPtzK; INVITRO_REGION_CODE=chita; INVITRO_RU_REGION=896; INVITRO_CITY_LK_GUID=8a322cdd-5f39-413c-9c89-f64bcd3a7200; INVITRO_CITY=%D0%A7%D0%B8%D1%82%D0%B0; call_s=___qx4qnn1u.1727386989.867427587.170104:523914|2___; popmechanic_sbjs_migrations=popmechanic_1418474375998%3D1%7C%7C%7C1471519752600%3D1%7C%7C%7C1471519752605%3D1; _ga=GA1.1.1101291450.1727385191; _ym_uid=1727385192838951434; _ym_d=1727385192; _ym_isad=1; _ym_visorc=b; session-cookie=17f8e7aee25e044f842c213ebeb261f5fe2e0e8bc3517ca22e438757c6ef618bc1c24d4de9395eedea5a73fba81cb934; flocktory-uuid=2a62b0ce-997a-46e3-95c6-1a6d425c62f0-4; INVITRO_LOCALE=ru; csrf-token-name=csrftoken; _ga_T79M031R2Q=GS1.1.1727385191.1.1.1727385197.0.0.0; INVITRO_LKP_COUNTRY_CODE=RU; mindboxDeviceUUID=1a310a98-8fea-4b51-b567-e9db2e7d5b59; directCrm-session=%7B%22deviceGuid%22%3A%221a310a98-8fea-4b51-b567-e9db2e7d5b59%22%7D; popmechanic_sbjs_migrations=popmechanic_1418474375998%3D1%7C%7C%7C1471519752600%3D1%7C%7C%7C1471519752605%3D1; unauthorizedId=8q17489od4470484985b483290a252e3f0a93f40; csrf-token-value=17f8e7afc53cbfc69260ac11d56b9095bd5b8bcfbe63ff2c2ad74f88f123d5da7ed186712f252fe0; _ga_4LQENYMEJY=GS1.1.1727385191.1.1.1727385201.0.0.0",
-                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
-                "X-Ajax-Token: 9ddcba6204fb98be0fb38f1252b062c4dc069da74088395dc65076d88cb8c681",
-                "X-csrftoken: 17f8e7aee31c440f6075d471b0c167a759f8ebede508adb667c36b969d2df17c2ee6a18c55dbea33"
-            ],
-            "request-type": 1,
-            "protocol-type": 1
-        },
-
-        {
-            "name": "585Gold",
-            "url": "https://cart.zoloto585.ru/api/auth/code",
-            "payload": "{\"phone\":\"${phone}\",\"type\":\"sms\"}",
-            "headers": [
-                "accept: application/json",
-                "authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjczODUzODUsImV4cCI6MTcyOTk3NzM4NSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiZ2VuZXJpYy01NzUxZGQ4NTk2N2IwZWMzN2IyYTdkNTIyNDEyYWYzOCJ9.djbwY5aoZluLTqWqQzPguPvDgTFgxPlhm5igsnl-oCmYix9eg-5iHcsonSEp9Bym6eRZTI04wr9MXRAUeq3-rzRCfbIeEPdK7fxho1bi09aX9y1b1q1Dk48_kieWNkeselk478H2JHW_uKccH_dey-7kMYvBvkDB5_oDDun4xdR2z_0mmy10R_DWpdMAqsBh4KXp9MkViq_RAXKRh04gyjrn9_Aq6a8_HTf9z23jU28fEf1BL4conuwRjtF5F61_Z3k5ICBwsvA6P1eqKul-lhSTlBWG8WHpx6AjwTAzvmkqIBkOuWV4eW1UUwnL4ZZTg3OyWDOaLzpO35JgYw-jIA",
-                "content-type: application/json",
-                "cookie: popmechanic_sbjs_migrations=popmechanic_1418474375998%3D1%7C%7C%7C1471519752600%3D1%7C%7C%7C1471519752605%3D1; _ga=GA1.1.2142701672.1727385385; _ym_uid=1727385385790550816; _ym_d=1727385385; _ym_isad=1; _ym_visorc=w; mindboxDeviceUUID=1a310a98-8fea-4b51-b567-e9db2e7d5b59; directCrm-session=%7B%22deviceGuid%22%3A%221a310a98-8fea-4b51-b567-e9db2e7d5b59%22%7D; _clck=17g6zb9%7C2%7Cfpi%7C0%7C1730; access-token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjczODUzODUsImV4cCI6MTcyOTk3NzM4NSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiZ2VuZXJpYy01NzUxZGQ4NTk2N2IwZWMzN2IyYTdkNTIyNDEyYWYzOCJ9.djbwY5aoZluLTqWqQzPguPvDgTFgxPlhm5igsnl-oCmYix9eg-5iHcsonSEp9Bym6eRZTI04wr9MXRAUeq3-rzRCfbIeEPdK7fxho1bi09aX9y1b1q1Dk48_kieWNkeselk478H2JHW_uKccH_dey-7kMYvBvkDB5_oDDun4xdR2z_0mmy10R_DWpdMAqsBh4KXp9MkViq_RAXKRh04gyjrn9_Aq6a8_HTf9z23jU28fEf1BL4conuwRjtF5F61_Z3k5ICBwsvA6P1eqKul-lhSTlBWG8WHpx6AjwTAzvmkqIBkOuWV4eW1UUwnL4ZZTg3OyWDOaLzpO35JgYw-jIA; jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjczODUzODUsImV4cCI6MTcyOTk3NzM4NSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiZ2VuZXJpYy01NzUxZGQ4NTk2N2IwZWMzN2IyYTdkNTIyNDEyYWYzOCJ9.djbwY5aoZluLTqWqQzPguPvDgTFgxPlhm5igsnl-oCmYix9eg-5iHcsonSEp9Bym6eRZTI04wr9MXRAUeq3-rzRCfbIeEPdK7fxho1bi09aX9y1b1q1Dk48_kieWNkeselk478H2JHW_uKccH_dey-7kMYvBvkDB5_oDDun4xdR2z_0mmy10R_DWpdMAqsBh4KXp9MkViq_RAXKRh04gyjrn9_Aq6a8_HTf9z23jU28fEf1BL4conuwRjtF5F61_Z3k5ICBwsvA6P1eqKul-lhSTlBWG8WHpx6AjwTAzvmkqIBkOuWV4eW1UUwnL4ZZTg3OyWDOaLzpO35JgYw-jIA; _clsk=1oizgy6%7C1727385386957%7C1%7C1%7Cz.clarity.ms%2Fcollect; _ga_DN0LC24WVV=GS1.1.1727385384.1.0.1727385389.55.0.0; _ga_G2HH3SYHYC=GS1.1.1727385389.1.0.1727385432.0.0.0",
-                "x-xsrf-one-token:57449a69646d0143391d5a02233f3fb0",
-                "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
-            ],
-            "request-type": 1,
-            "protocol-type": 1
         }
     ]
 }
