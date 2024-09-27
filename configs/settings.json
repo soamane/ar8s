@@ -1,6 +1,39 @@
 {
-	"attacks-count": 1,
-	
+	"attacks-count": 10,
+	"loop-timeout": 60,
+	"use-proxy": true,
+	"proxies": [
+		{
+			"address": "46.38.128.6:5319",
+			"username": "user214609",
+			"password": "7owera"
+		},
+		{
+			"address": "46.3.198.161:9794",
+			"username": "vrzpNB",
+			"password": "qQxVEo"
+		},
+		{
+			"address": "46.3.199.86:9106",
+			"username": "vrzpNB",
+			"password": "qQxVEo"
+		},
+		{
+			"address": "45.91.65.221:9716",
+			"username": "vrzpNB",
+			"password": "qQxVEo"
+		},
+		{
+			"address": "91.211.113.207:9973",
+			"username": "vrzpNB",
+			"password": "qQxVEo"
+		},
+		{
+			"address": "45.91.65.63:9333",
+			"username": "vrzpNB",
+			"password": "qQxVEo"
+		}
+	],
 	"use-placeholders": true,
 	"placeholders": [
 		{
