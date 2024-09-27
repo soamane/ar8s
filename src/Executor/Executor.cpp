@@ -1,5 +1,7 @@
 #include "Executor.hpp"
 
+#include <thread>
+#include <random>
 #include <iostream>
 
 Executor::Executor(const Settings& settings, const std::vector<Service>& services) : m_settings(settings), m_services(services) { }
@@ -15,10 +17,17 @@ void Executor::Execute() {
             std::cout << "\t[URL]: " << service.url << std::endl;
 
             MyCurl myCurl;
-           // myCurl.UseProxyServer("46.38.128.6:5319", "user214609", "7owera");
+
+            if (this->m_settings.useProxy) {
+                const Proxy proxy = this->GetRandomProxy(this->m_settings.proxies);
+                myCurl.UseProxyServer(proxy.address, proxy.username, proxy.password);
+                std::cout << "[+] Proxy used: " << proxy.address << std::endl;
+            }
+
             RESPONSE response = this->ExecuteRequest(myCurl, service);
             this->ProcessServiceResponse(response);
         }
+        std::this_thread::sleep_for(std::chrono::seconds(this->m_settings.loopTimeout));
     }
 }
 
@@ -44,4 +53,24 @@ const RESPONSE Executor::ExecuteRequest(const MyCurl& myCurl, const Service& ser
 void Executor::ProcessServiceResponse(RESPONSE response) {
     std::cout << "\t[Status]: " << response.second << std::endl;
     std::cout << "\t[Response]: " << response.first << std::endl;
+    std::cout << std::endl;
 }
+
+const Proxy Executor::GetRandomProxy(const std::vector<Proxy>& proxies) {
+    if (proxies.empty()) {
+        return Proxy();
+    }
+
+    if (proxies.size() == 1) {
+        return proxies.front();
+    }
+
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::uniform_int_distribution<> dis(0, proxies.size() - 1);
+
+    int index = dis(generator);
+
+    return proxies.at(index);
+}
+
