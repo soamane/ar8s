@@ -71,6 +71,24 @@
             ],
             "request-type": 1,
             "protocol-type": 1
+        },
+        {
+            "name": "Raiffeisen",
+            "url": "https://online.raiffeisen.ru/id/oauth/mfa/otp/send",
+            "payload": "{\"mfa_token\":\"6ee82018-e560-4579-9b61-12f188d43eec\"}",
+            "headers": [
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0",
+                "Accept: application/json, text/plain, */*",
+                "Content-Type: application/json;charset=UTF-8",
+                "X-Device-Id: 0104fee8-24d7-4f87-8a5e-8dd3381533f7",
+                "X-Request-Id: d0e1d650-d184-4239-a303-9c5e45315828",
+                "X-Session-Id: 3912d806-e1c7-4403-8625-b9c8af7100a6",
+                "Authorization: Basic cHJvZC1jbGllbnQtaWQ6eHh+Yjd9ZU8yUSR7eVkqe3ROTDRTZTBhaiR5KkA0Uks=",
+                "X-GIB-GSSCgib-w-raiffeisen: fRS37rKpU6pdJk4BN6ZGGggMwRYP3TmXHCcDW6wqJhL03R5S7vfm+dj9gB+mJ+dtawzTS9Amgqe4ty3zWuUTTR6Ud9/gZwXf6Xb1Bd5MYlWp7m1sjutHh/bl2jzzANTP1YPVakcQzkaCIQKPqh8FA5juw4qVY5dVdi1yLtjs5nsONozSst6pV8IqaBN2q/skaEujnBoJ3vGsVYsR1XMEnHVpBDGXY/UWI2q8YLeYNCM5OsTR0W0e2BRdQEyUpQPHfQ==",
+                "X-GIB-FGSSCgib-w-raiffeisen: 1sZQe4a4ea747d5a7e3e04e010922ec5628df7c1"
+            ],
+            "request-type": 1,
+            "protocol-type": 1
         }
     ]
 }
