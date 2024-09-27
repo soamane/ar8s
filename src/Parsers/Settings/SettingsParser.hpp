@@ -18,7 +18,7 @@ class SettingsParser : public ConfigParser {
 public:
     SettingsParser(const std::filesystem::path& path);
     const Settings& GetSettings();
-    
+
 private:
     void Load() override;
     void ParsePlaceholders(const nlohmann::json& data);

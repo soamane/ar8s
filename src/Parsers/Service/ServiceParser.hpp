@@ -24,9 +24,11 @@ public:
     ServiceParser(const Settings& settings, const std::filesystem::path& path);
 
     const std::vector<Service>& GetServices();
+
 private:
     void Load() override;
     void ReplacePlaceholders(std::string& source);
+
 private:
     std::vector<Service> m_services;
     Settings m_settings;

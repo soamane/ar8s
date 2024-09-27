@@ -3,16 +3,11 @@
 #include <fstream>
 #include <iostream>
 
-ConfigParser::ConfigParser(const std::filesystem::path &path) : m_path(path)
-{
-}
+ConfigParser::ConfigParser(const std::filesystem::path& path) : m_path(path) { }
 
-ConfigParser::~ConfigParser()
-{
-}
+ConfigParser::~ConfigParser() { }
 
-nlohmann::json ConfigParser::Parse()
-{
+nlohmann::json ConfigParser::Parse() {
     if (this->m_path.empty()) {
         throw std::invalid_argument("Empty configuration path.");
     }
@@ -30,7 +25,7 @@ nlohmann::json ConfigParser::Parse()
 
     try {
         file >> data;
-    } catch(const nlohmann::json::parse_error& e) {
+    } catch (const nlohmann::json::parse_error& e) {
         throw std::runtime_error("Failed to parse configuration: " + std::string(e.what()));
     }
 
