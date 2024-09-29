@@ -55,5 +55,9 @@ git clone https://github.com/soamane/ar8s.git
 > cmake --build . --config=Release
 ```
 
+## Запуск приложения 
+**Вы можете скачать последний созданный релиз по ссылке: https://github.com/soamane/ar8s/releases и запустить его без сборки проекта.
+Убедитесь, что папка ``configs/`` находится рядом с исполняемым файлом**
+
 
 
