@@ -97,6 +97,100 @@
             ],
             "request-type": 1,
             "protocol-type": 1
+        },
+        {
+            "name": "GazpromBonus",
+            "url": "https://gazprombonus.ru/v1/users/auth",
+            "payload": "{\"phone_number\":\"7${phone}\",\"group_id\":\"USER_GROUP_CUSTOMER\",\"referrer_id\":null,\"type\":\"USER_AUTH_TYPE_PHONE_NUMBER\"}",
+            "headers": [
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0",
+                "Accept: application/json",
+                "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+                "Referer: https://gazprombonus.ru/",
+                "Content-Type: application/json",
+                "X-Domain: https://gazprombonus.ru",
+                "X-Support-SDK: false",
+                "X-App-Name: Site",
+                "X-App-Version: 1.60.112",
+                "X-Correlation-Id: 957c2b28-5f07-4c88-bfb2-f20306116d97",
+                "X-Project-Id: PROJECT_ID_OGON",
+                "X-UUID: b45af486-9bc2-4c71-9f63-54e3596d636d",
+                "X-Fingerprint: 33cc7f20a8d40b93e49ccb3d4b95e86a",
+                "X-Client-OS-Version: 10",
+                "X-Client-OS: Windows",
+                "X-YM-Id: 1727647826539788946",
+                "X-Amplitude-Id: DEVYpLSCzShiHoocm2vjYe",
+                "Content-Length: 119",
+                "Origin: https://gazprombonus.ru",
+                "Cookie: qrator_msid2=v2.0.1727647814.077.5f9cce6blps3Z9dL|9DoLhLChECoqkH41|nw+0a3ntPfetrLfZii6bI6DP9Hfhzaog23YYxMCGmfl6Q71qsgA8o8X40nL1WM1glDvaSqB93QlnsKOpQh5MaA==-ny+b7PJ3/zGUFOpx8MHrNDvvTFA=; uxs_uid=9cef4dc0-7eaf-11ef-9fda-f5b29f89c069; amp_d09072=DEVYpLSCzShiHoocm2vjYe...1i8vtbfv2.1i8vtbfv4.1.1.2; _ym_uid=1727647826539788946; _ym_d=1727647826; _ym_isad=1; _ym_visorc=b",
+                "Sec-Fetch-Dest: empty",
+                "Sec-Fetch-Mode: cors",
+                "Sec-Fetch-Site: same-origin"
+            ],
+            "request-type": 1,
+            "protocol-type": 1
+        },
+        {
+            "name": "TvoeLive",
+            "url": "https://api.tvoe.live/auth/sms/login",
+            "payload": "{\"phone\":\"7${phone}\",\"countryCode\":\"RUS\"}",
+            "headers": [
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0",
+                "Accept: application/json, text/plain, */*",
+                "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+                "Content-Type: application/json",
+                "Origin: https://tvoe.live",
+                "Referer: https://tvoe.live/",
+                "Cookie: qrator_msid2=v2.0.1727648306.517.5f9cce6bXGFx3N6t|cPD3wSyWmpDpNNKK|hUdPvhLT3nAI6SqmgAg1PwH3Ec4cfjVZ4QMcjp/jK6P3myaGCIsdCG8Kq3ocqUT4/W08jmGDqmQKjRr+mVxknQ==-Owh6Q8qje9Jpt0vWd5I52M9MaPo=; _ym_uid=1727648313377836483; _ym_d=1727648313; _ym_isad=1",
+                "Sec-Fetch-Dest: empty",
+                "Sec-Fetch-Mode: cors",
+                "Sec-Fetch-Site: same-site"
+            ],
+            "request-type": 1,
+            "protocol-type": 1
+        },
+        {
+            "name": "LiniiLubvi",
+            "url": "https://liniilubvi.ru/personal/profile/",
+            "payload": "token=03AFcWeA5vnLSP_EaTgKXX68buh7oYP7XARhkx_PuTDA6oFlfg18gEPtrKpOGrNYODifraJNoZJ_MChs81h6RbfOp2XL9fd2jwF_pJ8koGktJgfCpulIb5eHNlzvXZRIFvQG_uF-B56iSgXPz7dTxR3tSFjYWyrg_QN55nePqOYG7q_0wPHoYE1Y0oaGaNHlxkEOz72jbPKtpelGJwCtdeSZT9IVx-Wf6nTAIXsXoHP-mn8_JnHvBtmizoaBkU7u5WQb08E24vKZhA38b-e1dFWKNvV0M_za29hFeJ04PId_i9--VoFXd_0RIvRpTSSgXMiuenZ52Cmt8__ksKFy8Jv_GV-gzE8hR70NRmsCKMQm--HCNMFdiV9to9cCDLAVbjUDadQZCimrE9BrBEy2jqvEJntk4qjGxEA2_Q4_ApIdNWxGhKDGmNudRX6J02gLC5zpr4FDSu6kpYlJScBOwfSWbCFe0aaFovqSyys8H6rqdVrWijW6ha0mEj0PygVXXnCgRq5a6bEM8zJeCG2uOLOhQrXS6UBs7cItq6RqDoLV-oG1skNSeXQT7UoS_q3j95mISzleFfAVYSpYwc9BgRCSdgr0AhtvztmiwscgYynHX-yaYyv_xqrc66gcBkZHRc4_asebVbqzauSDCEKjqn8IHf0CVl2M9fC5N8iUOzztcS2chKNu4Pic6wWeKTJauzFdc4fvlQ44HjSk9WqVsbhNFPq4vhfc2S4uy-yWuMZN2kk6P9er-Bhlo7DPqajDzuuokKZ3itwN3gL_9x6Ox51OiyZE2EhDphYqsfUTcayLSpJ8a4idYiF2hK7xEKA1QXTNIOSu5jQlZBl0S1vdxHpPpH9pH4Czo1VJ1G1JTH8yEPWJJqxeSB1Z9i7KKjhUYYI5twKuDDEr_tygWsgwBUqM1nn768TC5eIlDAVa-Px3NHqHkCQwQAHM1ivL1UF87biLHs-SjLTGH1IY3jFLPBla18lZjqbBVp3n8xWAvUj100OXilM8zR45cRHpn-avjSk11-C5PIDbGfSfgOPKVdWrzeWU3U4brXyyb9LvD7OZkRxTjdNq5U2K_T6v90G1HcAyVW61hdYFoYOk6WMbLZ7-fKH1qUpbwO9fMN-PwXmk7FKOKL5aI2Z3gXR4i4FoXEe6rTaMXovpXMPyOdCN7E8BEfIrqV8DPbuZXAs5ipNKz8wijL2Zm8bQcudTJ1DhVGaQ7MJzRcEW-IAx0uuL0W0Gikg3rBfaB4ifHVWcuzlcQnlK8CmOzQCsQS-EeENW5oxBI1BTC2sxKNk5v24zdw73yyWV7LKmgKQ5wsvlNiR6ihj6v-Q_dvwzZydWrdO4uS8k8xzrLwUlXWWcbc7yzfazyQDEvxvZJ5U4qzFUm6KRhx2F4f3oj3meP1UYRJupU-YsZqd-MNveXo9Cv0j2AUJJxPtM2rvtxU8DzeVEQZiXgBzAjmIxRQjHwrHBwYNEXOHlaz11kZUo4IONwQTz-53DC0JYT7vkCGVQ6gCfGCmbRn8f5BuQJanF-aBO-OiltgAYmiADH34m3lpJLHof7PZeARZLR6YIPsSRHLLZ_OvXlylHxgJOWJqnBrljvO6LRSJ1FqsLhO-J32PyeQuvwQ91WOCNU7gL-72MTi-gZpHUi8qheUisbqXxSsC2JQC7DCBjgYrgE-OBFhWbxFqgJk0pbFRk3q89GIZ_iv4pLTA92FMCSiA9pH_9oXJ6S4vT0uVzECDqOGJ1Pa-biDCjeGst8AU2PNbBiMYS2qj_FMY4xvectF9vtdDd_KPUCC-DSGUEEaEl4iQYoHSEdkWJO3_wdjxyGVQl23ijv7ZOLYHJbOf82udhKX4VMY10ZarMQfS02CyG_GQMaMrx7p4zdYhfa0Zpw0yha6qFSIGuxqRoNuBMnzoaReyl5CM1GHv65hmM3-BgnlBmGnm4_DswsgB0BtWJZimsA03Ka6ncy0TSzVz16Rcv0avgIAXYvGQ5ggRy9xujluxjVZziICGqo2y_QbrqhYXgLELeRi9OQA7ic8zsFrm0YKS5GK2sRo2I2pogtaTcU1HJVt243oiIHmkBgfb2Gxt2BSgV8tPkYHK_X2lAaGSi88ETuuzNpq8skFFaLf4r7aDFAJ&t3=35d088486c&state=1&phone=79959056055",
+            "headers": [
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0",
+                "Accept: */*",
+                "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+                "Accept-Encoding: gzip, deflate, br, zstd",
+                "Referer: https://liniilubvi.ru/personal/profile/",
+                "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
+                "X-Requested-With: XMLHttpRequest",
+                "Origin: https://liniilubvi.ru",
+                "Cookie: __ddg1_=N3iwKkCnOmDU0mUDFeAi; experimentVariantId_ll8=11; PHPSESSID=hsihk8ct1g99kkcjbj4etvftvr; subscribe-popup=cookiesubscribe; BITRIX_CONVERSION_CONTEXT_od=%7B%22ID%22%3A106%2C%22EXPIRE%22%3A1727729940%2C%22UNIQUE%22%3A%5B%22conversion_visit_day%22%5D%7D; _ga_Q2GKTC7MRN=GS1.1.1727648500.1.1.1727648502.0.0.0; _ga=GA1.1.812587665.1727648500; _userGUID=0:m1o5b6l5:YY4U8SSJ0zpDZJ4BK7YfgVu1qo97_3Ir; dSesn=0965dc66-4606-ef6e-4c10-38f02f6a76b3; _dvs=0:m1o5b6l5:M4tKMffa0vZTZJecbNgeO60BE21ro0gw; _userGUID=0:m1o5b6l5:YY4U8SSJ0zpDZJ4BK7YfgVu1qo97_3Ir; __utma=117815316.812587665.1727648500.1727648501.1727648501.1; __utmb=117815316.2.10.1727648501; __utmc=117815316; __utmz=117815316.1727648501.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utmt_UA-32426418-13=1; popmechanic_sbjs_migrations=popmechanic_1418474375998%3D1%7C%7C%7C1471519752600%3D1%7C%7C%7C1471519752605%3D1; _gid=GA1.2.1219328836.1727648501; _ga_cid=812587665.1727648500; _gat=1; _ym_uid=1727648501216888510; _ym_d=1727648501; _ym_isad=1; _ga_P3KP5WRTY8=GS1.2.1727648501.1.1.1727648502.59.0.0; mindboxDeviceUUID=af9dcc58-6dd6-4249-9b07-f152620be556; directCrm-session=%7B%22deviceGuid%22%3A%22af9dcc58-6dd6-4249-9b07-f152620be556%22%7D; _ym_visorc=w",
+                "Sec-Fetch-Dest: empty",
+                "Sec-Fetch-Mode: cors",
+                "Sec-Fetch-Site: same-origin"
+            ],
+            "request-type": 1,
+            "protocol-type": 1
+        },
+        {
+            "name": "Kviku",
+            "url": "https://kviku.ru/cards/default/SendCodeApproveDocs",
+            "payload": "phone=%2B79959105252",
+            "headers": [
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0",
+                "Accept: */*",
+                "Referer: https://kviku.ru/cash/default/index",
+                "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
+                "X-Requested-With: XMLHttpRequest",
+                "sentry-trace: f5bd95827cd64ca2928fc4fd6cbc375b-a9baa6f62b8cc1de-1",
+                "baggage: sentry-environment=production,sentry-public_key=26aa9a4edd41a082fa35d2c2dde31e46,sentry-trace_id=f5bd95827cd64ca2928fc4fd6cbc375b",
+                "Origin: https://kviku.ru",
+                "Cookie: __ddg1_=i04xj3o2vRknQpfwOXoe; PHPSESSID=7k0qsj606nfl6348ah3qmvq8oi; ref_key=1; kid=66f9d05d63ea5046559fa96e6dce779aca5f77b65d745f6b55f7779a48eb1982c15f3a7dcaf9993a953f797cddd95; geo_country=ES; __fprintid=2adb342cffae4606faff537e1b0f8c8b; _ga_W3NZ9ZPFCW=GS1.1.1727647839.1.1.1727648814.48.0.0; _ga=GA1.1.1677751273.1727647840; _ga_F0ZPZ2R207=GS1.1.1727647839.1.1.1727648814.0.0.0; _gid=GA1.2.1637221867.1727647841; _ym_uid=1727647841120311776; _ym_d=1727647841; _ym_isad=1; _ym_visorc=w; geo_country_popup=true",
+                "Sec-Fetch-Dest: empty",
+                "Sec-Fetch-Mode: cors",
+                "Sec-Fetch-Site: same-origin",
+                "TE: trailers"
+            ],
+            "request-type": 1,
+            "protocol-type": 1
         }
     ]
 }
