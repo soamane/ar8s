@@ -2,33 +2,30 @@
 
 #include <fstream>
 #include <iostream>
+#include <stdexcept>
 
-ConfigParser::ConfigParser(const std::filesystem::path& path) : m_path(path) { }
-
-ConfigParser::~ConfigParser() { }
-
-nlohmann::json ConfigParser::Parse() {
-    if (this->m_path.empty()) {
-        throw std::invalid_argument("Empty configuration path.");
+ConfigParser::ConfigParser(const std::filesystem::path& path) : m_path(path) {
+    if (m_path.empty()) {
+        throw std::invalid_argument("Configuration path is empty.");
     }
-
-    if (!std::filesystem::exists(this->m_path)) {
-        throw std::runtime_error("File " + this->m_path.string() + " doesn't exists.");
+    if (!std::filesystem::exists(m_path)) {
+        throw std::runtime_error("File " + m_path.string() + " does not exist.");
     }
+}
 
-    std::ifstream file(this->m_path);
+nlohmann::json ConfigParser::Parse() const {
+    std::ifstream file(m_path);
     if (!file.is_open()) {
-        throw std::runtime_error("Failed open " + this->m_path.string() + " to parsing.");
+        throw std::runtime_error("Failed to open file: " + m_path.string());
     }
 
     nlohmann::json data;
-
     try {
         file >> data;
     } catch (const nlohmann::json::parse_error& e) {
-        throw std::runtime_error("Failed to parse configuration: " + std::string(e.what()));
+        throw std::runtime_error("Failed to parse configuration file '" + m_path.string() + "': " + std::string(e.what()));
     }
 
-    std::cout << "Successful" << std::endl;
+    std::cout << "Configuration loaded successfully from " << m_path.string() << std::endl;
     return data;
 }

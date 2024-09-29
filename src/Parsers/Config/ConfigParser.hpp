@@ -6,12 +6,12 @@
 
 class ConfigParser {
 public:
-    ConfigParser(const std::filesystem::path& path);
-    virtual ~ConfigParser();
+    explicit ConfigParser(const std::filesystem::path& path);
+    virtual ~ConfigParser() = default;
 
 protected:
     virtual void Load() = 0;
-    virtual nlohmann::json Parse();
+    virtual nlohmann::json Parse() const;
 
 private:
     std::filesystem::path m_path;
