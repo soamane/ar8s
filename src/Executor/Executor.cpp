@@ -51,7 +51,9 @@ RESPONSE Executor::ExecuteRequest(const MyCurl& myCurl, const Service& service) 
 
 void Executor::ProcessServiceResponse(const RESPONSE& response) const {
     std::cout << "\t[Status]: " << response.second << std::endl;
-   // std::cout << "\t[Response]: " << response.first << std::endl;
+    if (response.second == 200) {
+        std::cout << "\t[Response]: " << response.first << std::endl;
+    }
     std::cout << std::endl;
 }
 
