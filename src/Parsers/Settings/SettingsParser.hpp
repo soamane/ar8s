@@ -3,6 +3,10 @@
 
 #include "../Config/ConfigParser.hpp"
 
+#include <nlohmann/json.hpp>
+#include <vector>
+#include <string>
+
 struct Proxy {
     std::string address;
     std::string username;
@@ -25,7 +29,7 @@ struct Settings {
 
 class SettingsParser : public ConfigParser {
 public:
-    SettingsParser(const std::filesystem::path& path);
+    explicit SettingsParser(const std::filesystem::path& path);
     const Settings& GetSettings();
 
 private:
@@ -34,6 +38,9 @@ private:
     void ParseAdditionals(const nlohmann::json& data);
     void ParsePlaceholders(const nlohmann::json& data);
     void ParseProxies(const nlohmann::json& data);
+
+    void CheckJsonKey(const nlohmann::json& data, const std::string& key) const;
+    void CheckJsonArray(const nlohmann::json& data, const std::string& key) const;
 
 private:
     Settings m_settings;

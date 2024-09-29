@@ -26,65 +26,61 @@ void SettingsParser::Load() {
 void SettingsParser::ParsePlaceholders(const nlohmann::json& data) {
     std::cout << "\t[~] Parse placeholders: ";
 
-    if (!data.contains("use-placeholders")) {
-        throw std::runtime_error("Failed to parse 'use-placeholders', please check the correctness of the file.");
-    }
+    const std::string placeholdersKey = "placeholders";
+    const std::string usePlaceholdersKey = "use-placeholders";
 
-    this->m_settings.usePlaceholders = data[ "use-placeholders" ];
+    CheckJsonKey(data, usePlaceholdersKey);
+    this->m_settings.usePlaceholders = data[ usePlaceholdersKey ];
 
-    if (!data.contains("placeholders") || !data[ "placeholders" ].is_array()) {
-        throw std::runtime_error("Failed to parse 'placeholders', please check the correctness of the file.");
-    }
+    CheckJsonArray(data, placeholdersKey);
 
-    const auto& placeholders = data[ "placeholders" ];
-
-    for (const auto& object : placeholders) {
-        Placeholder placeholder;
-        placeholder.key = object[ "key" ];
-        placeholder.value = object[ "value" ];
-
-        this->m_settings.placeholders.push_back(placeholder);
+    for (const auto& object : data[ placeholdersKey ]) {
+        Placeholder placeholder{
+            object.at("key").get<std::string>(),
+            object.at("value").get<std::string>()
+        };
+        this->m_settings.placeholders.push_back(std::move(placeholder));
     }
 
     std::cout << "Successful" << std::endl;
 }
 
 void SettingsParser::ParseAdditionals(const nlohmann::json& data) {
-    if (!data.contains("attacks-count")) {
-        throw std::runtime_error("Failed to parse 'use-placeholders', please check the correctness of the file.");
-    }
+    CheckJsonKey(data, "attacks-count");
+    this->m_settings.attacksCount = data.at("attacks-count");
 
-    this->m_settings.attacksCount = data[ "attacks-count" ];
-
-    if (!data.contains("loop-timeout")) {
-        throw std::runtime_error("Failed to parse 'loop-timeout', please check the correctness of the file.");
-    }
-
-    this->m_settings.loopTimeout = data[ "loop-timeout" ];
+    CheckJsonKey(data, "loop-timeout");
+    this->m_settings.loopTimeout = data.at("loop-timeout");
 }
 
 void SettingsParser::ParseProxies(const nlohmann::json& data) {
     std::cout << "\t[~] Parse proxies: ";
 
-    if (!data.contains("use-proxy")) {
-        throw std::runtime_error("Failed to parse 'use-proxy', please check the correctness of the file.");
-    }
+    CheckJsonKey(data, "use-proxy");
+    this->m_settings.useProxy = data.at("use-proxy");
 
-    this->m_settings.useProxy = data[ "use-proxy" ];
+    CheckJsonArray(data, "proxies");
 
-    if (!data.contains("proxies") || !data[ "proxies" ].is_array()) {
-        throw std::runtime_error("Failed to parse 'proxies', please check the correctness of the file.");
-    }
-
-    const auto& proxies = data[ "proxies" ];
-    for (const auto& object : proxies) {
-        Proxy proxy;
-        proxy.address = object[ "address" ];
-        proxy.username = object[ "username" ];
-        proxy.password = object[ "password" ];
-
-        this->m_settings.proxies.push_back(proxy);
+    for (const auto& object : data[ "proxies" ]) {
+        Proxy proxy{
+            object.at("address").get<std::string>(),
+            object.value("username", ""),
+            object.value("password", "")
+        };
+        this->m_settings.proxies.push_back(std::move(proxy));
     }
 
     std::cout << "Successful" << std::endl;
+}
+
+void SettingsParser::CheckJsonKey(const nlohmann::json& data, const std::string& key) const {
+    if (!data.contains(key)) {
+        throw std::runtime_error("Failed to parse '" + key + "', please check the correctness of the file.");
+    }
+}
+
+void SettingsParser::CheckJsonArray(const nlohmann::json& data, const std::string& key) const {
+    if (!data.contains(key) || !data[ key ].is_array()) {
+        throw std::runtime_error("Failed to parse '" + key + "', please check the correctness of the file.");
+    }
 }
