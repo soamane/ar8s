@@ -1,12 +1,11 @@
-#include <memory>
-#include <iostream>
-
 #include "Parsers/Service/ServiceParser.hpp"
 #include "Parsers/Settings/SettingsParser.hpp"
 #include "Executor/Executor.hpp"
 
-int main() {
+#include <memory>
+#include <iostream>
 
+int main() {
     std::cout << R"(
  ______  ____    ____     ____       
 /\  _  \/\  _`\ /\  _`\  /\  _`\        Tool for sending service messages 
@@ -18,16 +17,22 @@ int main() {
     )" << std::endl;
 
     try {
-        SettingsParser settingsParser("configs\\settings.json");
+        // Путь к конфигурационным файлам
+        const std::string settingsPath = "configs\\settings.json";
+        const std::string servicesPath = "configs\\services.json";
+
+        SettingsParser settingsParser(settingsPath);
         const Settings& settings = settingsParser.GetSettings();
 
-        ServiceParser serviceParser(settings, "configs\\services.json");
+        ServiceParser serviceParser(settings, servicesPath);
         const std::vector<Service>& services = serviceParser.GetServices();
 
         Executor executor(settings, services);
         executor.Execute();
     } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl;
+        return EXIT_FAILURE;
     }
-    return 0;
+
+    return EXIT_SUCCESS;
 }
