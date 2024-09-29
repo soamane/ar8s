@@ -1,12 +1,12 @@
 #ifndef SERVICE_PARSER_HPP
 #define SERVICE_PARSER_HPP
 
+#include "../Config/ConfigParser.hpp"
+#include "../Settings/SettingsParser.hpp"
+
 #include <vector>
 #include <filesystem>
 #include <MyCurl.hpp>
-
-#include "../Config/ConfigParser.hpp"
-#include "../Settings/SettingsParser.hpp"
 
 struct Service {
     std::string name;
