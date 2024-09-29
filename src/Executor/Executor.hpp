@@ -1,11 +1,11 @@
 #ifndef EXECUTOR_HPP
 #define EXECUTOR_HPP
 
-#include <vector>
-#include <MyCurl.hpp>
-
 #include "../Parsers/Service/ServiceParser.hpp"
 #include "../Parsers/Settings/SettingsParser.hpp"
+
+#include <vector>
+#include <MyCurl.hpp>
 
 using RESPONSE = std::pair<std::string, long>;
 
@@ -17,13 +17,14 @@ public:
     void Execute();
 
 private:
-    const RESPONSE ExecuteRequest(const MyCurl& myCurl, const Service& service);
-    void ProcessServiceResponse(RESPONSE response);
-    const Proxy GetRandomProxy(const std::vector<Proxy>& proxies);
-    void ShowConfigs();
+    RESPONSE ExecuteRequest(const MyCurl& myCurl, const Service& service) const;
+    void ProcessServiceResponse(const RESPONSE& response) const;
+    Proxy GetRandomProxy(const std::vector<Proxy>& proxies) const;
+    void ShowConfigs() const;
+
 private:
     Settings m_settings;
     std::vector<Service> m_services;
 };
 
-#endif // !EXECUTOR_HPP
+#endif // EXECUTOR_HPP
