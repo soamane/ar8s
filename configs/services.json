@@ -82,6 +82,21 @@
             ],
             "request-type": 0,
             "protocol-type": 1
+        },
+        {
+            "name": "Ascomin",
+            "url": "https://www.ascomin.ru/connection",
+            "payload": "_token=UUoaKjANiTv5ozq8D43VWUOoyyUjQytdXGzUFMrg&name=%D0%93%D0%BE%D1%80%D0%B8%D0%BD+%D0%93%D0%B5%D0%BD%D0%BD%D0%B0%D0%B4%D0%B8%D0%B9+%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2%D0%B8%D1%87&phone=79959055255&city=%D0%A0%D0%B5%D0%B4%D0%BA%D0%B8%D0%BD%D0%BE&street=%D1%83%D0%BB+%D0%A4%D0%B0%D0%B4%D0%B5%D0%B5%D0%B2%D0%B0&house=3&apartment=33&policy=on",
+            "headers": [
+                "Referer: https://www.ascomin.ru/connection",
+                "Origin: https://www.ascomin.ru",
+                "Content-Type: application/x-www-form-urlencoded",
+                "Cookie: XSRF-TOKEN=eyJpdiI6ImtFdkxuY3ZuMmF1Y2FJWWdDSHQ0Y2c9PSIsInZhbHVlIjoicUhXVStkNWV5WkZyQXhlRFYwU003Y3QreUNZTGQ4YlBuenFLbm5qNm1oeUVsTDM4YlRsWS9MbkNhYjk2TDFsOGN6cy9scTRja1ZoeWd2aG5mK1BZUFg5ZmVYZ0QyUkVHd0l0bHVQbVpzZ3h4VGVYd0haVGxBV1ZidEVyL2dBT28iLCJtYWMiOiJjNGYxZGViOGVmNmJjYzZjYWIyMDFjYmJjNGMwYmQzYzIxM2ZkMTIwNGE2YTQ1Y2YyMDE3NmJiMWYxNGU3Mzk2IiwidGFnIjoiIn0%3D; ascomin_session=eyJpdiI6Im1Sa2tMaGw0NCtsK2Q0RzVUMjEwVUE9PSIsInZhbHVlIjoiZHNleVZ0Q0FRSC9MRTJyNTBXUElvQlFrdFZBZ0x2T2NrMWdKMEdVZnlwa0ZUNnpueEVLT3NSQzcrMU9QRDg5YllvMFBKdjRmNnEwRVdIWFo0UnlOTHJMYlBwNHltY1F3TVQ0NGRDbTdyQTdwYVdwdDkxUnQrdjJUUGhDTHFFT1YiLCJtYWMiOiJjN2ZmNmZlMGY1YzcxMTUyZDUzOGVlMmYwNDZmNDU5NmNkMTQzMWRhOWQ1Yzk3NWI2OTZiYWRjYTljMmUxOGYxIiwidGFnIjoiIn0%3D; _ym_uid=172764485657934905; _ym_d=1727644856; _ym_isad=1; _ym_visorc=w",
+                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8",
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0"
+            ],
+            "request-type": 1,
+            "protocol-type": 1
         }
     ]
 }
