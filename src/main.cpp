@@ -18,10 +18,10 @@ int main() {
     )" << std::endl;
 
     try {
-        SettingsParser settingsParser("..\\..\\configs\\settings.json");
+        SettingsParser settingsParser("configs\\settings.json");
         const Settings& settings = settingsParser.GetSettings();
 
-        ServiceParser serviceParser(settings, "..\\..\\configs\\services.json");
+        ServiceParser serviceParser(settings, "configs\\services.json");
         const std::vector<Service>& services = serviceParser.GetServices();
 
         Executor executor(settings, services);
