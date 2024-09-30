@@ -8,7 +8,7 @@
                 "Accept: application/json, text/plain, */*",
                 "Accept-Encoding: gzip, deflate, br, zstd",
                 "Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-                "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
                 "client-id: p0527624d9274fe184e71edbc9d1f88f",
                 "Content-Type: application/json",
                 "x-api-key: fIpqjiDT1dYhOa4k6SbvUO8tRTFjcGxi",
@@ -36,7 +36,7 @@
                 "cookie: fuserToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjczODMyOTMsImV4cCI6MTc1ODkxOTI5MywiZnVzZXIiOjE5OTM5ODgyfQ.RHRGjfrNxNVH90-fohfisoJra9a4Oh-4i_46aducgvHozj6QUgDVnn6eJj_jQnQEDqQ20OSUUiSqmroU4ob92xGgpmT4tX4n0ID2eSpRJ-DJYJG6uwm062x5c5Ci3u-ZUamj97LEYDVhlnBwUnNm_p5XqOKQCdxZ_-iCVZT5LaQZGWJV8EmbkzNkU8B0oLH9ElTCK5dcaGs1f36bvhTb3vttDQ9EYhefpLtoe7I5u12FStIPPxTaHTspgo-7oDW06LFi13gxCA8yGrhdyfnMahWFRucsT6xNwqhvcgnH1Z63GqtyM2W1TRIBG9X0QCmvqOMyVazjATLUGGYkKbGejA; mindboxDeviceUUID=1a310a98-8fea-4b51-b567-e9db2e7d5b59; directCrm-session=%7B%22deviceGuid%22%3A%221a310a98-8fea-4b51-b567-e9db2e7d5b59%22%7D; _ga=GA1.1.615416332.1727383297; _ym_uid=1727383297432142234; _ym_d=1727383297; _ym_isad=1; _ym_visorc=w; popmechanic_sbjs_migrations=popmechanic_1418474375998%3D1%7C%7C%7C1471519752600%3D1%7C%7C%7C1471519752605%3D1; _ga_SP7EWRHZPK=GS1.1.1727383296.1.0.1727383302.0.0.0",
                 "deviceuuid:1a310a98-8fea-4b51-b567-e9db2e7d5b59",
                 "fuser-token:eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjczODMyOTMsImV4cCI6MTc1ODkxOTI5MywiZnVzZXIiOjE5OTM5ODgyfQ.RHRGjfrNxNVH90-fohfisoJra9a4Oh-4i_46aducgvHozj6QUgDVnn6eJj_jQnQEDqQ20OSUUiSqmroU4ob92xGgpmT4tX4n0ID2eSpRJ-DJYJG6uwm062x5c5Ci3u-ZUamj97LEYDVhlnBwUnNm_p5XqOKQCdxZ_-iCVZT5LaQZGWJV8EmbkzNkU8B0oLH9ElTCK5dcaGs1f36bvhTb3vttDQ9EYhefpLtoe7I5u12FStIPPxTaHTspgo-7oDW06LFi13gxCA8yGrhdyfnMahWFRucsT6xNwqhvcgnH1Z63GqtyM2W1TRIBG9X0QCmvqOMyVazjATLUGGYkKbGejA",
-                "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
                 "user-location-id: 216"
             ],
             "request-type": 1,
@@ -53,7 +53,7 @@
                 "content-type:application/json",
                 "cookie: _ym_uid=1727384225400195175; _ym_d=1727384225; _ym_isad=1; iap.uid=7d9ac258eacf4d13871956f9bcad7207; _ga=GA1.2.823016543.1727384225; _gid=GA1.2.883252970.1727384225; _gat=1; _ym_visorc=b; uxs_uid=e3aff0b0-7c49-11ef-8ca8-5d125d1b0bfd; mindboxDeviceUUID=1a310a98-8fea-4b51-b567-e9db2e7d5b59; directCrm-session=%7B%22deviceGuid%22%3A%221a310a98-8fea-4b51-b567-e9db2e7d5b59%22%7D; _ga_S6XCS66QYH=GS1.1.1727384225.1.0.1727384232.53.0.0",
                 "session-id:6fb56v10fw3c53a1co46aq699145f39s",
-                "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
                 "x-request-id:df0ab3ce5292e9e0e2d45b7a5322b8ac",
                 "app-id: 115"
             ],
@@ -77,6 +77,7 @@
             "url": "https://www.winelab.ru/confirmation/sendByPhone?number=${phone}",
             "payload": "",
             "headers": [
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
                 "x-dtpc: 65$76326823_898h28vNWPGKUTCHAFMOARNAUHBCFIRNHTOBMUV-0e0",
                 "Cookie: anyquery-userGUID=\"0:MTcyNzQ3NjMyNTM1Nw==:e67d219a-1a2d-49e9-8cc5-aa7932012c93\"; avifActive=true; webpActive=true; anonymous-consents=%5B%7B%22templateCode%22%3A%22adpr%22%2C%22templateVersion%22%3A1%2C%22consentState%22%3Anull%7D%2C%7B%22templateCode%22%3A%22generic%22%2C%22templateVersion%22%3A1%2C%22consentState%22%3Anull%7D%5D; cookie-notification=NOT_ACCEPTED; dtCookie=v_4_srv_65_sn_031BF35D30EACF7CDC8147FE885B706D_perc_100000_ol_0_mul_1_app-3Ab08f9e5bb12c9b66_1; qrator_ssid=1727476325.323.4VJMrB0IqnWztWiw-qkniibo3o39v7nfuo6gm2b5sgs6pe8is; rxVisitor=17274763268242Q6HSE7VEDDTHTM151TB2HRT0L2U0DBD; dtPC=65$76326823_898h28vNWPGKUTCHAFMOARNAUHBCFIRNHTOBMUV-0e0; rxvt=1727478159974|1727476326825; dtSa=-; JSESSIONID=1b394d1e-2124-467e-8874-f3809a82d694; flocktory-uuid=3e452245-4ab5-4c58-855f-b4a64e7b1fc6-8; _ym_uid=1727476327923926444; _ym_d=1727476327; _ym_isad=1; stDeIdU=1d62e65a-2f62-41ef-9009-90a01067e9fe; advcake_track_id=a7d08c29-9273-28d3-602d-3245e7d800ce; advcake_session_id=c30c7ede-0a07-65e9-83c5-128c47753472; _ga_M2S97XLR16=GS1.1.1727476328.1.1.1727476359.29.0.0; _ga=GA1.2.1758172858.1727476328; age-confirmed=1; advcake_track_url=%3D20240923dLha7o4uakqZenirJRe4nfUjcJPJVn%2FFdggDDrXnT1nnpkyyg%2FPIxn%2BBlEsBw0DFxa%2B31gpdyjm22xK7JFasxrgHWfbYxgy%2B84ykAYVKFwnc3gZ3sqxLVd90AdXD8nyVg9aWFwCjHHfpsCzQ%2Bo8ZyW0lMxkV21czKlkS1FxAgtKe9Y%2BO0zUuQxj3Rta8NlTY649LCUvi3J0TEOs3pNqZ%2BLeE3AtpSANkzZxzs5nXwW9O9h%2FIV43QR4QK9q%2BZq7dgw4WsjUO7DJHD8nLYPq97PiiHtJ9n0hKDN6hFyYKuUQIaXYSnk9x7AwIYa9p7KElFc%2B1hJmyYzxRwLN0O9BIjp5UzaiJbxZDnSG158JKZj2DmOznMzzOtofg%2BqviyZnH7B8PMaa4CP2fZHo3O%2BGHXTU2YrNy5TxmgXtYVXg42oKO424SA0W5FNboqljalRrCtYd4DQPvSFEsvFudyHYi01klwCkMec49cYN89kLfikmc3lXw7bf4XhkE%2BVokbOzLJ%2B2vaeHl3eRZ0k%2B8yNRJU181cR1uQSiUThRntepWBFs24cPYqqccnBhlOF%2Fw6J68F32e95cpudhsvuxB52LiZ%2F7dxb7pLqGP0bcMs546%2BXDBSHPtFd0hTC%2FiUN%2FeEYbFsechGiXRFOlW4bghabAklR%2B3fWlIwk1zkXtzheXABrWJzu%2BOkptzla2k%3D; _ga_9YHSC7Y1FD=GS1.1.1727476328.1.0.1727476328.0.0.0; uxs_uid=54af8830-7d20-11ef-93e1-5bb9e08de60d; _userGUID=0:m1lasxwd:ic1tilbh6rL973vEyu~VWsKggOwXkzud; digi-group-a2; dSesn=e5c6809e-ce4c-01c4-4277-8ad532da2ca8; _dvs=0:m1lasxwd:wI__qtEVGkXLABVBJW11HeXjpYKzvhUK; _userGUID=0:m1lasxwd:ic1tilbh6rL973vEyu~VWsKggOwXkzud; popmechanic_sbjs_migrations=popmechanic_1418474375998%3D1%7C%7C%7C1471519752600%3D1%7C%7C%7C1471519752605%3D1; _gid=GA1.2.747469105.1727476329; _gat_UA-125169834-1=1; mindboxDeviceUUID=638793e3-1458-45b2-a135-bf301c7a76cc; directCrm-session=%7B%22deviceGuid%22%3A%22638793e3-1458-45b2-a135-bf301c7a76cc%22%7D"
             ],
