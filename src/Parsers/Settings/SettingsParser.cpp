@@ -18,9 +18,10 @@ void SettingsParser::Load() {
         throw std::runtime_error("Settings data is empty.");
     }
 
+    this->ParseProxies(data);
+    this->ParseUserAgents(data);
     this->ParseAdditionals(data);
     this->ParsePlaceholders(data);
-    this->ParseProxies(data);
 }
 
 void SettingsParser::ParsePlaceholders(const nlohmann::json& data) {
@@ -72,6 +73,31 @@ void SettingsParser::ParseProxies(const nlohmann::json& data) {
 
     std::cout << "Successful" << std::endl;
 }
+
+void SettingsParser::ParseUserAgents(const nlohmann::json& data) {
+    std::cout << "\t[~] Parse user-agents: ";
+
+    CheckJsonKey(data, "use-useragent");
+    this->m_settings.useUserAgent = data.at("use-useragent").get<bool>();
+
+    CheckJsonArray(data, "user-agents");
+
+    for (const auto& userAgentString : data[ "user-agents" ]) {
+
+        if (userAgentString.is_string()) {
+            UserAgent userAgent{
+                userAgentString.get<std::string>()
+            };
+
+            this->m_settings.userAgents.push_back(userAgent);
+        } else {
+            throw std::invalid_argument("Invalid user-agent format in JSON, expected string");
+        }
+    }
+
+    std::cout << "Successful" << std::endl;
+}
+
 
 void SettingsParser::CheckJsonKey(const nlohmann::json& data, const std::string& key) const {
     if (!data.contains(key)) {

@@ -7,6 +7,10 @@
 #include <vector>
 #include <string>
 
+struct UserAgent {
+    std::string name;
+};
+
 struct Proxy {
     std::string address;
     std::string username;
@@ -22,8 +26,10 @@ struct Settings {
     int attacksCount;
     int loopTimeout;
     bool useProxy;
+    bool useUserAgent;
     bool usePlaceholders;
     std::vector<Proxy> proxies;
+    std::vector<UserAgent> userAgents;
     std::vector<Placeholder> placeholders;
 };
 
@@ -38,6 +44,7 @@ private:
     void ParseAdditionals(const nlohmann::json& data);
     void ParsePlaceholders(const nlohmann::json& data);
     void ParseProxies(const nlohmann::json& data);
+    void ParseUserAgents(const nlohmann::json& data);
 
     void CheckJsonKey(const nlohmann::json& data, const std::string& key) const;
     void CheckJsonArray(const nlohmann::json& data, const std::string& key) const;
