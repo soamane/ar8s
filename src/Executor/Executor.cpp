@@ -12,16 +12,33 @@ void Executor::Execute() {
     ShowConfigs();
     std::cout << "[!] Executing services..." << std::endl;
     for (int i = 0; i < m_settings.attacksCount; ++i) {
-        for (const auto& service : m_services) {
+        for (auto& service : m_services) {
             std::cout << "[Service]: " << service.name << std::endl;
             std::cout << "\t[URL]: " << service.url << std::endl;
 
             MyCurl myCurl;
 
             if (m_settings.useProxy) {
-                Proxy proxy = GetRandomProxy(m_settings.proxies);
-                myCurl.UseProxyServer(proxy.address, proxy.username, proxy.password);
-                std::cout << "[+] Proxy used: " << proxy.address << std::endl;
+                auto proxyResult = this->GetRandomObject<Proxy>(m_settings.proxies);
+                if (proxyResult) {
+                    const Proxy& proxy = *proxyResult;
+                    myCurl.UseProxyServer(proxy.address, proxy.username, proxy.password);
+                    std::cout << "[+] Proxy used: " << proxy.address << std::endl;
+                } else {
+                    std::cout << "[-] Proxy not used: proxies' array is empty" << std::endl;
+                }
+            }
+
+            if (this->m_settings.useUserAgent) {
+                for (auto& header : service.headers) {
+                    if (header.find("User-Agent:") == 0) {
+                        auto userAgentResult = this->GetRandomObject<UserAgent>(this->m_settings.userAgents);
+                        if (userAgentResult) {
+                            const UserAgent& userAgent = *userAgentResult;
+                            header = "User-Agent: " + userAgent.name;
+                        }
+                    }
+                }
             }
 
             RESPONSE response = ExecuteRequest(myCurl, service);
@@ -57,22 +74,11 @@ void Executor::ProcessServiceResponse(const RESPONSE& response) const {
     std::cout << std::endl;
 }
 
-Proxy Executor::GetRandomProxy(const std::vector<Proxy>& proxies) const {
-    if (proxies.empty()) {
-        return Proxy();
-    }
-
-    std::random_device rd;
-    std::mt19937 generator(rd());
-    std::uniform_int_distribution<std::size_t> dis(0, proxies.size() - 1);
-
-    return proxies[ dis(generator) ];
-}
-
 void Executor::ShowConfigs() const {
     std::cout << "\n[!] Your config's settings:" << std::endl;
     std::cout << "\t[Settings]:" << std::boolalpha << std::endl;
     std::cout << "\t\t[Proxies]: " << m_settings.useProxy << ' ' << '[' << m_settings.proxies.size() << ']' << std::endl;
+    std::cout << "\t\t[UserAgents]: " << m_settings.useUserAgent << ' ' << '[' << m_settings.userAgents.size() << ']' << std::endl;
     std::cout << "\t\t[Placeholders]: " << m_settings.usePlaceholders << ' ' << '[' << m_settings.placeholders.size() << ']' << std::endl;
     std::cout << "\t[Services]: " << m_services.size() << " object(-s)" << std::endl;
     std::cout << "\n[ar8s] Press any key to execute services." << std::endl;
