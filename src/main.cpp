@@ -17,9 +17,8 @@ int main() {
     )" << std::endl;
 
     try {
-        // Путь к конфигурационным файлам
-        const std::string settingsPath = "configs\\settings.json";
-        const std::string servicesPath = "configs\\services.json";
+        std::string_view settingsPath = "configs\\settings.json";
+        std::string_view servicesPath = "configs\\services.json";
 
         SettingsParser settingsParser(settingsPath);
         const Settings& settings = settingsParser.GetSettings();
