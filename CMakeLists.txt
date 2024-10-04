@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.5.0)
+
+cmake_policy(SET CMP0167 NEW)
+
 project(ar8s LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
@@ -46,6 +49,7 @@ target_link_libraries(${PROJECT_NAME}
     ${OPENSSL_LIBRARIES} 
     ${Boost_LIBRARIES}
     ${CMAKE_SOURCE_DIR}/lib/MyCurl/lib/MyCurl_x64.lib
+    ${CMAKE_SOURCE_DIR}/lib/tgbot-cpp/lib/TgBot.lib
     Ws2_32
     Wldap32
     Normaliz
