@@ -34,13 +34,11 @@ void ServiceParser::Load() {
         service.payload = object.at("payload").get<std::string>();
         service.headers = object.at("headers").get<std::vector<std::string>>();
 
-        if (this->m_settings.usePlaceholders) {
-            this->ReplacePlaceholders(service.url);
-            this->ReplacePlaceholders(service.payload);
+        this->ReplacePhoneNumber(service.url);
+        this->ReplacePhoneNumber(service.payload);
 
-            for (auto& header : service.headers) {
-                this->ReplacePlaceholders(header);
-            }
+        for (auto& header : service.headers) {
+            this->ReplacePhoneNumber(header);
         }
 
         service.requestType = object.at("request-type").get<RequestType>();
@@ -50,12 +48,12 @@ void ServiceParser::Load() {
     }
 }
 
-void ServiceParser::ReplacePlaceholders(std::string& source) {
-    for (const auto& placeholder : this->m_settings.placeholders) {
-        std::size_t pos = 0;
-        while ((pos = source.find(placeholder.key, pos)) != std::string::npos) {
-            source.replace(pos, placeholder.key.length(), placeholder.value);
-            pos += placeholder.value.length();
-        }
+void ServiceParser::ReplacePhoneNumber(std::string& source) {
+    std::size_t pos = 0;
+    const std::string placeholder = "${phone}";
+
+    while ((pos = source.find("${phone}", pos)) != std::string::npos) {
+        source.replace(pos, placeholder.length(), this->m_settings.phoneNumber);
+        pos += this->m_settings.phoneNumber.length();
     }
 }
