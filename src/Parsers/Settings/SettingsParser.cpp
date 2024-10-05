@@ -6,7 +6,7 @@ SettingsParser::SettingsParser(const std::filesystem::path& path) : ConfigParser
     this->Load();
 }
 
-const Settings& SettingsParser::GetSettings() {
+Settings& SettingsParser::GetSettings() {
     return this->m_settings;
 }
 
@@ -21,29 +21,6 @@ void SettingsParser::Load() {
     this->ParseProxies(data);
     this->ParseUserAgents(data);
     this->ParseAdditionals(data);
-    this->ParsePlaceholders(data);
-}
-
-void SettingsParser::ParsePlaceholders(const nlohmann::json& data) {
-    std::cout << "\t[~] Parse placeholders: ";
-
-    const std::string placeholdersKey = "placeholders";
-    const std::string usePlaceholdersKey = "use-placeholders";
-
-    CheckJsonKey(data, usePlaceholdersKey);
-    this->m_settings.usePlaceholders = data[ usePlaceholdersKey ];
-
-    CheckJsonArray(data, placeholdersKey);
-
-    for (const auto& object : data[ placeholdersKey ]) {
-        Placeholder placeholder{
-            object.at("key").get<std::string>(),
-            object.at("value").get<std::string>()
-        };
-        this->m_settings.placeholders.push_back(std::move(placeholder));
-    }
-
-    std::cout << "Successful" << std::endl;
 }
 
 void SettingsParser::ParseAdditionals(const nlohmann::json& data) {
