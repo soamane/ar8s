@@ -79,8 +79,5 @@ void Executor::ShowConfigs() const {
     std::cout << "\t[Settings]:" << std::boolalpha << std::endl;
     std::cout << "\t\t[Proxies]: " << m_settings.useProxy << ' ' << '[' << m_settings.proxies.size() << ']' << std::endl;
     std::cout << "\t\t[UserAgents]: " << m_settings.useUserAgent << ' ' << '[' << m_settings.userAgents.size() << ']' << std::endl;
-    std::cout << "\t\t[Placeholders]: " << m_settings.usePlaceholders << ' ' << '[' << m_settings.placeholders.size() << ']' << std::endl;
     std::cout << "\t[Services]: " << m_services.size() << " object(-s)" << std::endl;
-    std::cout << "\n[ar8s] Press any key to execute services." << std::endl;
-    std::cin.get();
 }
