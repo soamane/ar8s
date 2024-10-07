@@ -132,8 +132,8 @@ void EventHandler::PerformExecutor(int64_t chatId, TgBot::Message::Ptr message) 
     ServiceParser serviceParser(settings, servicesPath);
     const std::vector<Service>& services = serviceParser.GetServices();
 
-    Executor executor(settings, services);
-    executor.Execute();
+    std::unique_ptr<Executor> executor = std::make_unique<Executor>(settings, services);
+    executor->Execute();
 
     this->SendMessage(chatId, "✅ Атака завершена.\n\n📥 Использовано сервисов: " + std::to_string(services.size()) + "\nВремя выполнения (в минутах): " + std::to_string(this->m_users[ message->chat->id ].attacksCount));
     this->SendMessage(chatId, "💬 Чтобы снова воспользоваться ботом, введите команду /start");
