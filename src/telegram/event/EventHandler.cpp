@@ -55,7 +55,6 @@ void EventHandler::LaunchAttack(int64_t chatId, TgBot::Message::Ptr message) {
     this->SendMessage(chatId, "🚀 Атака запущена на номер: +7" + user.phone + "\n⏳ Подождите завершения цикла.  Вам придет сообщение сразу же после окончания.");
 
     user.attackInProgress = true;
-
     std::thread([=]()
     {
         this->PerformExecutor(chatId, message);
@@ -107,8 +106,8 @@ void EventHandler::SendErrorMessage(int64_t chatId, int32_t messageId, std::stri
         return;
     }
 
-    this->DeleteMessagesWithDelay(chatId, messageId, 0);
-    this->DeleteMessagesWithDelay(chatId, answer->messageId, 2);
+    this->DeleteMessagesWithDelay(chatId, messageId, 1);
+    this->DeleteMessagesWithDelay(chatId, answer->messageId, 1);
 }
 
 void EventHandler::DeleteMessagesWithDelay(int64_t chatId, int32_t messageId, int delay) {
@@ -160,7 +159,12 @@ void EventHandler::OnCommandEvent(std::string_view command, std::function<void(T
 }
 
 TgBot::Message::Ptr EventHandler::SendMessage(int64_t chatId, std::string_view message) {
-    return this->m_bot.getApi().sendMessage(chatId, message.data());
+    try {
+        return this->m_bot.getApi().sendMessage(chatId, message.data());
+    } catch (const TgBot::TgException& e) {
+        std::cerr << "Error while sending message: " << e.what() << std::endl;
+        return nullptr;
+    }
 }
 
 bool EventHandler::DeleteMessage(int64_t chatId, int32_t messageId) {
