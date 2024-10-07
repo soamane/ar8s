@@ -6,13 +6,11 @@ SettingsParser::SettingsParser(const std::filesystem::path& path) : ConfigParser
     this->Load();
 }
 
-const Settings& SettingsParser::GetSettings() {
+Settings& SettingsParser::GetSettings() {
     return this->m_settings;
 }
 
 void SettingsParser::Load() {
-    std::cout << "[~] Loading settings config: ";
-
     nlohmann::json data = this->Parse();
     if (data.empty()) {
         throw std::runtime_error("Settings data is empty.");
@@ -21,81 +19,46 @@ void SettingsParser::Load() {
     this->ParseProxies(data);
     this->ParseUserAgents(data);
     this->ParseAdditionals(data);
-    this->ParsePlaceholders(data);
-}
-
-void SettingsParser::ParsePlaceholders(const nlohmann::json& data) {
-    std::cout << "\t[~] Parse placeholders: ";
-
-    const std::string placeholdersKey = "placeholders";
-    const std::string usePlaceholdersKey = "use-placeholders";
-
-    CheckJsonKey(data, usePlaceholdersKey);
-    this->m_settings.usePlaceholders = data[ usePlaceholdersKey ];
-
-    CheckJsonArray(data, placeholdersKey);
-
-    for (const auto& object : data[ placeholdersKey ]) {
-        Placeholder placeholder{
-            object.at("key").get<std::string>(),
-            object.at("value").get<std::string>()
-        };
-        this->m_settings.placeholders.push_back(std::move(placeholder));
-    }
-
-    std::cout << "Successful" << std::endl;
 }
 
 void SettingsParser::ParseAdditionals(const nlohmann::json& data) {
-    CheckJsonKey(data, "attacks-count");
+    this->CheckJsonKey(data, "attacks-count");
     this->m_settings.attacksCount = data.at("attacks-count");
 
-    CheckJsonKey(data, "loop-timeout");
+    this->CheckJsonKey(data, "loop-timeout");
     this->m_settings.loopTimeout = data.at("loop-timeout");
 }
 
 void SettingsParser::ParseProxies(const nlohmann::json& data) {
-    std::cout << "\t[~] Parse proxies: ";
-
-    CheckJsonKey(data, "use-proxy");
+    this->CheckJsonKey(data, "use-proxy");
     this->m_settings.useProxy = data.at("use-proxy");
 
-    CheckJsonArray(data, "proxies");
+    this->CheckJsonArray(data, "proxies");
+    for (const auto& proxyObj : data[ "proxies" ]) {
+        Proxy proxy;
+        {
+            proxy.address = proxyObj.at("address").get<std::string>();
+            proxy.username = proxyObj.value("username", "");
+            proxy.password = proxyObj.value("password", "");
+        }
 
-    for (const auto& object : data[ "proxies" ]) {
-        Proxy proxy{
-            object.at("address").get<std::string>(),
-            object.value("username", ""),
-            object.value("password", "")
-        };
         this->m_settings.proxies.push_back(std::move(proxy));
     }
-
-    std::cout << "Successful" << std::endl;
 }
 
 void SettingsParser::ParseUserAgents(const nlohmann::json& data) {
-    std::cout << "\t[~] Parse user-agents: ";
-
-    CheckJsonKey(data, "use-useragent");
+    this->CheckJsonKey(data, "use-useragent");
     this->m_settings.useUserAgent = data.at("use-useragent").get<bool>();
 
-    CheckJsonArray(data, "user-agents");
-
+    this->CheckJsonArray(data, "user-agents");
     for (const auto& userAgentString : data[ "user-agents" ]) {
-
-        if (userAgentString.is_string()) {
-            UserAgent userAgent{
-                userAgentString.get<std::string>()
-            };
-
-            this->m_settings.userAgents.push_back(userAgent);
-        } else {
-            throw std::invalid_argument("Invalid user-agent format in JSON, expected string");
+        UserAgent userAgent;
+        {
+            userAgent.name = userAgentString.get<std::string>();
         }
-    }
 
-    std::cout << "Successful" << std::endl;
+        this->m_settings.userAgents.push_back(userAgent);
+    }
 }
 
 
