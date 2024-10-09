@@ -95,7 +95,7 @@ void EventHandler::ProcessAttackCount(TgBot::Message::Ptr message) {
         }
         user.attacksEntered = true;
         this->SendMessage(message->chat->id, "🔄 Количество минут для проведения атаки: " + std::to_string(user.attacksCount) + ". Введите команду /execute для запуска атаки.");
-    } catch (...) {
+    } catch ([[maybe_unused]] const std::exception& e) {
         this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный ввод.");
     }
 }
