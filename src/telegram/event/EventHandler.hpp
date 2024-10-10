@@ -44,6 +44,9 @@ private:
     bool DeleteChatMessage(int64_t chatId, int32_t messageId);
 
 private:
+    void DeleteUserStatus(UserData& userData);
+
+private:
     TgBot::Bot& m_bot;
     std::unordered_map<int64_t, UserData> m_users;
 };
