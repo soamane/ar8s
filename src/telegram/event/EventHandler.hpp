@@ -40,8 +40,8 @@ private:
     void OnCommandEvent(std::string_view command, std::function<void(TgBot::Message::Ptr)> function);
 
 private:
-    TgBot::Message::Ptr SendMessage(int64_t chatId, std::string_view message);
-    bool DeleteMessage(int64_t chatId, int32_t messageId);
+    TgBot::Message::Ptr SendChatMessage(int64_t chatId, std::string_view message);
+    bool DeleteChatMessage(int64_t chatId, int32_t messageId);
 
 private:
     TgBot::Bot& m_bot;

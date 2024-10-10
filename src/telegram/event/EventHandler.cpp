@@ -12,7 +12,7 @@ EventHandler::EventHandler(TgBot::Bot& bot) : m_bot(bot) { }
 void EventHandler::CreateEvents() {
     OnCommandEvent("start", [this](TgBot::Message::Ptr message)
     {
-        this->SendMessage(message->chat->id, "💬 Введи номер телефона в удобном формате.\n📲 🇷🇺 Укажи только российский номер.");
+        this->SendChatMessage(message->chat->id, "💬 Введи номер телефона в удобном формате.\n📲 🇷🇺 Укажи только российский номер.");
     });
 
     OnCommandEvent("execute", [this](TgBot::Message::Ptr message)
@@ -52,7 +52,7 @@ void EventHandler::LaunchAttack(int64_t chatId, TgBot::Message::Ptr message) {
         return;
     }
 
-    this->SendMessage(chatId, "🚀 Атака запущена на номер: +7" + user.phone + "\n⏳ Подождите завершения цикла.  Вам придет сообщение сразу же после окончания.");
+    this->SendChatMessage(chatId, "🚀 Атака запущена на номер: +7" + user.phone + "\n⏳ Подождите завершения цикла.  Вам придет сообщение сразу же после окончания.");
 
     user.attackInProgress = true;
     std::thread([=]()
@@ -73,7 +73,7 @@ void EventHandler::ProcessPhoneNumber(TgBot::Message::Ptr message) {
     user.phoneEntered = !user.phone.empty();
 
     if (user.phoneEntered) {
-        this->SendMessage(message->chat->id, "📲 Номер успешно обработан.\n💬 Введите количество минут для атаки (1-100):");
+        this->SendChatMessage(message->chat->id, "📲 Номер успешно обработан.\n💬 Введите количество минут для атаки (1-100):");
     } else {
         this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный номер телефона.");
     }
@@ -95,14 +95,14 @@ void EventHandler::ProcessAttackCount(TgBot::Message::Ptr message) {
         }
 
         user.durationEntered = true;
-        this->SendMessage(message->chat->id, "🔄 Количество минут для проведения атаки: " + std::to_string(user.attackDuration) + ". Введите команду /execute для запуска атаки.");
+        this->SendChatMessage(message->chat->id, "🔄 Количество минут для проведения атаки: " + std::to_string(user.attackDuration) + ". Введите команду /execute для запуска атаки.");
     } catch ([[maybe_unused]] const std::exception& e) {
         this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный ввод.");
     }
 }
 
 void EventHandler::SendErrorMessage(int64_t chatId, int32_t messageId, std::string_view errorMessage) {
-    auto answer = this->SendMessage(chatId, errorMessage);
+    auto answer = this->SendChatMessage(chatId, errorMessage);
     if (answer == nullptr) {
         return;
     }
@@ -113,7 +113,7 @@ void EventHandler::SendErrorMessage(int64_t chatId, int32_t messageId, std::stri
 
 void EventHandler::DeleteMessagesWithDelay(int64_t chatId, int32_t messageId, int delay) {
     std::this_thread::sleep_for(std::chrono::seconds(delay));
-    if (!this->DeleteMessage(chatId, messageId)) {
+    if (!this->DeleteChatMessage(chatId, messageId)) {
         std::cerr << "Warning: Could not delete message " << messageId << ". It might not exist or deletion is restricted." << std::endl;
     }
 }
@@ -135,8 +135,8 @@ void EventHandler::PerformExecutor(int64_t chatId, TgBot::Message::Ptr message) 
     std::unique_ptr<Executor> executor = std::make_unique<Executor>(settings, services);
     executor->Execute();
 
-    this->SendMessage(chatId, "✅ Атака завершена.\n\n📥 Использовано сервисов: " + std::to_string(services.size()) + "\nВремя выполнения (в минутах): " + std::to_string(this->m_users[ message->chat->id ].attackDuration));
-    this->SendMessage(chatId, "💬 Чтобы снова воспользоваться ботом, введите команду /start");
+    this->SendChatMessage(chatId, "✅ Атака завершена.\n\n📥 Использовано сервисов: " + std::to_string(services.size()) + "\nВремя выполнения (в минутах): " + std::to_string(this->m_users[ message->chat->id ].attackDuration));
+    this->SendChatMessage(chatId, "💬 Чтобы снова воспользоваться ботом, введите команду /start");
 }
 
 void EventHandler::CreateListenerLoop() {
@@ -159,7 +159,7 @@ void EventHandler::OnCommandEvent(std::string_view command, std::function<void(T
     this->m_bot.getEvents().onCommand(command.data(), std::move(function));
 }
 
-TgBot::Message::Ptr EventHandler::SendMessage(int64_t chatId, std::string_view message) {
+TgBot::Message::Ptr EventHandler::SendChatMessage(int64_t chatId, std::string_view message) {
     try {
         return this->m_bot.getApi().sendMessage(chatId, message.data());
     } catch (const TgBot::TgException& e) {
@@ -168,7 +168,7 @@ TgBot::Message::Ptr EventHandler::SendMessage(int64_t chatId, std::string_view m
     }
 }
 
-bool EventHandler::DeleteMessage(int64_t chatId, int32_t messageId) {
+bool EventHandler::DeleteChatMessage(int64_t chatId, int32_t messageId) {
     try {
         return this->m_bot.getApi().deleteMessage(chatId, messageId);
     } catch (const TgBot::TgException& e) {
