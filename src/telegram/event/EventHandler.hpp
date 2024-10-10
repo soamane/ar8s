@@ -8,12 +8,12 @@
 #include <optional>
 
 struct UserData {
-    std::string phone;
+    std::string phone; // target phone
+    int attackDuration; // duration in minutes
 
-    int attacksCount;
-    bool phoneEntered;
-    bool attacksEntered;
-    bool attackInProgress;
+    bool phoneEntered;      // phone's input flag
+    bool durationEntered;   // duration's input flag
+    bool attackInProgress;  // attack status flag
 };
 
 class EventHandler {
@@ -40,8 +40,11 @@ private:
     void OnCommandEvent(std::string_view command, std::function<void(TgBot::Message::Ptr)> function);
 
 private:
-    TgBot::Message::Ptr SendMessage(int64_t chatId, std::string_view message);
-    bool DeleteMessage(int64_t chatId, int32_t messageId);
+    TgBot::Message::Ptr SendChatMessage(int64_t chatId, std::string_view message);
+    bool DeleteChatMessage(int64_t chatId, int32_t messageId);
+
+private:
+    void DeleteUserStatus(UserData& userData);
 
 private:
     TgBot::Bot& m_bot;
