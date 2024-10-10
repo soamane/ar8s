@@ -18,7 +18,7 @@ void EventHandler::CreateEvents() {
     OnCommandEvent("execute", [this](TgBot::Message::Ptr message)
     {
         const auto& user = this->m_users[ message->chat->id ];
-        if (!user.phoneEntered || !user.attacksEntered) {
+        if (!user.phoneEntered || !user.durationEntered) {
             SendErrorMessage(message->chat->id, message->messageId, "⚠️ Ты не можешь выполнить эту команду сейчас. Пожалуйста, убедитесь, что все данные введены корректно.");
             return;
         }
@@ -40,7 +40,7 @@ void EventHandler::HandleUserMessage(TgBot::Message::Ptr message) {
     const auto& user = this->m_users[ message->chat->id ];
     if (!user.phoneEntered) {
         this->ProcessPhoneNumber(message);
-    } else if (!user.attacksEntered) {
+    } else if (!user.durationEntered) {
         this->ProcessAttackCount(message);
     }
 }
@@ -88,13 +88,14 @@ void EventHandler::ProcessAttackCount(TgBot::Message::Ptr message) {
     }
 
     try {
-        user.attacksCount = std::stoi(message->text);
-        if (user.attacksCount < 1 || user.attacksCount > 100) {
+        user.attackDuration = std::stoi(message->text);
+        if (user.attackDuration < 1 || user.attackDuration > 100) {
             this->SendErrorMessage(message->chat->id, message->messageId, "❌ Количество минут должно быть от 1 до 100.");
             return;
         }
-        user.attacksEntered = true;
-        this->SendMessage(message->chat->id, "🔄 Количество минут для проведения атаки: " + std::to_string(user.attacksCount) + ". Введите команду /execute для запуска атаки.");
+
+        user.durationEntered = true;
+        this->SendMessage(message->chat->id, "🔄 Количество минут для проведения атаки: " + std::to_string(user.attackDuration) + ". Введите команду /execute для запуска атаки.");
     } catch ([[maybe_unused]] const std::exception& e) {
         this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный ввод.");
     }
@@ -125,7 +126,7 @@ void EventHandler::PerformExecutor(int64_t chatId, TgBot::Message::Ptr message) 
     Settings& settings = settingsParser.GetSettings();
     {
         settings.phoneNumber = this->m_users[ message->chat->id ].phone;
-        settings.attacksCount = this->m_users[ message->chat->id ].attacksCount;
+        settings.attacksCount = this->m_users[ message->chat->id ].attackDuration;
     }
 
     ServiceParser serviceParser(settings, servicesPath);
@@ -134,7 +135,7 @@ void EventHandler::PerformExecutor(int64_t chatId, TgBot::Message::Ptr message) 
     std::unique_ptr<Executor> executor = std::make_unique<Executor>(settings, services);
     executor->Execute();
 
-    this->SendMessage(chatId, "✅ Атака завершена.\n\n📥 Использовано сервисов: " + std::to_string(services.size()) + "\nВремя выполнения (в минутах): " + std::to_string(this->m_users[ message->chat->id ].attacksCount));
+    this->SendMessage(chatId, "✅ Атака завершена.\n\n📥 Использовано сервисов: " + std::to_string(services.size()) + "\nВремя выполнения (в минутах): " + std::to_string(this->m_users[ message->chat->id ].attackDuration));
     this->SendMessage(chatId, "💬 Чтобы снова воспользоваться ботом, введите команду /start");
 }
 

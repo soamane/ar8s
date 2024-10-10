@@ -8,12 +8,12 @@
 #include <optional>
 
 struct UserData {
-    std::string phone;
+    std::string phone; // target phone
+    int attackDuration; // duration in minutes
 
-    int attacksCount;
-    bool phoneEntered;
-    bool attacksEntered;
-    bool attackInProgress;
+    bool phoneEntered;      // phone's input flag
+    bool durationEntered;   // duration's input flag
+    bool attackInProgress;  // attack status flag
 };
 
 class EventHandler {
