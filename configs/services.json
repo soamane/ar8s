@@ -85,21 +85,6 @@
             "protocol-type": 1
         },
         {
-            "name": "Ascomin",
-            "url": "https://www.ascomin.ru/connection",
-            "payload": "_token=UUoaKjANiTv5ozq8D43VWUOoyyUjQytdXGzUFMrg&name=%D0%93%D0%BE%D1%80%D0%B8%D0%BD+%D0%93%D0%B5%D0%BD%D0%BD%D0%B0%D0%B4%D0%B8%D0%B9+%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2%D0%B8%D1%87&phone=7${phone}&city=%D0%A0%D0%B5%D0%B4%D0%BA%D0%B8%D0%BD%D0%BE&street=%D1%83%D0%BB+%D0%A4%D0%B0%D0%B4%D0%B5%D0%B5%D0%B2%D0%B0&house=3&apartment=33&policy=on",
-            "headers": [
-                "Referer: https://www.ascomin.ru/connection",
-                "Origin: https://www.ascomin.ru",
-                "Content-Type: application/x-www-form-urlencoded",
-                "Cookie: XSRF-TOKEN=eyJpdiI6ImtFdkxuY3ZuMmF1Y2FJWWdDSHQ0Y2c9PSIsInZhbHVlIjoicUhXVStkNWV5WkZyQXhlRFYwU003Y3QreUNZTGQ4YlBuenFLbm5qNm1oeUVsTDM4YlRsWS9MbkNhYjk2TDFsOGN6cy9scTRja1ZoeWd2aG5mK1BZUFg5ZmVYZ0QyUkVHd0l0bHVQbVpzZ3h4VGVYd0haVGxBV1ZidEVyL2dBT28iLCJtYWMiOiJjNGYxZGViOGVmNmJjYzZjYWIyMDFjYmJjNGMwYmQzYzIxM2ZkMTIwNGE2YTQ1Y2YyMDE3NmJiMWYxNGU3Mzk2IiwidGFnIjoiIn0%3D; ascomin_session=eyJpdiI6Im1Sa2tMaGw0NCtsK2Q0RzVUMjEwVUE9PSIsInZhbHVlIjoiZHNleVZ0Q0FRSC9MRTJyNTBXUElvQlFrdFZBZ0x2T2NrMWdKMEdVZnlwa0ZUNnpueEVLT3NSQzcrMU9QRDg5YllvMFBKdjRmNnEwRVdIWFo0UnlOTHJMYlBwNHltY1F3TVQ0NGRDbTdyQTdwYVdwdDkxUnQrdjJUUGhDTHFFT1YiLCJtYWMiOiJjN2ZmNmZlMGY1YzcxMTUyZDUzOGVlMmYwNDZmNDU5NmNkMTQzMWRhOWQ1Yzk3NWI2OTZiYWRjYTljMmUxOGYxIiwidGFnIjoiIn0%3D; _ym_uid=172764485657934905; _ym_d=1727644856; _ym_isad=1; _ym_visorc=w",
-                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8",
-                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0"
-            ],
-            "request-type": 1,
-            "protocol-type": 1
-        },
-        {
             "name": "GazpromBonus",
             "url": "https://gazprombonus.ru/v1/users/auth",
             "payload": "{\"phone_number\":\"7${phone}\",\"group_id\":\"USER_GROUP_CUSTOMER\",\"referrer_id\":null,\"type\":\"USER_AUTH_TYPE_PHONE_NUMBER\"}",
@@ -157,46 +142,6 @@
             "protocol-type": 1
         },
         {
-            "name": "TvoeLive",
-            "url": "https://api.tvoe.live/auth/sms/login",
-            "payload": "{\"phone\":\"7${phone}\",\"countryCode\":\"RUS\"}",
-            "headers": [
-                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0",
-                "Accept: application/json, text/plain, */*",
-                "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
-                "Content-Type: application/json",
-                "Origin: https://tvoe.live",
-                "Referer: https://tvoe.live/",
-                "Cookie: qrator_msid2=v2.0.1727648306.517.5f9cce6bXGFx3N6t|cPD3wSyWmpDpNNKK|hUdPvhLT3nAI6SqmgAg1PwH3Ec4cfjVZ4QMcjp/jK6P3myaGCIsdCG8Kq3ocqUT4/W08jmGDqmQKjRr+mVxknQ==-Owh6Q8qje9Jpt0vWd5I52M9MaPo=; _ym_uid=1727648313377836483; _ym_d=1727648313; _ym_isad=1",
-                "Sec-Fetch-Dest: empty",
-                "Sec-Fetch-Mode: cors",
-                "Sec-Fetch-Site: same-site"
-            ],
-            "request-type": 1,
-            "protocol-type": 1
-        },
-        {
-            "name": "LiniiLubvi",
-            "url": "https://liniilubvi.ru/personal/profile/",
-            "payload": "token=03AFcWeA5vnLSP_EaTgKXX68buh7oYP7XARhkx_PuTDA6oFlfg18gEPtrKpOGrNYODifraJNoZJ_MChs81h6RbfOp2XL9fd2jwF_pJ8koGktJgfCpulIb5eHNlzvXZRIFvQG_uF-B56iSgXPz7dTxR3tSFjYWyrg_QN55nePqOYG7q_0wPHoYE1Y0oaGaNHlxkEOz72jbPKtpelGJwCtdeSZT9IVx-Wf6nTAIXsXoHP-mn8_JnHvBtmizoaBkU7u5WQb08E24vKZhA38b-e1dFWKNvV0M_za29hFeJ04PId_i9--VoFXd_0RIvRpTSSgXMiuenZ52Cmt8__ksKFy8Jv_GV-gzE8hR70NRmsCKMQm--HCNMFdiV9to9cCDLAVbjUDadQZCimrE9BrBEy2jqvEJntk4qjGxEA2_Q4_ApIdNWxGhKDGmNudRX6J02gLC5zpr4FDSu6kpYlJScBOwfSWbCFe0aaFovqSyys8H6rqdVrWijW6ha0mEj0PygVXXnCgRq5a6bEM8zJeCG2uOLOhQrXS6UBs7cItq6RqDoLV-oG1skNSeXQT7UoS_q3j95mISzleFfAVYSpYwc9BgRCSdgr0AhtvztmiwscgYynHX-yaYyv_xqrc66gcBkZHRc4_asebVbqzauSDCEKjqn8IHf0CVl2M9fC5N8iUOzztcS2chKNu4Pic6wWeKTJauzFdc4fvlQ44HjSk9WqVsbhNFPq4vhfc2S4uy-yWuMZN2kk6P9er-Bhlo7DPqajDzuuokKZ3itwN3gL_9x6Ox51OiyZE2EhDphYqsfUTcayLSpJ8a4idYiF2hK7xEKA1QXTNIOSu5jQlZBl0S1vdxHpPpH9pH4Czo1VJ1G1JTH8yEPWJJqxeSB1Z9i7KKjhUYYI5twKuDDEr_tygWsgwBUqM1nn768TC5eIlDAVa-Px3NHqHkCQwQAHM1ivL1UF87biLHs-SjLTGH1IY3jFLPBla18lZjqbBVp3n8xWAvUj100OXilM8zR45cRHpn-avjSk11-C5PIDbGfSfgOPKVdWrzeWU3U4brXyyb9LvD7OZkRxTjdNq5U2K_T6v90G1HcAyVW61hdYFoYOk6WMbLZ7-fKH1qUpbwO9fMN-PwXmk7FKOKL5aI2Z3gXR4i4FoXEe6rTaMXovpXMPyOdCN7E8BEfIrqV8DPbuZXAs5ipNKz8wijL2Zm8bQcudTJ1DhVGaQ7MJzRcEW-IAx0uuL0W0Gikg3rBfaB4ifHVWcuzlcQnlK8CmOzQCsQS-EeENW5oxBI1BTC2sxKNk5v24zdw73yyWV7LKmgKQ5wsvlNiR6ihj6v-Q_dvwzZydWrdO4uS8k8xzrLwUlXWWcbc7yzfazyQDEvxvZJ5U4qzFUm6KRhx2F4f3oj3meP1UYRJupU-YsZqd-MNveXo9Cv0j2AUJJxPtM2rvtxU8DzeVEQZiXgBzAjmIxRQjHwrHBwYNEXOHlaz11kZUo4IONwQTz-53DC0JYT7vkCGVQ6gCfGCmbRn8f5BuQJanF-aBO-OiltgAYmiADH34m3lpJLHof7PZeARZLR6YIPsSRHLLZ_OvXlylHxgJOWJqnBrljvO6LRSJ1FqsLhO-J32PyeQuvwQ91WOCNU7gL-72MTi-gZpHUi8qheUisbqXxSsC2JQC7DCBjgYrgE-OBFhWbxFqgJk0pbFRk3q89GIZ_iv4pLTA92FMCSiA9pH_9oXJ6S4vT0uVzECDqOGJ1Pa-biDCjeGst8AU2PNbBiMYS2qj_FMY4xvectF9vtdDd_KPUCC-DSGUEEaEl4iQYoHSEdkWJO3_wdjxyGVQl23ijv7ZOLYHJbOf82udhKX4VMY10ZarMQfS02CyG_GQMaMrx7p4zdYhfa0Zpw0yha6qFSIGuxqRoNuBMnzoaReyl5CM1GHv65hmM3-BgnlBmGnm4_DswsgB0BtWJZimsA03Ka6ncy0TSzVz16Rcv0avgIAXYvGQ5ggRy9xujluxjVZziICGqo2y_QbrqhYXgLELeRi9OQA7ic8zsFrm0YKS5GK2sRo2I2pogtaTcU1HJVt243oiIHmkBgfb2Gxt2BSgV8tPkYHK_X2lAaGSi88ETuuzNpq8skFFaLf4r7aDFAJ&t3=35d088486c&state=1&phone=7${phone}",
-            "headers": [
-                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0",
-                "Accept: */*",
-                "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
-                "Accept-Encoding: gzip, deflate, br, zstd",
-                "Referer: https://liniilubvi.ru/personal/profile/",
-                "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
-                "X-Requested-With: XMLHttpRequest",
-                "Origin: https://liniilubvi.ru",
-                "Cookie: __ddg1_=N3iwKkCnOmDU0mUDFeAi; experimentVariantId_ll8=11; PHPSESSID=hsihk8ct1g99kkcjbj4etvftvr; subscribe-popup=cookiesubscribe; BITRIX_CONVERSION_CONTEXT_od=%7B%22ID%22%3A106%2C%22EXPIRE%22%3A1727729940%2C%22UNIQUE%22%3A%5B%22conversion_visit_day%22%5D%7D; _ga_Q2GKTC7MRN=GS1.1.1727648500.1.1.1727648502.0.0.0; _ga=GA1.1.812587665.1727648500; _userGUID=0:m1o5b6l5:YY4U8SSJ0zpDZJ4BK7YfgVu1qo97_3Ir; dSesn=0965dc66-4606-ef6e-4c10-38f02f6a76b3; _dvs=0:m1o5b6l5:M4tKMffa0vZTZJecbNgeO60BE21ro0gw; _userGUID=0:m1o5b6l5:YY4U8SSJ0zpDZJ4BK7YfgVu1qo97_3Ir; __utma=117815316.812587665.1727648500.1727648501.1727648501.1; __utmb=117815316.2.10.1727648501; __utmc=117815316; __utmz=117815316.1727648501.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utmt_UA-32426418-13=1; popmechanic_sbjs_migrations=popmechanic_1418474375998%3D1%7C%7C%7C1471519752600%3D1%7C%7C%7C1471519752605%3D1; _gid=GA1.2.1219328836.1727648501; _ga_cid=812587665.1727648500; _gat=1; _ym_uid=1727648501216888510; _ym_d=1727648501; _ym_isad=1; _ga_P3KP5WRTY8=GS1.2.1727648501.1.1.1727648502.59.0.0; mindboxDeviceUUID=af9dcc58-6dd6-4249-9b07-f152620be556; directCrm-session=%7B%22deviceGuid%22%3A%22af9dcc58-6dd6-4249-9b07-f152620be556%22%7D; _ym_visorc=w",
-                "Sec-Fetch-Dest: empty",
-                "Sec-Fetch-Mode: cors",
-                "Sec-Fetch-Site: same-origin"
-            ],
-            "request-type": 1,
-            "protocol-type": 1
-        },
-        {
             "name": "Kviku",
             "url": "https://kviku.ru/cards/default/SendCodeApproveDocs",
             "payload": "phone=%2B7${phone}",
@@ -214,73 +159,6 @@
                 "Sec-Fetch-Mode: cors",
                 "Sec-Fetch-Site: same-origin",
                 "TE: trailers"
-            ],
-            "request-type": 1,
-            "protocol-type": 1
-        },
-        {
-            "name": "Beeline",
-            "url": "https://idplogin.beeline.ru/web/v1/process",
-            "payload": "{\"challenge\":\"79WYApnwNrKVNnnMyNafRK1RYYevAah6SBYE-JvEODkPYH6ZduyQBCRJ6TX8M7u-8wKSTLdcVDuX19KnS0Hf3j3s76znYevlPKXe4Z9qjjj11A8bTHOI6IRZIfB2-Bwn_1xDEcf4Mw0vs6MXPSGLfZxJD3gxZe3KpmHTJibo1T9nMyq5JaNDyiSsoK7XeYkgecPtw9SJSAanJkxEAN_KbAkv3pKVQPSE5G0cr8sOWi69BfOzsUOmGtuMWInuFXlWccQMqfoWA8dR9ERefRKuEcNg0u9BYtCXBJ7MsNhl1iL9hW9DU26UsR9r2h5ai24RxXE6ysJqIrVANPeUSa7EHJNsXlJ1UHHDLhbmTUcZGHRjOK7QWLz9_MsZv1q2iuikIgecGyJ0ZzQIhInPEfGb8TKXQVveLuSMG8YEPaWQXk_Wrsq2Lq76DwGVzaWnAVNlaykiCUNA7NBOkwOgvnqU2bAqS-Mcmq0EUEguU6diBLXmxqdP6dePweGcRS85UYMrYx1cz3j8PPv_p7HCC4JgnLT8xI3X_ykEeiUZT5B1Qqu-zIE6VW1uKbiD8yrdS82iXDTsDJUg0wxXrDp47HAUvTVTcEabOvkKfKfSSq3vrsJLWkLvCu1RrKU9kHTrWcEbQjUuvmaBnc8j1YZpw5srGfsuHfyGtBN9o2FDF2sgtAkWSCjqYAnHduon_GJ9TfLO_tRCj5F6D-4cuI3XMihNYqjgcILCwpF-HfQYwnPymgybDcGqulB0ur5n8qhz2egzJTpq6JurwJ6hfJtly_FibcsHZIAvdaDpoU1A9KWd0r04BefXnP1jsbIuyXmQB0sgJl8ClB97pua2xfqu7-Lh2K-8i-NzZXEun1lzKH69C3EAlwgm28oRXVUuDd8ftIfrUx9bzxVpygrZ3DhCfKhSdO-HwLJhFWoGeOEeHVE0V0-zAJwmmE6Rvc7kzKFmE92mxZWi5BiwxONTyCemzGIYQyub266JGSd7ZK79jgisHzdpjQKmvKMjpFhON4Lq7Fm-LrGq8fieKHcfcbw53mVPkbabehn5Da3v6X_Fc1heoRutM2dcflEdpdcDcJ_tPsVFcuDj8IDjdA2DKSbHUo2zTCcdYCtzIUWKz7sNW2_o51NIGVTjy-WSGJgkZ8H1dpGyBEAX1IPCOVmRVCqXAOdr3d3tpeqNGTwEYJ9F_99dE17rqbWPJlz6W2DS4dz3qRdCW75BCBeW7LoPsgNpSd8_oMV-f5vMh8wjNMheGSZQ8puxNSiv_ugtRVHol65NWv2tQ2BMVE78R5XOyL5-s9Qh5r5AGud3IrmkKSn1kZGIZKh7dMSXdJCpFyOEN25VGt3eqvRejD2gW6Tz9rlvLt81A7zh_mmBjam9E9wfFzpyQEwe3ZTjLZeX8iSZqP-umfz_rcqWfnUIYsYTKq3hsHsw_zjfj74kXsJAfLbLn5zwrcuzo7QXbIapNKNutBV0fEryDDm270-D9WvElckV2xQJ-iKlT419Z0xqd-fqj8t_KgXw5-BWY5cc7Izqabj0ZID-FTZX2ss6ydtIAYVXr591h6S2rdkc4qa-80f4qXMJY121pS_eqjdNoEOhod2qxSsB4PHuO0OVF-UVqo2UZwIWVxQ9HSD2lLLOT8QFULhva_wu-qL0sjMJdshlvyyjRcHwh1H4v_kINlmyvceFvuUi5cDUxr13BNQRjn4P6-pP1hR4dqTiChceI3cri5gN7A4xyI6YTtmsgQX6YzV1CecNUvAzhy3SQ8wJgCibWoUsoxiB_LGhm6A95aQt1EjdukLdWZNvrfJFG6cDS4LGR9fUJmP-IzXLsN1KIFmBjaOnWazApA1attiIuldpKl0QA3ne0IciCzHusIB_YZ-jigiPFgKSBCBEnOBQXcIXmBQHHm6Yz_K0khoaPYUQWghSukgFO2Bz3lQuM59fLgWBmims6ry778oCWE7TbPsgH2rJodU5CLh_117SNPWfErKAjnlxYaDLokbXcZfD_bHjTo840sQ5-QvdBfObv2V1lo7Pjbe7SknaEtx4BFEPwFyHYMH08czUVfZwkYoR9g7-Qork2j4lAwerVl5qbco8Mn8wSdbZO33u8SQnqXzUZFOcq_EumWsN2FcG_hcYI2Fmt5PuB1DEBnLhnlQ=\",\"csrfToken\":\"MTYxMjU0YmEtMzljMy00NmRhLTk5MzgtNjY5NWQxMzMyYTY4\",\"action\":\"ACT_SUBMIT_CREDENTIALS\",\"data\":{\"methodId\":\"2\",\"login\":\"7${phone}\",\"captcha\":\"29350\"}}",
-            "headers": [
-                "Host: idplogin.beeline.ru",
-                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
-                "Accept: application/json",
-                "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
-                "Content-Type: application/json;charset=UTF-8",
-                "Access-Control-Allow-Origin: *",
-                "Access-Control-Allow-Methods: GET, PUT, POST, DELETE",
-                "Origin: https://authentication.beeline.ru",
-                "Connection: keep-alive",
-                "Referer: https://authentication.beeline.ru/",
-                "Cookie: core-sso-flowstate=b32f24ca-b206-4c40-b5e2-6e7f9bd48d4f; abt_b2c_new_basket=true; abt-2241212=1; isAuthorized=0; basket_redirect=false; referrer=https://www.google.com/; OpenIdConnect.nonce.fMleoR3D36i34dzxndG1kgu27fJ6iHy7u1hfgDOdtLw%3D=Q0ZQOTNJT0oxMjc2czNjYUJSWGc4X3RGMHpXMms1TW9pY3Bqa3VLOTE5Ymttc29HY1hMRXJpaW83U1BhYnlETGVBTmxNSTJ3R1o2XzhDYzQwU1BSNzl0NkY4RE5BZEZpa1JMaHZ5N1d2MWFyTEdnUjR1SGY5WmVfQU8wZ3RKaHE4c2RXSUhmSUVwNEcxQnFPdVROMmNRSE81anRmUzI2TDZKRWpxYkQ2UXdGUmRnZ1A4MmRkU2FUcGlkbWlsYUR3TURNMi1nSVVJTG9IaUxFQ25ldU15OEZkZzdJ; ASP.NET_shop_SessionId=5k114imcxvjeu3zugpttqlxt; OpenIdConnect.nonce.NjQCYuLLcWBOS8ul1Bb7hy%2FjHSe3nxveLAC2yY%2Bg%2B9Q%3D=NUtidTRfMkw2WjRPNnp0cE55aDdKVFFHUUhMa0d0cWJ6a21NT29tSGljMG9pX3RkbFN2NEpCazNPcWtlaGhxZWY1SG1uU00zRWk3ZFg2TEJCU0FjWXg3ZkdoUTRfRWVwSmdsYUsxSHFNMl9fa21lT0NmLWY2ZlNsRHBtNUU1TG5EMGFpWk5YWlpkd01ZYjdnbGw3NXdEZDFuVGtUa3d5ZXpkR3JOUURzNUhBWW1BSzhfbHdzc2ktVjZoaGtGc0N2R0xUM0djLXMyT1BFWk01MF9BZUxMNWNsU3hr; _ym_uid=1727899807482813893; _ym_d=1727899807; _ym_isad=1; session_id=ca0e7b9f-2b09-451d-942b-dd07ba12e6d4",
-                "Sec-Fetch-Dest: empty",
-                "Sec-Fetch-Mode: cors",
-                "Sec-Fetch-Site: same-site"
-            ],
-            "request-type": 1,
-            "protocol-type": 1
-        },
-        {
-            "name": "CityStar: Call",
-            "url": "https://citystarwear.com/bitrix/templates/bs-base/php/includes/bs-handlers.php",
-            "payload": "phone=${phone}&bxl=42f034e44ee6fc1a03283334f23cee74&hdlr=bsSendCallCode&key=DOvBhIav34535434v212SEoVINS&dataForm%5Bphone%5D=${phone}&dataForm%5BcallNums%5D=&dataForm%5BsmsCode%5D=&dataForm%5Bemail%5D=&dataForm%5Becode%5D=&KPNyr=99C2k71IQGzOL4yWB592SYwHt&otS0X=cqpxl1Gf5drvRn37mt89vJyN9&yjWZm=7p9sy7VHQjsj2BdBmtWpLiBlP&MiV59=ZodOAM0nv8flkr1Gjvt2kKArj&pF4Lb=PIvbjtDsSNxOFE30cb0JKnvI5&7uE7K=8S73TJKJIpahInX06pwWyxw16&U7yMB=iFcebu3AyYlgTRUxK6XHEz0R6&Bt21g=zQTQNPJQ9gLmXESXF23E1R0Om&q4Xza=6HK1r6Cl5l2I3xkVWNZkRdANu&59xPH=MC9OSgjcOpxhS5fpFELDIO2Hf",
-            "headers": [
-                "Host: citystarwear.com",
-                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
-                "Accept: */*",
-                "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
-                "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
-                "X-Requested-With: XMLHttpRequest",
-                "Origin: https://citystarwear.com",
-                "Connection: keep-alive",
-                "Referer: https://citystarwear.com/lk/profile/",
-                "Cookie: PHPSESSID=fuQ3kGOqGqFEFWJ5b2k8VsH66BW1MKGH; I_BITRIX2_SM_bsSiteVersionRun=D; _ga_V3X9JZN8LW=GS1.1.1727900773.1.1.1727900776.57.0.0; _ga=GA1.1.490729510.1727900774; bsTracker=13c16a2b9d5a67d8acfcaa63c9ef5baa%7C1727900772; _ym_uid=1727900774773829283; _ym_d=1727900774; _ym_isad=1; _ym_visorc=w; cto_bundle=8ikqsV9UU2tYdnNmb0tjZnYwbWhXT0YwdTBQbWVXWU9SRmVRdGdHUVl2MEpFU2VDUDdJcE1Ua2xpM1UyaEt3SWU2cU05aGtTQm82cTMwSEp6bTFaOU0yU1EyYzN5NnRHT2VWZ29uY0dTcEl1JTJGb0lWM1lPZHlyWHA1SGRmczM2alRHckkyREVSbTRaZGh5UmNXVlk4WnNJYWRhUSUzRCUzRA; faddprodsitems=a2b193ca6830a56f5a236213c824a627; I_BITRIX2_SM_bsAuthPhone=7%239959105265",
-                "Sec-Fetch-Dest: empty",
-                "Sec-Fetch-Mode: cors",
-                "Sec-Fetch-Site: same-origin"
-            ],
-            "request-type": 1,
-            "protocol-type": 1
-        },
-        {
-            "name": "CityStar: SMS",
-            "url": "https://citystarwear.com/bitrix/templates/bs-base/php/includes/bs-handlers.php",
-            "payload": "phone=${phone}&bxl=42f034e44ee6fc1a03283334f23cee74&hdlr=bsSendSMSCode&key=DOvBhIav34535434v212SEoVINS&dataForm%5Bphone%5D=${phone}&dataForm%5BcallNums%5D=&dataForm%5BsmsCode%5D=&dataForm%5Bemail%5D=&dataForm%5Becode%5D=&KPNyr=99C2k71IQGzOL4yWB592SYwHt&otS0X=cqpxl1Gf5drvRn37mt89vJyN9&yjWZm=7p9sy7VHQjsj2BdBmtWpLiBlP&MiV59=ZodOAM0nv8flkr1Gjvt2kKArj&pF4Lb=PIvbjtDsSNxOFE30cb0JKnvI5&7uE7K=8S73TJKJIpahInX06pwWyxw16&U7yMB=iFcebu3AyYlgTRUxK6XHEz0R6&Bt21g=zQTQNPJQ9gLmXESXF23E1R0Om&q4Xza=6HK1r6Cl5l2I3xkVWNZkRdANu&59xPH=MC9OSgjcOpxhS5fpFELDIO2Hf",
-            "headers": [
-                "Host: citystarwear.com",
-                "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
-                "Accept: */*",
-                "Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
-                "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
-                "X-Requested-With: XMLHttpRequest",
-                "Origin: https://citystarwear.com",
-                "Connection: keep-alive",
-                "Referer: https://citystarwear.com/lk/profile/",
-                "Cookie: PHPSESSID=fuQ3kGOqGqFEFWJ5b2k8VsH66BW1MKGH; I_BITRIX2_SM_bsSiteVersionRun=D; _ga_V3X9JZN8LW=GS1.1.1727900773.1.1.1727900776.57.0.0; _ga=GA1.1.490729510.1727900774; bsTracker=13c16a2b9d5a67d8acfcaa63c9ef5baa%7C1727900772; _ym_uid=1727900774773829283; _ym_d=1727900774; _ym_isad=1; _ym_visorc=w; cto_bundle=8ikqsV9UU2tYdnNmb0tjZnYwbWhXT0YwdTBQbWVXWU9SRmVRdGdHUVl2MEpFU2VDUDdJcE1Ua2xpM1UyaEt3SWU2cU05aGtTQm82cTMwSEp6bTFaOU0yU1EyYzN5NnRHT2VWZ29uY0dTcEl1JTJGb0lWM1lPZHlyWHA1SGRmczM2alRHckkyREVSbTRaZGh5UmNXVlk4WnNJYWRhUSUzRCUzRA; faddprodsitems=a2b193ca6830a56f5a236213c824a627; I_BITRIX2_SM_bsAuthPhone=7%239959105265",
-                "Sec-Fetch-Dest: empty",
-                "Sec-Fetch-Mode: cors",
-                "Sec-Fetch-Site: same-origin"
             ],
             "request-type": 1,
             "protocol-type": 1
