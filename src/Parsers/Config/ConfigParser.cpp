@@ -26,6 +26,5 @@ nlohmann::json ConfigParser::Parse() const {
         throw std::runtime_error("Failed to parse configuration file '" + m_path.string() + "': " + std::string(e.what()));
     }
 
-    std::cout << "Configuration loaded successfully from " << m_path.string() << std::endl;
     return data;
 }

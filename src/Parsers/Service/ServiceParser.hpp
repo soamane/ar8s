@@ -27,7 +27,7 @@ public:
 
 private:
     void Load() override;
-    void ReplacePlaceholders(std::string& source);
+    void ReplacePhoneNumber(std::string& source);
 
 private:
     std::vector<Service> m_services;

@@ -1,6 +1,4 @@
-#include "Parsers/Service/ServiceParser.hpp"
-#include "Parsers/Settings/SettingsParser.hpp"
-#include "Executor/Executor.hpp"
+#include "telegram/bot/TelegramBot.hpp"
 
 #include <memory>
 #include <iostream>
@@ -17,18 +15,9 @@ int main() {
     )" << std::endl;
 
     try {
-        // Путь к конфигурационным файлам
-        const std::string settingsPath = "configs\\settings.json";
-        const std::string servicesPath = "configs\\services.json";
-
-        SettingsParser settingsParser(settingsPath);
-        const Settings& settings = settingsParser.GetSettings();
-
-        ServiceParser serviceParser(settings, servicesPath);
-        const std::vector<Service>& services = serviceParser.GetServices();
-
-        Executor executor(settings, services);
-        executor.Execute();
+        std::string_view botToken = "7810469792:AAFPk333ZZMXEAFlOVK7iTBdLYAXH1_GYRE";
+        auto bot = std::make_unique<TelegramBot>(botToken);
+        bot->Start();
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return EXIT_FAILURE;

@@ -18,14 +18,12 @@ public:
     void Execute();
 
 private:
-    RESPONSE ExecuteRequest(const MyCurl& myCurl, const Service& service) const;
-    void ProcessServiceResponse(const RESPONSE& response) const;
+    RESPONSE ExecuteRequest(std::shared_ptr<MyCurl> myCurl, const Service& service) const;
+    void SetProxyToRequest(std::shared_ptr<MyCurl> myCurl);
+    void SetUserAgentToRequest(Service& service);
 
     template<class T>
     std::optional<T> GetRandomObject(const std::vector<T>& vec);
-
-    void ShowConfigs() const;
-
 private:
     Settings m_settings;
     std::vector<Service> m_services;
@@ -44,4 +42,4 @@ std::optional<T> Executor::GetRandomObject(const std::vector<T>& vec) {
     return vec[ dis(generator) ];
 }
 
-#endif // EXECUTOR_HPP
+#endif // !EXECUTOR_HPP
