@@ -88,19 +88,19 @@ void EventHandler::ProcessPhoneNumber(TgBot::Message::Ptr message) {
 void EventHandler::ProcessAttackCount(TgBot::Message::Ptr message) {
     auto& user = this->m_users[ message->chat->id ];
     if (!MessageHandler::IsDigitOnly(message->text)) {
-        this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректное значение времени.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
+        this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректное значение.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
         return;
     }
 
     try {
         user.attackIterations = std::stoi(message->text);
         if (user.attackIterations < 1 || user.attackIterations > 100) {
-            this->SendErrorMessage(message->chat->id, message->messageId, "❌ Количество минут должно быть от 1 до 100.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
+            this->SendErrorMessage(message->chat->id, message->messageId, "❌ Количество итераций должно быть от 1 до 100.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
             return;
         }
 
         user.iterationsEntered = true;
-        this->SendChatMessage(message->chat->id, "🎲 Количество минут для проведения атаки: " + std::to_string(user.attackIterations) + "\n\nЧтобы начать спам по указанному номеру, введите команду /execute");
+        this->SendChatMessage(message->chat->id, "🎲 Количество итераций для проведения атаки: " + std::to_string(user.attackIterations) + "\n\nЧтобы начать спам по указанному номеру, введите команду /execute");
     } catch ([[maybe_unused]] const std::exception& e) {
         this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный ввод.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
     }
