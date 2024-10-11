@@ -93,14 +93,14 @@ void EventHandler::ProcessAttackCount(TgBot::Message::Ptr message) {
     }
 
     try {
-        user.attackDuration = std::stoi(message->text);
-        if (user.attackDuration < 1 || user.attackDuration > 100) {
+        user.attackIterations = std::stoi(message->text);
+        if (user.attackIterations < 1 || user.attackIterations > 100) {
             this->SendErrorMessage(message->chat->id, message->messageId, "❌ Количество минут должно быть от 1 до 100.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
             return;
         }
 
         user.durationEntered = true;
-        this->SendChatMessage(message->chat->id, "🎲 Количество минут для проведения атаки: " + std::to_string(user.attackDuration) + "\n\nЧтобы начать спам по указанному номеру, введите команду /execute");
+        this->SendChatMessage(message->chat->id, "🎲 Количество минут для проведения атаки: " + std::to_string(user.attackIterations) + "\n\nЧтобы начать спам по указанному номеру, введите команду /execute");
     } catch ([[maybe_unused]] const std::exception& e) {
         this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный ввод.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
     }
@@ -132,7 +132,7 @@ void EventHandler::PerformExecutor(int64_t chatId, TgBot::Message::Ptr message) 
         Settings& settings = settingsParser.GetSettings();
         {
             settings.phoneNumber = this->m_users[ message->chat->id ].phone;
-            settings.attacksCount = this->m_users[ message->chat->id ].attackDuration;
+            settings.attacksCount = this->m_users[ message->chat->id ].attackIterations;
         }
 
         ServiceParser serviceParser(settings, servicesPath);

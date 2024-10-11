@@ -9,7 +9,7 @@
 
 struct UserData {
     std::string phone; // target phone
-    int attackDuration; // duration in minutes
+    int attackIterations; // duration in minutes
 
     bool phoneEntered;      // phone's input flag
     bool durationEntered;   // duration's input flag
