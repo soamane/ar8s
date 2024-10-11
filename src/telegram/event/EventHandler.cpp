@@ -13,7 +13,7 @@ void EventHandler::CreateEvents() {
     OnCommandEvent("start", [this](TgBot::Message::Ptr message)
     {
         auto& user = this->m_users[ message->chat->id ];
-        if (user.phoneEntered || user.durationEntered) {
+        if (user.phoneEntered || user.iterationsEntered) {
             this->DeleteUserStatus(user);
             this->SendChatMessage(message->chat->id, "Видимо, вы уже ввели данные для проведения спам атаки.\n\nВы бы врядли попробовали ввести начальную команду снова, поэтому считаем, что вы что-то упустили. Мы стёрли предыдущие введенные данные чтобы вы смогли записать новые!");
         }
@@ -23,7 +23,7 @@ void EventHandler::CreateEvents() {
     OnCommandEvent("execute", [this](TgBot::Message::Ptr message)
     {
         const auto& user = this->m_users[ message->chat->id ];
-        if (!user.phoneEntered || !user.durationEntered) {
+        if (!user.phoneEntered || !user.iterationsEntered) {
             SendErrorMessage(message->chat->id, message->messageId, "⚠️ Ты не можешь выполнить эту команду сейчас. Пожалуйста, убедитесь, что все данные введены корректно.");
             return;
         }
@@ -45,7 +45,7 @@ void EventHandler::HandleUserMessage(TgBot::Message::Ptr message) {
     const auto& user = this->m_users[ message->chat->id ];
     if (!user.phoneEntered) {
         this->ProcessPhoneNumber(message);
-    } else if (!user.durationEntered) {
+    } else if (!user.iterationsEntered) {
         this->ProcessAttackCount(message);
     }
 }
@@ -99,7 +99,7 @@ void EventHandler::ProcessAttackCount(TgBot::Message::Ptr message) {
             return;
         }
 
-        user.durationEntered = true;
+        user.iterationsEntered = true;
         this->SendChatMessage(message->chat->id, "🎲 Количество минут для проведения атаки: " + std::to_string(user.attackIterations) + "\n\nЧтобы начать спам по указанному номеру, введите команду /execute");
     } catch ([[maybe_unused]] const std::exception& e) {
         this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный ввод.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
@@ -188,6 +188,6 @@ bool EventHandler::DeleteChatMessage(int64_t chatId, int32_t messageId) {
 
 void EventHandler::DeleteUserStatus(UserData& userData) {
     userData.phoneEntered = false;
-    userData.durationEntered = false;
+    userData.iterationsEntered = false;
     userData.attackInProgress = false;
 }

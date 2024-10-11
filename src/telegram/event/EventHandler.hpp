@@ -12,7 +12,7 @@ struct UserData {
     int attackIterations; // duration in minutes
 
     bool phoneEntered;      // phone's input flag
-    bool durationEntered;   // duration's input flag
+    bool iterationsEntered;   // duration's input flag
     bool attackInProgress;  // attack status flag
 };
 
