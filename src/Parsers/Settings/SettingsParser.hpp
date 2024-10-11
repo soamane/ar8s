@@ -20,7 +20,6 @@ struct Proxy {
 
 struct Settings {
     int attacksCount;
-    int loopTimeout;
     bool useProxy;
     bool useUserAgent;
 

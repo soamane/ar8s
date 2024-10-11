@@ -1,6 +1,5 @@
 {
 	"attacks-count": 10,
-	"loop-timeout": 60,
 	"use-proxy": true,
 	"proxies": [
 		{

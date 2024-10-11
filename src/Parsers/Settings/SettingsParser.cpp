@@ -24,9 +24,6 @@ void SettingsParser::Load() {
 void SettingsParser::ParseAdditionals(const nlohmann::json& data) {
     this->CheckJsonKey(data, "attacks-count");
     this->m_settings.attacksCount = data.at("attacks-count");
-
-    this->CheckJsonKey(data, "loop-timeout");
-    this->m_settings.loopTimeout = data.at("loop-timeout");
 }
 
 void SettingsParser::ParseProxies(const nlohmann::json& data) {

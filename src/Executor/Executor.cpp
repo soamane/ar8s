@@ -18,7 +18,6 @@ void Executor::Execute() {
             this->ExecuteRequest(myCurl, service);
 
         }
-        std::this_thread::sleep_for(std::chrono::seconds(m_settings.loopTimeout));
     }
 }
 
