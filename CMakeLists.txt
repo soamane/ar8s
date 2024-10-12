@@ -10,13 +10,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(CURL REQUIRED)
-if (CURL_FOUND)
-    include_directories(${CURL_INCLUDE_DIRS})
-    add_definitions(-DHAVE_CURL)
-endif()
-
 find_package(OpenSSL REQUIRED)
 find_package(nlohmann_json REQUIRED)
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
 find_package(Boost REQUIRED)
 
 file(GLOB_RECURSE SOURCES
@@ -55,4 +51,5 @@ target_link_libraries(${PROJECT_NAME}
     Normaliz
     Crypt32
     nlohmann_json::nlohmann_json
+    unofficial::sqlite3::sqlite3
 )
