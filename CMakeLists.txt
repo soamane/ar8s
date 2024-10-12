@@ -27,8 +27,8 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
     ${CURL_INCLUDE_DIRS} 
-    ${CMAKE_SOURCE_DIR}/lib/MyCurl/include/
-    ${CMAKE_SOURCE_DIR}/lib/tgbot-cpp/include/
+    ${CMAKE_SOURCE_DIR}/vendor/lib/MyCurl/include/
+    ${CMAKE_SOURCE_DIR}/vendor/lib/tgbot-cpp/include/
 )
 
 foreach(headerFile ${HEADER_FILES})
@@ -44,8 +44,8 @@ target_link_libraries(${PROJECT_NAME}
     ${CURL_LIBRARIES} 
     ${OPENSSL_LIBRARIES} 
     ${Boost_LIBRARIES}
-    ${CMAKE_SOURCE_DIR}/lib/MyCurl/lib/MyCurl_x64.lib
-    ${CMAKE_SOURCE_DIR}/lib/tgbot-cpp/lib/TgBot.lib
+    ${CMAKE_SOURCE_DIR}/vendor/lib/MyCurl/lib/MyCurl_x64.lib
+    ${CMAKE_SOURCE_DIR}/vendor/lib/tgbot-cpp/lib/TgBot.lib
     Ws2_32
     Wldap32
     Normaliz
