@@ -10,13 +10,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(CURL REQUIRED)
-if (CURL_FOUND)
-    include_directories(${CURL_INCLUDE_DIRS})
-    add_definitions(-DHAVE_CURL)
-endif()
-
 find_package(OpenSSL REQUIRED)
 find_package(nlohmann_json REQUIRED)
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
 find_package(Boost REQUIRED)
 
 file(GLOB_RECURSE SOURCES
@@ -31,8 +27,8 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
     ${CURL_INCLUDE_DIRS} 
-    ${CMAKE_SOURCE_DIR}/lib/MyCurl/include/
-    ${CMAKE_SOURCE_DIR}/lib/tgbot-cpp/include/
+    ${CMAKE_SOURCE_DIR}/vendor/lib/MyCurl/include/
+    ${CMAKE_SOURCE_DIR}/vendor/lib/tgbot-cpp/include/
 )
 
 foreach(headerFile ${HEADER_FILES})
@@ -48,11 +44,12 @@ target_link_libraries(${PROJECT_NAME}
     ${CURL_LIBRARIES} 
     ${OPENSSL_LIBRARIES} 
     ${Boost_LIBRARIES}
-    ${CMAKE_SOURCE_DIR}/lib/MyCurl/lib/MyCurl_x64.lib
-    ${CMAKE_SOURCE_DIR}/lib/tgbot-cpp/lib/TgBot.lib
+    ${CMAKE_SOURCE_DIR}/vendor/lib/MyCurl/lib/MyCurl_x64.lib
+    ${CMAKE_SOURCE_DIR}/vendor/lib/tgbot-cpp/lib/TgBot.lib
     Ws2_32
     Wldap32
     Normaliz
     Crypt32
     nlohmann_json::nlohmann_json
+    unofficial::sqlite3::sqlite3
 )

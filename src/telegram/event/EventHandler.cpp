@@ -1,7 +1,11 @@
 #include "EventHandler.hpp"
-#include "../chat/MessageHandler.hpp"
+
+#include "../chat/handler/phone/phone.hpp"
+#include "../chat/validator/string/string.hpp"
+
 #include "../../parsers/service/ServiceParser.hpp"
 #include "../../parsers/settings/SettingsParser.hpp"
+
 #include "../../executor/Executor.hpp"
 
 #include <thread>
@@ -12,7 +16,7 @@ EventHandler::EventHandler(TgBot::Bot& bot) : m_bot(bot) { }
 void EventHandler::CreateEvents() {
     OnCommandEvent("start", [this](TgBot::Message::Ptr message)
     {
-        auto& user = this->m_users[ message->chat->id ];
+        auto& user = this->m_users[message->chat->id];
         if (user.phoneEntered || user.iterationsEntered) {
             this->DeleteUserStatus(user);
             this->SendChatMessage(message->chat->id, "Видимо, вы уже ввели данные для проведения спам атаки.\n\nВы бы врядли попробовали ввести начальную команду снова, поэтому считаем, что вы что-то упустили. Мы стёрли предыдущие введенные данные чтобы вы смогли записать новые!");
@@ -22,7 +26,7 @@ void EventHandler::CreateEvents() {
 
     OnCommandEvent("execute", [this](TgBot::Message::Ptr message)
     {
-        const auto& user = this->m_users[ message->chat->id ];
+        const auto& user = this->m_users[message->chat->id];
         if (!user.phoneEntered || !user.iterationsEntered) {
             SendErrorMessage(message->chat->id, message->messageId, "⚠️ Ты не можешь выполнить эту команду сейчас. Пожалуйста, убедитесь, что все данные введены корректно.");
             return;
@@ -37,12 +41,16 @@ void EventHandler::CreateEvents() {
             return;
         }
 
-        this->HandleUserMessage(message);
+        try {
+            this->HandleUserMessage(message);
+        } catch (const std::exception& e) {
+            std::cerr << "Failed to handle user message: " << e.what() << std::endl;
+        }
     });
 }
 
 void EventHandler::HandleUserMessage(TgBot::Message::Ptr message) {
-    const auto& user = this->m_users[ message->chat->id ];
+    const auto& user = this->m_users[message->chat->id];
     if (!user.phoneEntered) {
         this->ProcessPhoneNumber(message);
     } else if (!user.iterationsEntered) {
@@ -51,7 +59,7 @@ void EventHandler::HandleUserMessage(TgBot::Message::Ptr message) {
 }
 
 void EventHandler::LaunchAttack(int64_t chatId, TgBot::Message::Ptr message) {
-    auto& user = this->m_users[ message->chat->id ];
+    auto& user = this->m_users[message->chat->id];
     if (user.attackInProgress) {
         this->SendErrorMessage(chatId, static_cast<int32_t>(message->chat->id), "⚠️ Атака уже выполняется.\nПопробуйте повторить команду после завершения. Вам придет сообщение сразу же после завершения");
         return;
@@ -68,13 +76,17 @@ void EventHandler::LaunchAttack(int64_t chatId, TgBot::Message::Ptr message) {
 }
 
 void EventHandler::ProcessPhoneNumber(TgBot::Message::Ptr message) {
-    if (!MessageHandler::IsRussianPhoneNumber(message->text)) {
+    if (!StringValidator::IsRussianPhoneNumber(message->text)) {
         this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный формат номера телефона.\n\nУбедитесь в правильности введеного номера и повторите попытку. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
         return;
     }
 
-    auto& user = this->m_users[ message->chat->id ];
-    user.phone = MessageHandler::NormalizePhoneNumber(message->text);
+    auto& user = this->m_users[message->chat->id];
+    user.phone = PhoneHandler::FormatPhoneNumber(message->text);
+    if (user.phone.empty()) {
+        throw std::runtime_error("Failed to format input phone number");
+    }
+
     user.phoneEntered = !user.phone.empty();
 
     if (user.phoneEntered) {
@@ -86,8 +98,8 @@ void EventHandler::ProcessPhoneNumber(TgBot::Message::Ptr message) {
 }
 
 void EventHandler::ProcessAttackCount(TgBot::Message::Ptr message) {
-    auto& user = this->m_users[ message->chat->id ];
-    if (!MessageHandler::IsDigitOnly(message->text)) {
+    auto& user = this->m_users[message->chat->id];
+    if (!StringValidator::IsDigitOnly(message->text)) {
         this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректное значение.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
         return;
     }
@@ -131,8 +143,8 @@ void EventHandler::PerformExecutor(int64_t chatId, TgBot::Message::Ptr message) 
         SettingsParser settingsParser(settingsPath);
         Settings& settings = settingsParser.GetSettings();
         {
-            settings.phoneNumber = this->m_users[ message->chat->id ].phone;
-            settings.attacksCount = this->m_users[ message->chat->id ].attackIterations;
+            settings.phoneNumber = this->m_users[message->chat->id].phone;
+            settings.attacksCount = this->m_users[message->chat->id].attackIterations;
         }
 
         ServiceParser serviceParser(settings, servicesPath);

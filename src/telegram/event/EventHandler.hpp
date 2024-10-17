@@ -1,11 +1,11 @@
 #ifndef EVENT_HANDLER_HPP
 #define EVENT_HANDLER_HPP
 
-#include <TgBot/TgBot.h>
 #include <string>
 #include <functional>
 #include <unordered_map>
-#include <optional>
+
+#include <TgBot/TgBot.h>
 
 struct UserData {
     std::string phone; // target phone
