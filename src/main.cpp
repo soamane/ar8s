@@ -1,4 +1,4 @@
-#include "telegram/bot/TelegramBot.hpp"
+#include "telegram/bot/telegram_bot.hpp"
 
 #include <memory>
 #include <iostream>
