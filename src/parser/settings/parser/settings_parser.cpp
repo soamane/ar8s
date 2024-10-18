@@ -1,6 +1,4 @@
-#include "SettingsParser.hpp"
-
-#include <iostream>
+#include "settings_parser.hpp"
 
 SettingsParser::SettingsParser(const std::filesystem::path& path) : ConfigParser(path) {
     this->Load();
@@ -31,7 +29,7 @@ void SettingsParser::ParseProxies(const nlohmann::json& data) {
     this->m_settings.useProxy = data.at("use-proxy");
 
     this->CheckJsonArray(data, "proxies");
-    for (const auto& proxyObj : data[ "proxies" ]) {
+    for (const auto& proxyObj : data["proxies"]) {
         Proxy proxy;
         {
             proxy.address = proxyObj.at("address").get<std::string>();
@@ -48,7 +46,7 @@ void SettingsParser::ParseUserAgents(const nlohmann::json& data) {
     this->m_settings.useUserAgent = data.at("use-useragent").get<bool>();
 
     this->CheckJsonArray(data, "user-agents");
-    for (const auto& userAgentString : data[ "user-agents" ]) {
+    for (const auto& userAgentString : data["user-agents"]) {
         UserAgent userAgent;
         {
             userAgent.name = userAgentString.get<std::string>();
@@ -66,7 +64,7 @@ void SettingsParser::CheckJsonKey(const nlohmann::json& data, const std::string&
 }
 
 void SettingsParser::CheckJsonArray(const nlohmann::json& data, const std::string& key) const {
-    if (!data.contains(key) || !data[ key ].is_array()) {
+    if (!data.contains(key) || !data[key].is_array()) {
         throw std::runtime_error("Failed to parse '" + key + "', please check the correctness of the file.");
     }
 }

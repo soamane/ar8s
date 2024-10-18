@@ -1,23 +1,12 @@
 #ifndef SERVICE_PARSER_HPP
 #define SERVICE_PARSER_HPP
 
-#include "../Config/ConfigParser.hpp"
-#include "../Settings/SettingsParser.hpp"
+#include "../service.hpp"
+#include "../../config/parser/config_parser.hpp"
+#include "../../settings/parser/settings_parser.hpp"
 
 #include <vector>
 #include <filesystem>
-#include <MyCurl.hpp>
-
-struct Service {
-    std::string name;
-    std::string url;
-    std::string payload;
-
-    std::vector<std::string> headers;
-
-    RequestType requestType;
-    ProtocolType protocolType;
-};
 
 class ServiceParser : public ConfigParser {
 public:
@@ -30,8 +19,8 @@ private:
     void ReplacePhoneNumber(std::string& source);
 
 private:
-    std::vector<Service> m_services;
     Settings m_settings;
+    std::vector<Service> m_services;
 };
 
 #endif // !SERVICE_PARSER_HPP

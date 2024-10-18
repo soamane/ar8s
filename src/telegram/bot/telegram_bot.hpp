@@ -1,7 +1,7 @@
 #ifndef TELEGRAM_BOT_HPP
 #define TELEGRAM_BOT_HPP
 
-#include "../event/EventHandler.hpp"
+#include "../event/event_handler.hpp"
 
 #include <string_view>
 #include <tgbot/tgbot.h>

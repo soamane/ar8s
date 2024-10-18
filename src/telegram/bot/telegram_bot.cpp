@@ -1,4 +1,4 @@
-#include "TelegramBot.hpp"
+#include "telegram_bot.hpp"
 
 TelegramBot::TelegramBot(std::string_view token) : m_bot(token.data()), EventHandler(m_bot) {
     try {

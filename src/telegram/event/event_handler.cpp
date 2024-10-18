@@ -1,10 +1,10 @@
-#include "EventHandler.hpp"
+#include "event_handler.hpp"
 
-#include "../chat/handler/phone/phone.hpp"
-#include "../chat/validator/string/string.hpp"
+#include "../chat/handler/phone/phone_handler.hpp"
+#include "../chat/validator/string/string_validator.hpp"
 
-#include "../../parsers/service/ServiceParser.hpp"
-#include "../../parsers/settings/SettingsParser.hpp"
+#include "../../parser/service/parser/service_parser.hpp"
+#include "../../parser/settings/parser/settings_parser.hpp"
 
 #include "../../executor/Executor.hpp"
 

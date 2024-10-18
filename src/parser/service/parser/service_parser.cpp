@@ -1,6 +1,4 @@
-#include "ServiceParser.hpp"
-
-#include <iostream>
+#include "service_parser.hpp"
 
 ServiceParser::ServiceParser(const Settings& settings, const std::filesystem::path& path) : m_settings(settings), ConfigParser(path) {
     this->Load();
@@ -20,11 +18,11 @@ void ServiceParser::Load() {
         throw std::runtime_error("Service's data is empty.");
     }
 
-    if (!data.contains("services") || !data[ "services" ].is_array() || data[ "services" ].empty()) {
+    if (!data.contains("services") || !data["services"].is_array() || data["services"].empty()) {
         throw std::runtime_error("Failed to parse 'services', please check the correctness of the file.");
     }
 
-    for (const auto& serviceObj : data[ "services" ]) {
+    for (const auto& serviceObj : data["services"]) {
         Service service;
 
         service.name = serviceObj.at("name").get<std::string>();

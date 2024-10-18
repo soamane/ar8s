@@ -1,32 +1,13 @@
 #ifndef SETTINGS_PARSER_HPP
 #define SETTINGS_PARSER_HPP
 
-#include "../Config/ConfigParser.hpp"
+#include "../settings.hpp"
+#include "../../config/parser/config_parser.hpp"
 
 #include <vector>
 #include <string>
 
 #include <nlohmann/json.hpp>
-
-struct UserAgent {
-    std::string name;
-};
-
-struct Proxy {
-    std::string address;
-    std::string username;
-    std::string password;
-};
-
-struct Settings {
-    int attacksCount;
-    bool useProxy;
-    bool useUserAgent;
-
-    std::string phoneNumber;
-    std::vector<Proxy> proxies;
-    std::vector<UserAgent> userAgents;
-};
 
 class SettingsParser : public ConfigParser {
 public:
