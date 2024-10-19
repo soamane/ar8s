@@ -1,20 +1,13 @@
 #ifndef EVENT_HANDLER_HPP
 #define EVENT_HANDLER_HPP
 
+#include "user/data/user_data.hpp"
+
 #include <string>
 #include <functional>
 #include <unordered_map>
 
 #include <TgBot/TgBot.h>
-
-struct UserData {
-    std::string phone; // target phone
-    int attackIterations;
-
-    bool phoneEntered;      // phone's input flag
-    bool iterationsEntered;   // iteration's input flag
-    bool attackInProgress;  // attack status flag
-};
 
 class EventHandler {
 public:
