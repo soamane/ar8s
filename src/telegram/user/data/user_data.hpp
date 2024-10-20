@@ -10,6 +10,8 @@ struct UserData {
     InputStatus inputStatus;
     ExecutorStatus executorStatus;
 
+    int64_t chatId;
+
     void clear();
 };
 
