@@ -11,7 +11,7 @@
 #include <thread>
 #include <iostream>
 
-EventHandler::EventHandler(TgBot::Bot& bot) : m_bot(bot) { }
+EventHandler::EventHandler(TgBot::Bot& bot) : m_bot(bot), m_messageHandler(std::make_unique<MessageHandler>(bot)) { }
 
 void EventHandler::CreateEvents() {
     OnCommandEvent("start", [this](TgBot::Message::Ptr message)
@@ -19,16 +19,16 @@ void EventHandler::CreateEvents() {
         auto& user = this->m_users[message->chat->id];
         if (user.inputStatus.phoneEntered || user.inputStatus.attacksEntered) {
             user.inputStatus.clear();
-            this->SendChatMessage(message->chat->id, "Видимо, вы уже ввели данные для проведения спам атаки.\n\nВы бы врядли попробовали ввести начальную команду снова, поэтому считаем, что вы что-то упустили. Мы стёрли предыдущие введенные данные чтобы вы смогли записать новые!");
+            this->m_messageHandler->SendChatMessage(message->chat->id, "Видимо, вы уже ввели данные для проведения спам атаки.\n\nВы бы врядли попробовали ввести начальную команду снова, поэтому считаем, что вы что-то упустили. Мы стёрли предыдущие введенные данные чтобы вы смогли записать новые!");
         }
-        this->SendChatMessage(message->chat->id, "💬 Введи номер телефона в удобном для тебя формате.\n\nБот использует только российские сервисы, поэтому принимает в работу исключительно российский номер телефона.");
+        this->m_messageHandler->SendChatMessage(message->chat->id, "💬 Введи номер телефона в удобном для тебя формате.\n\nБот использует только российские сервисы, поэтому принимает в работу исключительно российский номер телефона.");
     });
 
     OnCommandEvent("execute", [this](TgBot::Message::Ptr message)
     {
         const auto& user = this->m_users[message->chat->id];
         if (!user.inputStatus.phoneEntered || !user.inputStatus.attacksEntered) {
-            SendErrorMessage(message->chat->id, message->messageId, "⚠️ Ты не можешь выполнить эту команду сейчас. Пожалуйста, убедитесь, что все данные введены корректно.");
+            this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "⚠️ Ты не можешь выполнить эту команду сейчас. Пожалуйста, убедитесь, что все данные введены корректно.");
             return;
         }
 
@@ -61,11 +61,11 @@ void EventHandler::HandleUserMessage(TgBot::Message::Ptr message) {
 void EventHandler::LaunchAttack(int64_t chatId, TgBot::Message::Ptr message) {
     auto& user = this->m_users[message->chat->id];
     if (user.executorStatus.attackInProgress) {
-        this->SendErrorMessage(chatId, static_cast<int32_t>(message->chat->id), "⚠️ Атака уже выполняется.\nПопробуйте повторить команду после завершения. Вам придет сообщение сразу же после завершения");
+        this->m_messageHandler->SendErrorMessage(chatId, static_cast<int32_t>(message->chat->id), "⚠️ Атака уже выполняется.\nПопробуйте повторить команду после завершения. Вам придет сообщение сразу же после завершения");
         return;
     }
 
-    this->SendChatMessage(chatId, "🚀 Атака запущена на номер: +7" + user.input.phone + "\n\n⏳ Подождите завершения цикла. Вам придет сообщение в этот чат сразу же после окончания");
+    this->m_messageHandler->SendChatMessage(chatId, "🚀 Атака запущена на номер: +7" + user.input.phone + "\n\n⏳ Подождите завершения цикла. Вам придет сообщение в этот чат сразу же после окончания");
 
     user.executorStatus.attackInProgress = true;
     std::thread([=]()
@@ -77,7 +77,7 @@ void EventHandler::LaunchAttack(int64_t chatId, TgBot::Message::Ptr message) {
 
 void EventHandler::ProcessPhoneNumber(TgBot::Message::Ptr message) {
     if (!StringValidator::IsRussianPhoneNumber(message->text)) {
-        this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный формат номера телефона.\n\nУбедитесь в правильности введеного номера и повторите попытку. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
+        this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный формат номера телефона.\n\nУбедитесь в правильности введеного номера и повторите попытку. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
         return;
     }
 
@@ -90,9 +90,9 @@ void EventHandler::ProcessPhoneNumber(TgBot::Message::Ptr message) {
     user.inputStatus.phoneEntered = !user.input.phone.empty();
 
     if (user.inputStatus.phoneEntered) {
-        this->SendChatMessage(message->chat->id, "📲 Номер телефона успешно считан.\n\n⏳ Введите желаемое количество итераций. Учтите, что максимальное количество не должно превышать 100");
+        this->m_messageHandler->SendChatMessage(message->chat->id, "📲 Номер телефона успешно считан.\n\n⏳ Введите желаемое количество итераций. Учтите, что максимальное количество не должно превышать 100");
     } else {
-        this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный номер телефона.\n\nУбедитесь в правильности введеного номера и повторите попытку. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
+        this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный номер телефона.\n\nУбедитесь в правильности введеного номера и повторите попытку. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
     }
 
 }
@@ -100,38 +100,21 @@ void EventHandler::ProcessPhoneNumber(TgBot::Message::Ptr message) {
 void EventHandler::ProcessAttackCount(TgBot::Message::Ptr message) {
     auto& user = this->m_users[message->chat->id];
     if (!StringValidator::IsDigitOnly(message->text)) {
-        this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректное значение.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
+        this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректное значение.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
         return;
     }
 
     try {
         user.input.attacksCount = std::stoi(message->text);
         if (user.input.attacksCount < 1 || user.input.attacksCount > 100) {
-            this->SendErrorMessage(message->chat->id, message->messageId, "❌ Количество итераций должно быть от 1 до 100.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
+            this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "❌ Количество итераций должно быть от 1 до 100.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
             return;
         }
 
         user.inputStatus.attacksEntered = true;
-        this->SendChatMessage(message->chat->id, "🎲 Количество итераций для проведения атаки: " + std::to_string(user.input.attacksCount) + "\n\nЧтобы начать спам по указанному номеру, введите команду /execute");
+        this->m_messageHandler->SendChatMessage(message->chat->id, "🎲 Количество итераций для проведения атаки: " + std::to_string(user.input.attacksCount) + "\n\nЧтобы начать спам по указанному номеру, введите команду /execute");
     } catch ([[maybe_unused]] const std::exception& e) {
-        this->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный ввод.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
-    }
-}
-
-void EventHandler::SendErrorMessage(int64_t chatId, int32_t messageId, std::string_view errorMessage) {
-    auto answer = this->SendChatMessage(chatId, errorMessage);
-    if (answer == nullptr) {
-        return;
-    }
-
-    this->DeleteMessagesWithDelay(chatId, messageId, 1);
-    this->DeleteMessagesWithDelay(chatId, answer->messageId, 1);
-}
-
-void EventHandler::DeleteMessagesWithDelay(int64_t chatId, int32_t messageId, int delay) {
-    std::this_thread::sleep_for(std::chrono::seconds(delay));
-    if (!this->DeleteChatMessage(chatId, messageId)) {
-        std::cerr << "Warning: Could not delete message " << messageId << ". It might not exist or deletion is restricted." << std::endl;
+        this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный ввод.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
     }
 }
 
@@ -154,10 +137,10 @@ void EventHandler::PerformExecutor(int64_t chatId, TgBot::Message::Ptr message) 
         std::unique_ptr<Executor> executor = std::make_unique<Executor>(settings, services);
         executor->Execute();
 
-        this->SendChatMessage(chatId, "✅ Атака на указанный номер успешно завершена\n\nИспользовано спам-сервисов: " + std::to_string(services.size()) + "\n\nЧтобы снова воспользоваться функционалом, выполните команду /start");
+        this->m_messageHandler->SendChatMessage(chatId, "✅ Атака на указанный номер успешно завершена\n\nИспользовано спам-сервисов: " + std::to_string(services.size()) + "\n\nЧтобы снова воспользоваться функционалом, выполните команду /start");
     } catch (const std::exception& e) {
         std::cerr << "Execution exception: " << e.what() << std::endl;
-        this->SendChatMessage(chatId, "❌ При выполнении атаки произошла непредвиденная ошибка.\n\nПожалуйста, повторите попытку позднее. В случае дальнейшего непредвиденного поведения обратитесь к разработчику: @soamane");
+        this->m_messageHandler->SendChatMessage(chatId, "❌ При выполнении атаки произошла непредвиденная ошибка.\n\nПожалуйста, повторите попытку позднее. В случае дальнейшего непредвиденного поведения обратитесь к разработчику: @soamane");
     }
 }
 
@@ -179,22 +162,4 @@ void EventHandler::OnAnyMessageEvent(std::function<void(TgBot::Message::Ptr)> fu
 
 void EventHandler::OnCommandEvent(std::string_view command, std::function<void(TgBot::Message::Ptr)> function) {
     this->m_bot.getEvents().onCommand(command.data(), std::move(function));
-}
-
-TgBot::Message::Ptr EventHandler::SendChatMessage(int64_t chatId, std::string_view message) {
-    try {
-        return this->m_bot.getApi().sendMessage(chatId, message.data());
-    } catch (const TgBot::TgException& e) {
-        std::cerr << "Error while sending message: " << e.what() << std::endl;
-        return nullptr;
-    }
-}
-
-bool EventHandler::DeleteChatMessage(int64_t chatId, int32_t messageId) {
-    try {
-        return this->m_bot.getApi().deleteMessage(chatId, messageId);
-    } catch (const TgBot::TgException& e) {
-        std::cerr << "Error while deleting message: " << e.what() << std::endl;
-        return false;
-    }
 }
