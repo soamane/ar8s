@@ -1,7 +1,7 @@
 #include "event_handler.hpp"
 
-#include "../chat/handler/phone/phone_handler.hpp"
-#include "../chat/validator/string/string_validator.hpp"
+#include "../chat/input/handler/phone/phone_handler.hpp"
+#include "../chat/input/validator/string/string_validator.hpp"
 
 #include "../../parser/service/parser/service_parser.hpp"
 #include "../../parser/settings/parser/settings_parser.hpp"

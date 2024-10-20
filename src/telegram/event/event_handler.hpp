@@ -1,7 +1,7 @@
 #ifndef EVENT_HANDLER_HPP
 #define EVENT_HANDLER_HPP
 
-#include "user/data/user_data.hpp"
+#include "../user/data/user_data.hpp"
 
 #include <string>
 #include <functional>
@@ -35,9 +35,6 @@ private:
 private:
     TgBot::Message::Ptr SendChatMessage(int64_t chatId, std::string_view message);
     bool DeleteChatMessage(int64_t chatId, int32_t messageId);
-
-private:
-    void DeleteUserStatus(UserData& userData);
 
 private:
     TgBot::Bot& m_bot;
