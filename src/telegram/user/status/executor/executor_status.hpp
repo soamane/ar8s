@@ -3,6 +3,7 @@
 
 struct ExecutorStatus {
     bool attackInProgress;
+    bool attackStopped;
 
     void clear();
 };

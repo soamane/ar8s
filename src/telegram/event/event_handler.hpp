@@ -35,6 +35,7 @@ private:
     MessageHandler m_messageHandler;
     InputProcessor m_inputProcessor;
 
+    std::mutex m_mutex;
     std::unordered_map<int64_t, UserData> m_users;
 };
 

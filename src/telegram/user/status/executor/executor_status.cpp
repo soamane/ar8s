@@ -2,4 +2,5 @@
 
 void ExecutorStatus::clear() {
     this->attackInProgress = false;
+    this->attackStopped = false;
 }

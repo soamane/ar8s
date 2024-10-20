@@ -19,7 +19,7 @@ void BotExecutor::ExecuteForUser(const UserData& user) {
         const std::vector<Service>& services = serviceParser.GetServices();
 
         std::unique_ptr<Executor> executor = std::make_unique<Executor>(settings, services);
-        executor->Execute();
+        executor->Execute(user);
 
         this->m_messageHandler.SendChatMessage(user.chatId, "✅ Атака на указанный номер успешно завершена\n\nИспользовано спам-сервисов: " + std::to_string(services.size()) + "\n\nЧтобы снова воспользоваться функционалом, выполните команду /start");
     } catch (const std::exception& e) {

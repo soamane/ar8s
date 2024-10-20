@@ -4,12 +4,14 @@
 #include "../parser/service/parser/service_parser.hpp"
 #include "../parser/settings/parser/settings_parser.hpp"
 
+#include "../telegram/user/data/user_data.hpp"
+
 class Executor {
 public:
     Executor(const Settings& settings, const std::vector<Service>& services);
     ~Executor();
 
-    void Execute();
+    void Execute(const UserData& user);
 private:
     Settings m_settings;
     std::vector<Service> m_services;

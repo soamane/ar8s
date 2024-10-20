@@ -20,7 +20,7 @@ TgBot::Message::Ptr MessageHandler::SendChatMessage(int64_t chatId, std::string_
     }
 }
 
-void MessageHandler::SendErrorMessage(int64_t chatId, int32_t messageId, std::string_view message) {
+void MessageHandler::SendErrorChatMessage(int64_t chatId, int32_t messageId, std::string_view message) {
     auto answer = this->SendChatMessage(chatId, message);
     if (answer == nullptr) {
         std::cerr << "Error while get chat message" << std::endl;
