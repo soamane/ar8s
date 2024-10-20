@@ -11,7 +11,8 @@
 #include <thread>
 #include <iostream>
 
-EventHandler::EventHandler(TgBot::Bot& bot) : m_bot(bot), m_messageHandler(std::make_unique<MessageHandler>(bot)) { }
+EventHandler::EventHandler(TgBot::Bot& bot)
+    : m_bot(bot), m_messageHandler(std::make_shared<MessageHandler>(bot)), m_inputProcessor(std::make_shared<InputProcessor>(m_messageHandler)) { }
 
 void EventHandler::CreateEvents() {
     OnCommandEvent("start", [this](TgBot::Message::Ptr message)
@@ -50,11 +51,11 @@ void EventHandler::CreateEvents() {
 }
 
 void EventHandler::HandleUserMessage(TgBot::Message::Ptr message) {
-    const auto& user = this->m_users[message->chat->id];
+    auto& user = this->m_users[message->chat->id];
     if (!user.inputStatus.phoneEntered) {
-        this->ProcessPhoneNumber(message);
+        this->m_inputProcessor->ProcessPhoneNumber(user, message);
     } else if (!user.inputStatus.attacksEntered) {
-        this->ProcessAttackCount(message);
+        this->m_inputProcessor->ProcessAttackCount(user, message);
     }
 }
 
@@ -73,49 +74,6 @@ void EventHandler::LaunchAttack(int64_t chatId, TgBot::Message::Ptr message) {
         this->PerformExecutor(chatId, message);
         this->m_users.erase(message->chat->id);
     }).detach();
-}
-
-void EventHandler::ProcessPhoneNumber(TgBot::Message::Ptr message) {
-    if (!StringValidator::IsRussianPhoneNumber(message->text)) {
-        this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный формат номера телефона.\n\nУбедитесь в правильности введеного номера и повторите попытку. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
-        return;
-    }
-
-    auto& user = this->m_users[message->chat->id];
-    user.input.phone = PhoneHandler::FormatPhoneNumber(message->text);
-    if (user.input.phone.empty()) {
-        throw std::runtime_error("Failed to format input phone number");
-    }
-
-    user.inputStatus.phoneEntered = !user.input.phone.empty();
-
-    if (user.inputStatus.phoneEntered) {
-        this->m_messageHandler->SendChatMessage(message->chat->id, "📲 Номер телефона успешно считан.\n\n⏳ Введите желаемое количество итераций. Учтите, что максимальное количество не должно превышать 100");
-    } else {
-        this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный номер телефона.\n\nУбедитесь в правильности введеного номера и повторите попытку. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
-    }
-
-}
-
-void EventHandler::ProcessAttackCount(TgBot::Message::Ptr message) {
-    auto& user = this->m_users[message->chat->id];
-    if (!StringValidator::IsDigitOnly(message->text)) {
-        this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректное значение.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
-        return;
-    }
-
-    try {
-        user.input.attacksCount = std::stoi(message->text);
-        if (user.input.attacksCount < 1 || user.input.attacksCount > 100) {
-            this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "❌ Количество итераций должно быть от 1 до 100.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
-            return;
-        }
-
-        user.inputStatus.attacksEntered = true;
-        this->m_messageHandler->SendChatMessage(message->chat->id, "🎲 Количество итераций для проведения атаки: " + std::to_string(user.input.attacksCount) + "\n\nЧтобы начать спам по указанному номеру, введите команду /execute");
-    } catch ([[maybe_unused]] const std::exception& e) {
-        this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "❌ Некорректный ввод.\n\nУбедитесь в правильности введеных данных. В случае непредвиденного поведения обратитесь к разработчику: @soamane");
-    }
 }
 
 void EventHandler::PerformExecutor(int64_t chatId, TgBot::Message::Ptr message) {

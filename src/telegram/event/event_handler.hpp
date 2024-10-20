@@ -2,6 +2,7 @@
 #define EVENT_HANDLER_HPP
 
 #include "../user/data/user_data.hpp"
+#include "../chat/input/processor/input_processor.hpp"
 #include "../chat/message/handler/message_handler.hpp"
 
 #include <string>
@@ -21,8 +22,6 @@ private:
 
 private:
     void LaunchAttack(int64_t chatId, TgBot::Message::Ptr message);
-    void ProcessPhoneNumber(TgBot::Message::Ptr message);
-    void ProcessAttackCount(TgBot::Message::Ptr message);
     void PerformExecutor(int64_t chatId, TgBot::Message::Ptr message);
 
 private:
@@ -31,7 +30,8 @@ private:
 
 private:
     TgBot::Bot& m_bot;
-    std::unique_ptr<MessageHandler> m_messageHandler;
+    std::shared_ptr<MessageHandler> m_messageHandler;
+    std::shared_ptr<InputProcessor> m_inputProcessor;
     std::unordered_map<int64_t, UserData> m_users;
 };
 
