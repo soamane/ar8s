@@ -10,13 +10,13 @@
 class InputProcessor {
 public:
     InputProcessor() = delete;
-    InputProcessor(std::shared_ptr<MessageHandler> messageHandler);
+    InputProcessor(MessageHandler& messageHandler);
 
     void ProcessPhoneNumber(UserData& user, TgBot::Message::Ptr message);
     void ProcessAttackCount(UserData& user, TgBot::Message::Ptr message);
 
 private:
-    std::shared_ptr<MessageHandler> m_messageHandler;
+    MessageHandler& m_messageHandler;
 };
 
 #endif // !INPUT_PROCESSOR_HPP

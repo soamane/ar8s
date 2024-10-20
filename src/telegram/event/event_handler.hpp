@@ -4,6 +4,7 @@
 #include "../user/data/user_data.hpp"
 #include "../chat/input/processor/input_processor.hpp"
 #include "../chat/message/handler/message_handler.hpp"
+#include "../bot/executor/bot_executor.hpp"
 
 #include <string>
 #include <functional>
@@ -15,14 +16,13 @@ class EventHandler {
 public:
     explicit EventHandler(TgBot::Bot& bot);
     void CreateEvents();
-    void CreateListenerLoop();
+    void CreateLongPoll();
 
 private:
     void HandleUserMessage(TgBot::Message::Ptr message);
 
 private:
-    void LaunchAttack(int64_t chatId, TgBot::Message::Ptr message);
-    void PerformExecutor(int64_t chatId, TgBot::Message::Ptr message);
+    void LaunchAttackEvent(UserData& user);
 
 private:
     void OnAnyMessageEvent(std::function<void(TgBot::Message::Ptr)> function);
@@ -30,8 +30,11 @@ private:
 
 private:
     TgBot::Bot& m_bot;
-    std::shared_ptr<MessageHandler> m_messageHandler;
-    std::shared_ptr<InputProcessor> m_inputProcessor;
+
+    BotExecutor m_botExecutor;
+    MessageHandler m_messageHandler;
+    InputProcessor m_inputProcessor;
+
     std::unordered_map<int64_t, UserData> m_users;
 };
 

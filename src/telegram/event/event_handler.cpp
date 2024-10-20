@@ -3,37 +3,36 @@
 #include "../chat/input/handler/phone/phone_handler.hpp"
 #include "../chat/input/validator/string/string_validator.hpp"
 
-#include "../../parser/service/parser/service_parser.hpp"
-#include "../../parser/settings/parser/settings_parser.hpp"
-
-#include "../../executor/Executor.hpp"
-
 #include <thread>
 #include <iostream>
 
 EventHandler::EventHandler(TgBot::Bot& bot)
-    : m_bot(bot), m_messageHandler(std::make_shared<MessageHandler>(bot)), m_inputProcessor(std::make_shared<InputProcessor>(m_messageHandler)) { }
+    : m_bot(bot), m_messageHandler(bot),
+    m_inputProcessor(m_messageHandler),
+    m_botExecutor(m_messageHandler) { }
 
 void EventHandler::CreateEvents() {
     OnCommandEvent("start", [this](TgBot::Message::Ptr message)
     {
         auto& user = this->m_users[message->chat->id];
+        user.chatId = message->chat->id;
+
         if (user.inputStatus.phoneEntered || user.inputStatus.attacksEntered) {
-            user.inputStatus.clear();
-            this->m_messageHandler->SendChatMessage(message->chat->id, "Видимо, вы уже ввели данные для проведения спам атаки.\n\nВы бы врядли попробовали ввести начальную команду снова, поэтому считаем, что вы что-то упустили. Мы стёрли предыдущие введенные данные чтобы вы смогли записать новые!");
+            user.clear();
+            this->m_messageHandler.SendChatMessage(message->chat->id, "Видимо, вы уже ввели данные для проведения спам атаки.\n\nВы бы врядли попробовали ввести начальную команду снова, поэтому считаем, что вы что-то упустили. Мы стёрли предыдущие введенные данные чтобы вы смогли записать новые!");
         }
-        this->m_messageHandler->SendChatMessage(message->chat->id, "💬 Введи номер телефона в удобном для тебя формате.\n\nБот использует только российские сервисы, поэтому принимает в работу исключительно российский номер телефона.");
+        this->m_messageHandler.SendChatMessage(message->chat->id, "💬 Введи номер телефона в удобном для тебя формате.\n\nБот использует только российские сервисы, поэтому принимает в работу исключительно российский номер телефона.");
     });
 
     OnCommandEvent("execute", [this](TgBot::Message::Ptr message)
     {
-        const auto& user = this->m_users[message->chat->id];
+        auto& user = this->m_users[message->chat->id];
         if (!user.inputStatus.phoneEntered || !user.inputStatus.attacksEntered) {
-            this->m_messageHandler->SendErrorMessage(message->chat->id, message->messageId, "⚠️ Ты не можешь выполнить эту команду сейчас. Пожалуйста, убедитесь, что все данные введены корректно.");
+            this->m_messageHandler.SendErrorMessage(message->chat->id, message->messageId, "⚠️ Ты не можешь выполнить эту команду сейчас. Пожалуйста, убедитесь, что все данные введены корректно.");
             return;
         }
 
-        this->LaunchAttack(message->chat->id, message);
+        this->LaunchAttackEvent(user);
     });
 
     OnAnyMessageEvent([this](TgBot::Message::Ptr message)
@@ -53,56 +52,30 @@ void EventHandler::CreateEvents() {
 void EventHandler::HandleUserMessage(TgBot::Message::Ptr message) {
     auto& user = this->m_users[message->chat->id];
     if (!user.inputStatus.phoneEntered) {
-        this->m_inputProcessor->ProcessPhoneNumber(user, message);
+        this->m_inputProcessor.ProcessPhoneNumber(user, message);
     } else if (!user.inputStatus.attacksEntered) {
-        this->m_inputProcessor->ProcessAttackCount(user, message);
+        this->m_inputProcessor.ProcessAttackCount(user, message);
     }
 }
 
-void EventHandler::LaunchAttack(int64_t chatId, TgBot::Message::Ptr message) {
-    auto& user = this->m_users[message->chat->id];
+void EventHandler::LaunchAttackEvent(UserData& user) {
     if (user.executorStatus.attackInProgress) {
-        this->m_messageHandler->SendErrorMessage(chatId, static_cast<int32_t>(message->chat->id), "⚠️ Атака уже выполняется.\nПопробуйте повторить команду после завершения. Вам придет сообщение сразу же после завершения");
+        this->m_messageHandler.SendChatMessage(user.chatId, "⚠️ Атака уже выполняется.\nПопробуйте повторить команду после завершения. Вам придет сообщение сразу же после завершения");
         return;
     }
 
-    this->m_messageHandler->SendChatMessage(chatId, "🚀 Атака запущена на номер: +7" + user.input.phone + "\n\n⏳ Подождите завершения цикла. Вам придет сообщение в этот чат сразу же после окончания");
+    this->m_messageHandler.SendChatMessage(user.chatId, "🚀 Атака запущена на номер: +7" + user.input.phone + "\n\n⏳ Подождите завершения цикла. Вам придет сообщение в этот чат сразу же после окончания");
 
     user.executorStatus.attackInProgress = true;
     std::thread([=]()
     {
-        this->PerformExecutor(chatId, message);
-        this->m_users.erase(message->chat->id);
+        this->m_botExecutor.ExecuteForUser(user);
+        this->m_users.erase(user.chatId);
     }).detach();
 }
 
-void EventHandler::PerformExecutor(int64_t chatId, TgBot::Message::Ptr message) {
-    const std::filesystem::path settingsPath = "configs\\settings.json";
-    const std::filesystem::path servicesPath = "configs\\services.json";
 
-    try {
-        SettingsParser settingsParser(settingsPath);
-        Settings& settings = settingsParser.GetSettings();
-        {
-            auto& user = this->m_users[message->chat->id];
-            settings.phoneNumber = user.input.phone;
-            settings.attacksCount = user.input.attacksCount;
-        }
-
-        ServiceParser serviceParser(settings, servicesPath);
-        const std::vector<Service>& services = serviceParser.GetServices();
-
-        std::unique_ptr<Executor> executor = std::make_unique<Executor>(settings, services);
-        executor->Execute();
-
-        this->m_messageHandler->SendChatMessage(chatId, "✅ Атака на указанный номер успешно завершена\n\nИспользовано спам-сервисов: " + std::to_string(services.size()) + "\n\nЧтобы снова воспользоваться функционалом, выполните команду /start");
-    } catch (const std::exception& e) {
-        std::cerr << "Execution exception: " << e.what() << std::endl;
-        this->m_messageHandler->SendChatMessage(chatId, "❌ При выполнении атаки произошла непредвиденная ошибка.\n\nПожалуйста, повторите попытку позднее. В случае дальнейшего непредвиденного поведения обратитесь к разработчику: @soamane");
-    }
-}
-
-void EventHandler::CreateListenerLoop() {
+void EventHandler::CreateLongPoll() {
     TgBot::TgLongPoll longPoll(this->m_bot);
     while (true) {
         try {

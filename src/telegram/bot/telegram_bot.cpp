@@ -17,5 +17,5 @@ TelegramBot::TelegramBot(std::string_view token) : m_bot(token.data()), EventHan
 
 void TelegramBot::Start() {
     this->CreateEvents();
-    this->CreateListenerLoop();
+    this->CreateLongPoll();
 }
