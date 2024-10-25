@@ -90,18 +90,6 @@ void EventHandler::LaunchAttackEvent(UserData& user) {
     }).detach();
 }
 
-void EventHandler::CreateLongPoll() {
-    TgBot::TgLongPoll longPoll(m_bot);
-    while (true) {
-        try {
-            longPoll.start();
-        } catch (const TgBot::TgException& e) {
-            std::cerr << "TgBot LongPoll exception: " << e.what() << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(3));
-        }
-    }
-}
-
 void EventHandler::OnAnyMessageEvent(std::function<void(TgBot::Message::Ptr)> function) {
     m_bot.getEvents().onAnyMessage(std::move(function));
 }

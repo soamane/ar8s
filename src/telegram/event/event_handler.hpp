@@ -16,7 +16,6 @@ class EventHandler {
 public:
     explicit EventHandler(TgBot::Bot& bot);
     void CreateEvents();
-    void CreateLongPoll();
 
 private:
     void HandleUserMessage(TgBot::Message::Ptr message);

@@ -1,6 +1,6 @@
 #include "telegram_bot.hpp"
 
-TelegramBot::TelegramBot(std::string_view token) : m_bot(token.data()), EventHandler(m_bot) {
+TelegramBot::TelegramBot(std::string_view token) : m_bot(token.data()), m_eventHandler(std::make_unique<EventHandler>(m_bot)) {
     try {
         auto me = this->m_bot.getApi().getMe();
         if (me == nullptr) {
@@ -16,6 +16,18 @@ TelegramBot::TelegramBot(std::string_view token) : m_bot(token.data()), EventHan
 }
 
 void TelegramBot::Start() {
-    this->CreateEvents();
+    this->m_eventHandler->CreateEvents();
     this->CreateLongPoll();
+}
+
+void TelegramBot::CreateLongPoll() {
+    TgBot::TgLongPoll longPoll(m_bot);
+    while (true) {
+        try {
+            longPoll.start();
+        } catch (const TgBot::TgException& e) {
+            std::cerr << "TgBot LongPoll exception: " << e.what() << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(3));
+        }
+    }
 }
