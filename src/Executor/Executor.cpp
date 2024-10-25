@@ -14,12 +14,11 @@ Executor::~Executor() { }
 
 void Executor::Execute(const UserData& user) {
     for (int i = 0; i < m_settings.attacksCount; ++i) {
-        if (user.executorStatus.attackStopped) {
-            std::cerr << "Stop call" << std::endl;
-            break;
-        }
-
         for (auto& service : m_services) {
+            if (user.executorStatus.attackStopped) {
+                return;
+            }
+
             service.SetRandomUserAgent(this->m_settings);
 
             RequestHandler requestHandler;
