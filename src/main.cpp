@@ -1,6 +1,8 @@
 #include <memory>
 #include <iostream>
 
+#include "frontend/telegram/bot/telegram_bot.hpp"
+
 int main() {
     std::cout << R"(
  ______  ____    ____     ____       
@@ -13,7 +15,8 @@ int main() {
     )" << std::endl;
 
     try {
-
+        TelegramBot bot("7437294115:AAE0CupyhrmmY9jzSZ3FbkiNf-P4AxcstHg");
+        bot.Run();
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return EXIT_FAILURE;
