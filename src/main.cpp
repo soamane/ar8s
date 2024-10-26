@@ -1,5 +1,3 @@
-#include "telegram/bot/telegram_bot.hpp"
-
 #include <memory>
 #include <iostream>
 
@@ -15,9 +13,7 @@ int main() {
     )" << std::endl;
 
     try {
-        std::string_view botToken = "7810469792:AAFPk333ZZMXEAFlOVK7iTBdLYAXH1_GYRE";
-        auto bot = std::make_unique<TelegramBot>(botToken);
-        bot->Start();
+
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return EXIT_FAILURE;
