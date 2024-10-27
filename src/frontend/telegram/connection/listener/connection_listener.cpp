@@ -26,7 +26,7 @@ void ConnectionListener::AcceptConnection(const int64_t currentChatId) {
 
 void ConnectionListener::CreateEventHandler(std::shared_ptr<UserData> userData, std::unique_ptr<MessageHandler> messageHandler) {
     std::shared_ptr<EventHandler> eventHandler = std::make_shared<EventHandler>(this->m_bot, std::move(messageHandler), userData);
-    this->m_eventHandlers.push_back(eventHandler);
-
     eventHandler->Handle();
+
+    this->m_eventHandlers.push_back(eventHandler);
 }
