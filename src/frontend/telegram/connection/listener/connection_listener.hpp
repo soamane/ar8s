@@ -3,6 +3,7 @@
 
 #include "../manager/connection_manager.hpp"
 #include "../../event/handler/event_handler.hpp"
+#include "../../chat/message/handler/message_handler.hpp"
 
 #include <tgbot/tgbot.h>
 
@@ -13,7 +14,7 @@ public:
 
 private:
     void AcceptConnection(const int64_t currentChatId);
-    void CreateEventHandler(std::shared_ptr<UserData> userData);
+    void CreateEventHandler(std::shared_ptr<UserData> userData, std::unique_ptr<MessageHandler> messageHandler);
 private:
     TgBot::Bot& m_bot;
 
