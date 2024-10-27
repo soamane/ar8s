@@ -11,6 +11,7 @@ TgBot::Message::Ptr MessageHandler::SendChatMessage(std::string_view message)
         return this->m_bot.getApi().sendMessage(this->m_user->chatId, message.data());
     } catch (const TgBot::TgException& e) {
         std::cerr << "Fail send message: " << e.what() << std::endl;
+        return nullptr;
     }
 }
     
