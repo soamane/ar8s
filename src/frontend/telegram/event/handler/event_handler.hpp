@@ -4,6 +4,7 @@
 #include "../../user/data/user_data.hpp"
 
 #include <memory>
+#include <functional>
 #include <tgbot/tgbot.h>
 
 class EventHandler {
@@ -13,7 +14,8 @@ public:
     void Handle();
 
 private:
-    void onAnyMessageEvent();
+    void onCommandEvent(std::string_view command, std::function<void(TgBot::Message::Ptr message)> func);
+    void onNonCommandMessageEvent(std::function<void(TgBot::Message::Ptr message)> func);
 
 private:
     TgBot::Bot& m_bot;
