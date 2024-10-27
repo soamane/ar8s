@@ -7,6 +7,7 @@ void EventHandler::Handle() {
     this->onCommandEvent("command", [this](TgBot::Message::Ptr message)
     {
         this->m_messageHandler->SendChatMessage("Test!");
+        this->m_messageHandler->DeleteMessage(message->messageId);
     });
 
     this->onNonCommandMessageEvent([this](TgBot::Message::Ptr message)

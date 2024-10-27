@@ -11,6 +11,7 @@ public:
     MessageHandler(TgBot::Bot& bot, std::shared_ptr<UserData> userData);
 
 public:
+    bool DeleteMessage(int32_t messageId);
     TgBot::Message::Ptr SendChatMessage(std::string_view message);
 
 private:
