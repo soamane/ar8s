@@ -15,8 +15,8 @@ public:
     TgBot::Message::Ptr SendChatMessage(std::string_view message);
 
 private:
-    std::shared_ptr<UserData> m_user;
     TgBot::Bot& m_bot;
+    std::shared_ptr<UserData> m_user;
 };
 
 #endif // !MESSAGE_HANDLER_HPP
