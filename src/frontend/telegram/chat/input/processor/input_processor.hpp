@@ -9,14 +9,13 @@
 class InputProcessor {
 public:
     InputProcessor() = delete;
-    InputProcessor(std::shared_ptr<UserData> userData, std::shared_ptr<MessageHandler> messageHandler);
+    InputProcessor(std::shared_ptr<UserData> userData);
 
-    void ProcessPhoneNumber(std::string_view message);
-    void ProcessAttackTime(std::string_view message);
+    bool ProcessPhoneNumber(std::string_view message);
+    bool ProcessAttackTime(std::string_view message);
 
 private:
     std::shared_ptr<UserData> m_user;
-    std::shared_ptr<MessageHandler> m_messageHandler;
 };
 
 #endif // !INPUT_PROCESSOR_HPP
