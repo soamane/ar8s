@@ -6,16 +6,25 @@ EventHandler::EventHandler(TgBot::Bot& bot, std::shared_ptr<UserData> userData)
 
 void EventHandler::Handle() {
     this->m_messageHandler->SendChatMessage("⚠️ Перед использованием Вы даете согласие, что не будете использовать функционал в незаконных целях.");
-    this->m_messageHandler->SendChatMessage("📲 Введите номер телефона в любом удобном формате.\n\n*принимаются исключительно российские номера телефонов");
+    this->m_messageHandler->SendChatMessage("📲 Введите номер телефона в любом удобном формате.\n\n*принимаются исключительно российские номера телефонов.");
 
     this->InitEvents();
 }
 
 void EventHandler::InitEvents() {
+    this->onCommandEvent("clear", [this](TgBot::Message::Ptr message)
+    {
+        if (!this->m_user->isInitialized()) {
+            this->m_messageHandler->SendChatMessage("❌ Вы не можете использовать эту команду сейчас.\n\nУбедитесь в наличии введенных данных и повторите попытку.");
+            return;
+        }
+
+        this->m_user->input->status->clear();
+        this->m_messageHandler->SendChatMessage("♻ Ваши введенные данные успешно стёрты.\n\nПродолжайте работу с ботом, укажите нужные данные заново.");
+    });
     this->onCommandEvent("execute", [this](TgBot::Message::Ptr message)
     {
-        const auto& inputStatus = this->m_user->input->status;
-        if (!inputStatus->attackTimeEntered || !inputStatus->phoneEntered) {
+        if (!this->m_user->isInitialized()) {
             this->m_messageHandler->SendChatMessage("❌ Эту команду нельзя выполнить сейчас.\n\nПеред использованием этой команды вы должны ввести необходимые данные.");
             return;
         }
