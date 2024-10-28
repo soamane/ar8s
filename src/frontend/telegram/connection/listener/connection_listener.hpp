@@ -14,7 +14,7 @@ public:
 
 private:
     void AcceptConnection(const int64_t currentChatId);
-    void CreateEventHandler(std::shared_ptr<UserData> userData, std::unique_ptr<MessageHandler> messageHandler);
+    void CreateEventHandler(std::shared_ptr<UserData> userData);
 private:
     TgBot::Bot& m_bot;
 

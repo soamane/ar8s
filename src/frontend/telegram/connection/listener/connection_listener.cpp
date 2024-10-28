@@ -20,12 +20,11 @@ void ConnectionListener::AcceptConnection(const int64_t currentChatId) {
     std::shared_ptr<UserData> userData = std::make_shared<UserData>(currentChatId);
     this->m_connectionManager.RegisterConnection(userData);
 
-    std::unique_ptr<MessageHandler> messageHandler = std::make_unique<MessageHandler>(this->m_bot, userData);
-    this->CreateEventHandler(userData, std::move(messageHandler));
+    this->CreateEventHandler(userData);
 }
 
-void ConnectionListener::CreateEventHandler(std::shared_ptr<UserData> userData, std::unique_ptr<MessageHandler> messageHandler) {
-    std::shared_ptr<EventHandler> eventHandler = std::make_shared<EventHandler>(this->m_bot, std::move(messageHandler), userData);
+void ConnectionListener::CreateEventHandler(std::shared_ptr<UserData> userData) {
+    std::shared_ptr<EventHandler> eventHandler = std::make_shared<EventHandler>(this->m_bot, userData);
     eventHandler->Handle();
 
     this->m_eventHandlers.push_back(eventHandler);
