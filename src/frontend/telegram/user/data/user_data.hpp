@@ -12,6 +12,8 @@ struct UserData {
 
     int64_t chatId;
     std::unique_ptr<UserInput> input;
+
+    bool isInitialized();
 };
 
 #endif // !USER_DATA_HPP
