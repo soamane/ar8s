@@ -4,6 +4,8 @@
 struct InputStatus {
     bool phoneEntered;
     bool attackTimeEntered;
+
+    void clear();
 };
 
 #endif // !USER_STATUS_HPP
