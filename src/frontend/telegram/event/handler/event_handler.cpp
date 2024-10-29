@@ -37,7 +37,7 @@ void EventHandler::RegisterStopCommand() {
         }
         m_user->executor->attackStopped = true;
         m_user->input->status->clear();
-        m_messageHandler->SendChatMessage("✅ Запрос на остановку выполнен. Для повторного использования укажите данные заново.");
+        m_messageHandler->SendChatMessage("🚫 Запрос на остановку выполнен.");
     });
 }
 
@@ -47,11 +47,16 @@ void EventHandler::RegisterExecuteCommand() {
         if (!ValidateUserData())
             return;
 
+        if (m_user->executor->attackInProgress) {
+            m_messageHandler->SendChatMessage("❌ Атака уже запущена");
+            m_messageHandler->SendChatMessage("Используйте команду /stop для преждевременного завершения");
+            return;
+        }
+
 
         std::thread([this]
         {
-            BotExecutor executor(m_user, m_messageHandler);
-            executor.Execute();
+            BotExecutor(m_user, m_messageHandler).Execute();
         }).detach();
     });
 }
