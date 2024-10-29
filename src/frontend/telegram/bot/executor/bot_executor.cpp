@@ -15,6 +15,9 @@ BotExecutor::BotExecutor(std::shared_ptr<UserData> user, std::shared_ptr<Message
 void BotExecutor::Execute() {
     m_user->executor->attackInProgress = true;
 
+    m_messageHandler->SendChatMessage("🚀 Атака на указанный номер успешно запущена");
+    m_messageHandler->SendChatMessage("Введите команду /stop для преждевременного завершения атаки");
+
     try {
         SettingsParser settingsParser(m_settingsPath);
         Settings& settings = settingsParser.GetSettings();
