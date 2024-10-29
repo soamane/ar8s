@@ -12,17 +12,20 @@ Executor::Executor(const Settings& settings, const std::vector<Service>& service
 
 Executor::~Executor() { }
 
-/*void Executor::Execute(const UserData& user) {
+void Executor::Execute(std::shared_ptr<UserData> user) {
     for (int i = 0; i < m_settings.attacksCount; ++i) {
         for (auto& service : m_services) {
-            if (user.executorStatus.attackStopped) {
+            if (user->executor->attackStopped) {
                 return;
             }
 
             service.SetRandomUserAgent(this->m_settings);
 
-            RequestHandler requestHandler;
-            requestHandler.ExecuteRequest(this->m_settings, service);
+            std::async(std::launch::async, [this, &service]()
+            {
+                RequestHandler requestHandler;
+                requestHandler.ExecuteRequest(this->m_settings, service);
+            });
         }
     }
-}*/
+}
