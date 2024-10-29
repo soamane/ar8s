@@ -1,7 +1,7 @@
 #ifndef USER_INPUT_HPP
 #define USER_INPUT_HPP
 
-#include "../status/input_status.hpp"
+#include "../status/input/input_status.hpp"
 
 #include <memory>
 #include <string>
