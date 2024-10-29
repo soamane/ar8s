@@ -3,13 +3,13 @@
 TelegramBot::TelegramBot(std::string_view token) : m_bot(token.data()), m_connectionListener(m_bot) { }
 
 void TelegramBot::Run() {
-    this->m_connectionListener.Listen();
-    this->InitLongPoll();
+    m_connectionListener.Listen();
+    InitLongPoll();
 }
 
 void TelegramBot::InitLongPoll() {
     try {
-        TgBot::TgLongPoll longPoll(this->m_bot);
+        TgBot::TgLongPoll longPoll(m_bot);
         while (true) {
             longPoll.start();
         }

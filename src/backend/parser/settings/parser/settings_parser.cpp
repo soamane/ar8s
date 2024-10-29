@@ -1,34 +1,34 @@
 #include "settings_parser.hpp"
 
 SettingsParser::SettingsParser(const std::filesystem::path& path) : ConfigParser(path) {
-    this->Load();
+    Load();
 }
 
 Settings& SettingsParser::GetSettings() {
-    return this->m_settings;
+    return m_settings;
 }
 
 void SettingsParser::Load() {
-    nlohmann::json data = this->Parse();
+    nlohmann::json data = Parse();
     if (data.empty()) {
         throw std::runtime_error("Settings data is empty.");
     }
 
-    this->ParseProxies(data);
-    this->ParseUserAgents(data);
-    this->ParseAdditionals(data);
+    ParseProxies(data);
+    ParseUserAgents(data);
+    ParseAdditionals(data);
 }
 
 void SettingsParser::ParseAdditionals(const nlohmann::json& data) {
-    this->CheckJsonKey(data, "attacks-count");
-    this->m_settings.attacksCount = data.at("attacks-count");
+    CheckJsonKey(data, "attacks-count");
+    m_settings.attacksCount = data.at("attacks-count");
 }
 
 void SettingsParser::ParseProxies(const nlohmann::json& data) {
-    this->CheckJsonKey(data, "use-proxy");
-    this->m_settings.useProxy = data.at("use-proxy");
+    CheckJsonKey(data, "use-proxy");
+    m_settings.useProxy = data.at("use-proxy");
 
-    this->CheckJsonArray(data, "proxies");
+    CheckJsonArray(data, "proxies");
     for (const auto& proxyObj : data["proxies"]) {
         Proxy proxy;
         {
@@ -37,22 +37,22 @@ void SettingsParser::ParseProxies(const nlohmann::json& data) {
             proxy.password = proxyObj.value("password", "");
         }
 
-        this->m_settings.proxies.push_back(std::move(proxy));
+        m_settings.proxies.push_back(std::move(proxy));
     }
 }
 
 void SettingsParser::ParseUserAgents(const nlohmann::json& data) {
-    this->CheckJsonKey(data, "use-useragent");
-    this->m_settings.useUserAgent = data.at("use-useragent").get<bool>();
+    CheckJsonKey(data, "use-useragent");
+    m_settings.useUserAgent = data.at("use-useragent").get<bool>();
 
-    this->CheckJsonArray(data, "user-agents");
+    CheckJsonArray(data, "user-agents");
     for (const auto& userAgentString : data["user-agents"]) {
         UserAgent userAgent;
         {
             userAgent.name = userAgentString.get<std::string>();
         }
 
-        this->m_settings.userAgents.push_back(userAgent);
+        m_settings.userAgents.push_back(userAgent);
     }
 }
 

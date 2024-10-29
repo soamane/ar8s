@@ -1,19 +1,19 @@
 #include "service_parser.hpp"
 
 ServiceParser::ServiceParser(const Settings& settings, const std::filesystem::path& path) : m_settings(settings), ConfigParser(path) {
-    this->Load();
+    Load();
 }
 
 const std::vector<Service>& ServiceParser::GetServices() {
-    if (this->m_services.empty()) {
+    if (m_services.empty()) {
         throw std::runtime_error("Service's array is empty");
     }
 
-    return this->m_services;
+    return m_services;
 }
 
 void ServiceParser::Load() {
-    nlohmann::json data = this->Parse();
+    nlohmann::json data = Parse();
     if (data.empty()) {
         throw std::runtime_error("Service's data is empty.");
     }
@@ -30,17 +30,17 @@ void ServiceParser::Load() {
         service.payload = serviceObj.at("payload").get<std::string>();
         service.headers = serviceObj.at("headers").get<std::vector<std::string>>();
 
-        this->ReplacePhoneNumber(service.url);
-        this->ReplacePhoneNumber(service.payload);
+        ReplacePhoneNumber(service.url);
+        ReplacePhoneNumber(service.payload);
 
         for (auto& header : service.headers) {
-            this->ReplacePhoneNumber(header);
+            ReplacePhoneNumber(header);
         }
 
         service.requestType = serviceObj.at("request-type").get<RequestType>();
         service.protocolType = serviceObj.at("protocol-type").get<ProtocolType>();
 
-        this->m_services.push_back(std::move(service));
+        m_services.push_back(std::move(service));
     }
 }
 
@@ -49,7 +49,7 @@ void ServiceParser::ReplacePhoneNumber(std::string& source) {
     std::string_view placeholder = "${phone}";
 
     while ((pos = source.find("${phone}", pos)) != std::string::npos) {
-        source.replace(pos, placeholder.length(), this->m_settings.phoneNumber);
-        pos += this->m_settings.phoneNumber.length();
+        source.replace(pos, placeholder.length(), m_settings.phoneNumber);
+        pos += m_settings.phoneNumber.length();
     }
 }

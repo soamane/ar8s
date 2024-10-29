@@ -10,10 +10,10 @@ bool InputProcessor::ProcessPhoneNumber(std::string_view message) {
         return false;
     }
 
-    this->m_user->input->phone = InputFormat::FormatPhoneNumber(message);
-    this->m_user->input->status->phoneEntered = !this->m_user->input->phone.empty();
+    m_user->input->phone = InputFormat::FormatPhoneNumber(message);
+    m_user->input->status->phoneEntered = !m_user->input->phone.empty();
 
-    return this->m_user->input->status->phoneEntered;
+    return m_user->input->status->phoneEntered;
 }
 
 
@@ -29,8 +29,8 @@ bool InputProcessor::ProcessAttackTime(std::string_view message) {
             return false;
         }
 
-        this->m_user->input->attackTime = attackTime;
-        this->m_user->input->status->attackTimeEntered = true;
+        m_user->input->attackTime = attackTime;
+        m_user->input->status->attackTimeEntered = true;
         return true;
 
     } catch (const std::exception&) {

@@ -9,7 +9,7 @@ void Service::SetRandomUserAgent(const Settings& settings) {
 
     std::string_view keyWord = "User-Agent: ";
 
-    for (auto& header : this->headers) {
+    for (auto& header : headers) {
         if (header.find(keyWord) != 0) {
             continue;
         }

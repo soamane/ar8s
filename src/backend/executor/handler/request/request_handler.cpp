@@ -6,18 +6,18 @@
 RequestHandler::RequestHandler() : m_myCurl(std::make_unique<MyCurl>()) { }
 
 const RESPONSE RequestHandler::ExecuteRequest(const Settings& settings, const Service& service) const {
-    this->SetProxyToRequest(settings);
+    SetProxyToRequest(settings);
 
-    const curl_slist* headers = this->m_myCurl->AddHeaders(service.headers);
+    const curl_slist* headers = m_myCurl->AddHeaders(service.headers);
     if (!headers) {
         throw std::runtime_error("Failed to add headers for request: " + service.name);
     }
     switch (service.requestType) {
         case RequestType::GET:
-            return this->m_myCurl->PerformGetRequest(service.protocolType, service.url, headers);
+            return m_myCurl->PerformGetRequest(service.protocolType, service.url, headers);
 
         case RequestType::POST:
-            return this->m_myCurl->PerformPostRequest(service.protocolType, service.url, headers, service.payload);
+            return m_myCurl->PerformPostRequest(service.protocolType, service.url, headers, service.payload);
 
         default:
             throw std::invalid_argument("Invalid request type for service '" + service.name + "'");
@@ -35,5 +35,5 @@ void RequestHandler::SetProxyToRequest(const Settings& settings) const {
     }
 
     const Proxy& proxy = optionalProxy.value();
-    this->m_myCurl->UseProxyServer(proxy.address, proxy.username, proxy.password);
+    m_myCurl->UseProxyServer(proxy.address, proxy.username, proxy.password);
 }

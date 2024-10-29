@@ -7,7 +7,7 @@ MessageHandler::MessageHandler(TgBot::Bot& bot, std::shared_ptr<UserData> userDa
 
 bool MessageHandler::DeleteMessage(int32_t messageId) {
     try {
-        return this->m_bot.getApi().deleteMessage(this->m_user->chatId, messageId);
+        return m_bot.getApi().deleteMessage(m_user->chatId, messageId);
     } catch (const TgBot::TgException& e) {
         std::cerr << "An error occurred when deleting a message: " << e.what() << std::endl;
         return false;
@@ -17,7 +17,7 @@ bool MessageHandler::DeleteMessage(int32_t messageId) {
 TgBot::Message::Ptr MessageHandler::SendChatMessage(std::string_view message)
 {
     try {
-        return this->m_bot.getApi().sendMessage(this->m_user->chatId, message.data());
+        return m_bot.getApi().sendMessage(m_user->chatId, message.data());
     } catch (const TgBot::TgException& e) {
         std::cerr << "There was an error sending a message: " << e.what() << std::endl;
         return nullptr;

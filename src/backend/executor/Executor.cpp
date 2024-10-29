@@ -19,12 +19,12 @@ void Executor::Execute(std::shared_ptr<UserData> user) {
                 return;
             }
 
-            service.SetRandomUserAgent(this->m_settings);
+            service.SetRandomUserAgent(m_settings);
 
             std::async(std::launch::async, [this, &service]()
             {
                 RequestHandler requestHandler;
-                requestHandler.ExecuteRequest(this->m_settings, service);
+                requestHandler.ExecuteRequest(m_settings, service);
             });
         }
     }
