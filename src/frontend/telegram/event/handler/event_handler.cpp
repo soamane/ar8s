@@ -15,6 +15,7 @@ void EventHandler::Handle() {
 void EventHandler::InitEvents() {
     RegisterClearCommand();
     RegisterStopCommand();
+    RegisterHelpCommand();
     RegisterExecuteCommand();
     RegisterNonCommandMessageEvent();
 }
@@ -41,6 +42,14 @@ void EventHandler::RegisterStopCommand() {
     });
 }
 
+void EventHandler::RegisterHelpCommand() {
+    onCommandEvent("help", [this](TgBot::Message::Ptr message)
+    {
+        m_messageHandler->SendChatMessage("Доступные команды бота");
+        m_messageHandler->SendChatMessage("/help - вызов данного справочного сообщения\n/execute - запустить атаку (необходимо ввести необходимые данные перед использованием этой команды)\n/stop - принудительное завершение спам-атаки");
+    });
+}
+
 void EventHandler::RegisterExecuteCommand() {
     onCommandEvent("execute", [this](TgBot::Message::Ptr message)
     {
@@ -52,7 +61,6 @@ void EventHandler::RegisterExecuteCommand() {
             m_messageHandler->SendChatMessage("Используйте команду /stop для преждевременного завершения");
             return;
         }
-
 
         std::thread([this]
         {

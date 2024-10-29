@@ -20,9 +20,9 @@ private:
     void InitEvents();
     void RegisterClearCommand();
     void RegisterStopCommand();
+    void RegisterHelpCommand();
     void RegisterExecuteCommand();
     void RegisterNonCommandMessageEvent();
-
 private:
     bool ValidateUserData() const;
 
