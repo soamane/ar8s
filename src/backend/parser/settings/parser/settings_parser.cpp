@@ -1,6 +1,7 @@
 #include "settings_parser.hpp"
 
-SettingsParser::SettingsParser(const std::filesystem::path& path) : ConfigParser(path) {
+SettingsParser::SettingsParser(const std::filesystem::path& path)
+    : ConfigParser(path) {
     Load();
 }
 
@@ -21,21 +22,19 @@ void SettingsParser::Load() {
 
 void SettingsParser::ParseAdditionals(const nlohmann::json& data) {
     CheckJsonKey(data, "attacks-count");
-    m_settings.attacksCount = data.at("attacks-count");
+    m_settings.attacksCount = data.at("attacks-count").get<int>();
 }
 
 void SettingsParser::ParseProxies(const nlohmann::json& data) {
     CheckJsonKey(data, "use-proxy");
-    m_settings.useProxy = data.at("use-proxy");
+    m_settings.useProxy = data.at("use-proxy").get<bool>();
 
     CheckJsonArray(data, "proxies");
     for (const auto& proxyObj : data["proxies"]) {
         Proxy proxy;
-        {
-            proxy.address = proxyObj.at("address").get<std::string>();
-            proxy.username = proxyObj.value("username", "");
-            proxy.password = proxyObj.value("password", "");
-        }
+        proxy.address = proxyObj.at("address").get<std::string>();
+        proxy.username = proxyObj.value("username", "");
+        proxy.password = proxyObj.value("password", "");
 
         m_settings.proxies.push_back(std::move(proxy));
     }
@@ -48,14 +47,10 @@ void SettingsParser::ParseUserAgents(const nlohmann::json& data) {
     CheckJsonArray(data, "user-agents");
     for (const auto& userAgentString : data["user-agents"]) {
         UserAgent userAgent;
-        {
-            userAgent.name = userAgentString.get<std::string>();
-        }
-
-        m_settings.userAgents.push_back(userAgent);
+        userAgent.name = userAgentString.get<std::string>();
+        m_settings.userAgents.push_back(std::move(userAgent));
     }
 }
-
 
 void SettingsParser::CheckJsonKey(const nlohmann::json& data, const std::string& key) const {
     if (!data.contains(key)) {

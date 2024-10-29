@@ -5,7 +5,7 @@
 #include <string_view>
 
 namespace InputFormat {
-    const std::string FormatPhoneNumber(std::string_view phone);
+    std::string FormatPhoneNumber(std::string_view phone);
 }
 
-#endif // !INPUT_FORMAT_HPP
+#endif // INPUT_FORMAT_HPP

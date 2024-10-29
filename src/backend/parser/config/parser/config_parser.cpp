@@ -23,7 +23,7 @@ nlohmann::json ConfigParser::Parse() const {
     try {
         file >> data;
     } catch (const nlohmann::json::parse_error& e) {
-        throw std::runtime_error("Failed to parse configuration file '" + m_path.string() + "': " + std::string(e.what()));
+        throw std::runtime_error("Failed to parse configuration file '" + m_path.string() + "': " + e.what());
     }
 
     return data;

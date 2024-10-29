@@ -3,13 +3,9 @@
 #include <iterator>
 #include <algorithm>
 
-const std::string InputFormat::FormatPhoneNumber(std::string_view phone) {
+std::string InputFormat::FormatPhoneNumber(std::string_view phone) {
     std::string result;
-
-    std::copy_if(phone.begin(), phone.end(), std::back_inserter(result), [](char c)
-    {
-        return std::isdigit(c);
-    });
+    std::copy_if(phone.begin(), phone.end(), std::back_inserter(result), std::isdigit);
 
     if (result.size() == 11 && (result[0] == '7' || result[0] == '8')) {
         return result.substr(1);

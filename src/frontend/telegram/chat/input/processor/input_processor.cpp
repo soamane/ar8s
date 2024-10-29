@@ -3,7 +3,8 @@
 #include "../format/input_format.hpp"
 #include "../validator/input_validator.hpp"
 
-InputProcessor::InputProcessor(std::shared_ptr<UserData> userData) : m_user(userData) { }
+InputProcessor::InputProcessor(std::shared_ptr<UserData> userData)
+    : m_user(userData) { }
 
 bool InputProcessor::ProcessPhoneNumber(std::string_view message) {
     if (!InputValidator::IsRussianPhoneNumber(message)) {
@@ -16,7 +17,6 @@ bool InputProcessor::ProcessPhoneNumber(std::string_view message) {
     return m_user->input->status->phoneEntered;
 }
 
-
 bool InputProcessor::ProcessAttackTime(std::string_view message) {
     if (!InputValidator::IsDigitOnly(message)) {
         return false;
@@ -24,7 +24,6 @@ bool InputProcessor::ProcessAttackTime(std::string_view message) {
 
     try {
         int attackTime = std::stoi(message.data());
-
         if (attackTime < 1 || attackTime > 100) {
             return false;
         }

@@ -2,15 +2,12 @@
 
 #include "../../../../backend/parser/config/parser/config_parser.hpp"
 #include "../../../../backend/parser/settings/parser/settings_parser.hpp"
-
 #include "../../../../backend/executor/executor.hpp"
 
 #include <iostream>
 
 BotExecutor::BotExecutor(std::shared_ptr<UserData> user, std::shared_ptr<MessageHandler> messageHandler)
-    : m_user(user), m_messageHandler(messageHandler) {
-
-}
+    : m_user(user), m_messageHandler(messageHandler) { }
 
 void BotExecutor::Execute() {
     m_user->executor->attackInProgress = true;
@@ -21,15 +18,13 @@ void BotExecutor::Execute() {
     try {
         SettingsParser settingsParser(m_settingsPath);
         Settings& settings = settingsParser.GetSettings();
-        {
-            settings.phoneNumber = m_user->input->phone;
-            settings.attacksCount = m_user->input->attackTime;
-        }
+        settings.phoneNumber = m_user->input->phone;
+        settings.attacksCount = m_user->input->attackTime;
 
         ServiceParser serviceParser(settings, m_servicesPath);
         const std::vector<Service>& services = serviceParser.GetServices();
 
-        std::unique_ptr<Executor> executor = std::make_unique<Executor>(settings, services);
+        auto executor = std::make_unique<Executor>(settings, services);
         executor->Execute(m_user);
 
         m_messageHandler->SendChatMessage("✅ Атака на указанный номер успешно завершена");

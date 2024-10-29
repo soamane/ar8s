@@ -17,4 +17,4 @@ private:
     std::filesystem::path m_path;
 };
 
-#endif // !CONFIG_PARSER_HPP
+#endif // CONFIG_PARSER_HPP

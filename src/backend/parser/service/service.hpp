@@ -2,7 +2,6 @@
 #define SERVICE_HPP
 
 #include "../settings/parser/settings_parser.hpp"
-
 #include <vector>
 #include <MyCurl.hpp>
 
@@ -10,14 +9,11 @@ struct Service {
     std::string name;
     std::string url;
     std::string payload;
-
     std::vector<std::string> headers;
-
     RequestType requestType;
     ProtocolType protocolType;
 
-public:
     void SetRandomUserAgent(const Settings& settings);
 };
 
-#endif // !SERVICE_HPP
+#endif // SERVICE_HPP

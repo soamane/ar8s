@@ -11,8 +11,7 @@ struct UserInput {
 
     int attackTime;
     std::string phone;
-
     std::unique_ptr<InputStatus> status;
 };
 
-#endif // !USER_INPUT_HPP
+#endif // USER_INPUT_HPP

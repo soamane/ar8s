@@ -1,6 +1,7 @@
 #include "service_parser.hpp"
 
-ServiceParser::ServiceParser(const Settings& settings, const std::filesystem::path& path) : m_settings(settings), ConfigParser(path) {
+ServiceParser::ServiceParser(const Settings& settings, const std::filesystem::path& path)
+    : m_settings(settings), ConfigParser(path) {
     Load();
 }
 
@@ -14,11 +15,8 @@ const std::vector<Service>& ServiceParser::GetServices() {
 
 void ServiceParser::Load() {
     nlohmann::json data = Parse();
-    if (data.empty()) {
-        throw std::runtime_error("Service's data is empty.");
-    }
 
-    if (!data.contains("services") || !data["services"].is_array() || data["services"].empty()) {
+    if (data.empty() || !data.contains("services") || !data["services"].is_array() || data["services"].empty()) {
         throw std::runtime_error("Failed to parse 'services', please check the correctness of the file.");
     }
 
@@ -46,9 +44,9 @@ void ServiceParser::Load() {
 
 void ServiceParser::ReplacePhoneNumber(std::string& source) {
     std::size_t pos = 0;
-    std::string_view placeholder = "${phone}";
+    const std::string_view placeholder = "${phone}";
 
-    while ((pos = source.find("${phone}", pos)) != std::string::npos) {
+    while ((pos = source.find(placeholder, pos)) != std::string::npos) {
         source.replace(pos, placeholder.length(), m_settings.phoneNumber);
         pos += m_settings.phoneNumber.length();
     }

@@ -15,7 +15,7 @@ struct UserData {
     std::unique_ptr<UserInput> input;
     std::unique_ptr<ExecutorStatus> executor;
 
-    bool isInitialized();
+    bool isInitialized() const;
 };
 
 #endif // !USER_DATA_HPP

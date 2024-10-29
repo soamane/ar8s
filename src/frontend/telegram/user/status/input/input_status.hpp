@@ -8,4 +8,4 @@ struct InputStatus {
     void clear();
 };
 
-#endif // !USER_STATUS_HPP
+#endif // USER_STATUS_HPP

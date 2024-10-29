@@ -1,5 +1,4 @@
 #include "service.hpp"
-
 #include "../../executor/helper/vector/vector_helper.hpp"
 
 void Service::SetRandomUserAgent(const Settings& settings) {
@@ -7,22 +6,15 @@ void Service::SetRandomUserAgent(const Settings& settings) {
         return;
     }
 
-    std::string_view keyWord = "User-Agent: ";
+    constexpr std::string_view keyWord = "User-Agent: ";
 
     for (auto& header : headers) {
-        if (header.find(keyWord) != 0) {
-            continue;
+        if (header.find(keyWord) == 0) {
+            auto optionalUserAgent = VectorHelper::GetRandomObject<UserAgent>(settings.userAgents);
+            if (optionalUserAgent) {
+                header = keyWord.data() + optionalUserAgent->name;
+            }
+            break;
         }
-
-        auto optionalUserAgent = VectorHelper::GetRandomObject<UserAgent>(settings.userAgents);
-        if (!optionalUserAgent.has_value()) {
-            return;
-        }
-
-        const UserAgent& userAgent = optionalUserAgent.value();
-
-        header = keyWord.data() + userAgent.name;
-
-        break;
     }
 }

@@ -9,13 +9,13 @@
 class ConnectionManager {
 public:
     void RegisterConnection(std::shared_ptr<UserData> userData);
-    bool UnregisterConnection(const int64_t chatId);
+    bool UnregisterConnection(int64_t chatId);
 
-    bool HasConnection(const int64_t chatId) const;
-    std::shared_ptr<UserData> GetUserDataById(const int64_t chatId) const;
+    bool HasConnection(int64_t chatId) const;
+    std::shared_ptr<UserData> GetUserDataById(int64_t chatId) const;
 
 private:
     std::unordered_map<int64_t, std::shared_ptr<UserData>> m_connections;
 };
 
-#endif // !CONNECTION_MANAGER_HPP
+#endif // CONNECTION_MANAGER_HPP

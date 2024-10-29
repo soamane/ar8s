@@ -4,8 +4,8 @@
 #include <string_view>
 
 namespace InputValidator {
-    const bool IsDigitOnly(std::string_view str);
-    const bool IsRussianPhoneNumber(std::string_view str);
+    bool IsDigitOnly(std::string_view str);
+    bool IsRussianPhoneNumber(std::string_view str);
 }
 
-#endif // !INPUT_VALIDATOR_HPP
+#endif // INPUT_VALIDATOR_HPP

@@ -5,16 +5,15 @@
 
 class TelegramBot {
 public:
-    TelegramBot(std::string_view token);
+    explicit TelegramBot(std::string_view token);
 
     void Run();
 
 private:
     void InitLongPoll();
 
-private:
     TgBot::Bot m_bot;
     ConnectionListener m_connectionListener;
 };
 
-#endif // !TELEGRAM_BOT_HPP
+#endif // TELEGRAM_BOT_HPP

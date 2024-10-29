@@ -1,6 +1,7 @@
 #include "telegram_bot.hpp"
 
-TelegramBot::TelegramBot(std::string_view token) : m_bot(token.data()), m_connectionListener(m_bot) { }
+TelegramBot::TelegramBot(std::string_view token)
+    : m_bot(token.data()), m_connectionListener(m_bot) { }
 
 void TelegramBot::Run() {
     m_connectionListener.Listen();
@@ -13,7 +14,6 @@ void TelegramBot::InitLongPoll() {
         while (true) {
             longPoll.start();
         }
-
     } catch (const TgBot::TgException& e) {
         std::cerr << "TgLongPoll exception: " << e.what() << std::endl;
     }

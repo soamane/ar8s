@@ -3,7 +3,7 @@
 #include <iostream>
 
 MessageHandler::MessageHandler(TgBot::Bot& bot, std::shared_ptr<UserData> userData)
-: m_bot(bot), m_user(userData) { }
+    : m_bot(bot), m_user(userData) { }
 
 bool MessageHandler::DeleteMessage(int32_t messageId) {
     try {
@@ -14,8 +14,7 @@ bool MessageHandler::DeleteMessage(int32_t messageId) {
     }
 }
 
-TgBot::Message::Ptr MessageHandler::SendChatMessage(std::string_view message)
-{
+TgBot::Message::Ptr MessageHandler::SendChatMessage(std::string_view message) {
     try {
         return m_bot.getApi().sendMessage(m_user->chatId, message.data());
     } catch (const TgBot::TgException& e) {
@@ -23,4 +22,3 @@ TgBot::Message::Ptr MessageHandler::SendChatMessage(std::string_view message)
         return nullptr;
     }
 }
-    

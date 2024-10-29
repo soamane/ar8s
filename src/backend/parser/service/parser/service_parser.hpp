@@ -23,4 +23,4 @@ private:
     std::vector<Service> m_services;
 };
 
-#endif // !SERVICE_PARSER_HPP
+#endif // SERVICE_PARSER_HPP

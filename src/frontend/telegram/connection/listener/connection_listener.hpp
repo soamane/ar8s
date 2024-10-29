@@ -6,20 +6,22 @@
 #include "../../chat/message/handler/message_handler.hpp"
 
 #include <tgbot/tgbot.h>
+#include <vector>
+#include <memory>
 
 class ConnectionListener {
 public:
-    ConnectionListener(TgBot::Bot& bot);
+    explicit ConnectionListener(TgBot::Bot& bot);
     void Listen();
 
 private:
-    void AcceptConnection(const int64_t currentChatId);
+    void AcceptConnection(int64_t currentChatId);
     void CreateEventHandler(std::shared_ptr<UserData> userData);
+
 private:
     TgBot::Bot& m_bot;
-
     ConnectionManager m_connectionManager;
     std::vector<std::shared_ptr<EventHandler>> m_eventHandlers;
 };
 
-#endif // !CONNECTION_LISTENER_HPP
+#endif // CONNECTION_LISTENER_HPP
