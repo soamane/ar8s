@@ -16,6 +16,8 @@ public:
 
 private:
     void AcceptConnection(int64_t currentChatId);
+
+    std::shared_ptr<UserData> CreateConnection(int64_t currentChatId);
     void CreateEventHandler(std::shared_ptr<UserData> userData);
 
 private:

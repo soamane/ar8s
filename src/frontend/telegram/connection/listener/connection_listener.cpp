@@ -12,6 +12,11 @@ void ConnectionListener::Listen() {
 }
 
 void ConnectionListener::AcceptConnection(int64_t currentChatId) {
+    auto currentUserData = CreateConnection(currentChatId);
+    CreateEventHandler(currentUserData);
+}
+
+std::shared_ptr<UserData> ConnectionListener::CreateConnection(int64_t currentChatId) {
     auto currentUserData = m_connectionManager.GetUserDataById(currentChatId);
 
     if (!currentUserData) {
@@ -19,7 +24,7 @@ void ConnectionListener::AcceptConnection(int64_t currentChatId) {
         m_connectionManager.RegisterConnection(currentUserData);
     }
 
-    CreateEventHandler(currentUserData);
+    return currentUserData;
 }
 
 void ConnectionListener::CreateEventHandler(std::shared_ptr<UserData> userData) {
