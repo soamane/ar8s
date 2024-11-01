@@ -27,6 +27,8 @@ void BotExecutor::Execute() {
         auto executor = std::make_unique<Executor>(settings, services);
         executor->Execute(m_user);
 
+        m_user->executor->attackInProgress = false;
+
         m_messageHandler->SendChatMessage("✅ Атака на указанный номер успешно завершена");
         m_messageHandler->SendChatMessage("Чтобы снова воспользоваться функционалом, введите данные снова");
 
