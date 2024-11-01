@@ -21,7 +21,8 @@ private:
 private:
     TgBot::Bot& m_bot;
     ConnectionManager m_connectionManager;
-    std::vector<std::shared_ptr<EventHandler>> m_eventHandlers;
+
+    std::unordered_map<std::shared_ptr<UserData>, std::shared_ptr<EventHandler>> m_eventHandlers;
 };
 
 #endif // CONNECTION_LISTENER_HPP
