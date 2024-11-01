@@ -105,9 +105,19 @@ bool EventHandler::ValidateUserData() const {
 }
 
 void EventHandler::onCommandEvent(std::string_view command, std::function<void(TgBot::Message::Ptr message)> func) {
-    m_bot.getEvents().onCommand(command.data(), std::move(func));
+    m_bot.getEvents().onCommand(command.data(), [this, func](TgBot::Message::Ptr message)
+    {
+        if (m_user->chatId == message->chat->id) {
+            func(message);
+        }
+    });
 }
 
 void EventHandler::onNonCommandMessageEvent(std::function<void(TgBot::Message::Ptr message)> func) {
-    m_bot.getEvents().onNonCommandMessage(std::move(func));
+    m_bot.getEvents().onNonCommandMessage([this, func](TgBot::Message::Ptr message)
+    {
+        if (m_user->chatId == message->chat->id) {
+            func(message);
+        }
+    });
 }
