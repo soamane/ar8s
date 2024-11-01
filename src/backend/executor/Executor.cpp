@@ -4,7 +4,6 @@
 #include "handler/request/request_handler.hpp"
 
 #include <future>
-#include <iostream>
 #include <thread>
 
 Executor::Executor(const Settings& settings, const std::vector<Service>& services)

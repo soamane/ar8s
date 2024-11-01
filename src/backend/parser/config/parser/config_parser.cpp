@@ -1,7 +1,6 @@
 #include "config_parser.hpp"
 
 #include <fstream>
-#include <iostream>
 #include <stdexcept>
 
 ConfigParser::ConfigParser(const std::filesystem::path& path) : m_path(path) {

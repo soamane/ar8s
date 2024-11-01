@@ -1,6 +1,5 @@
 #include "connection_listener.hpp"
 #include "../../user/data/user_data.hpp"
-#include <iostream>
 
 ConnectionListener::ConnectionListener(TgBot::Bot& bot)
     : m_bot(bot) { }
