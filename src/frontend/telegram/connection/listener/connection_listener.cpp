@@ -7,7 +7,7 @@ ConnectionListener::ConnectionListener(TgBot::Bot& bot)
 void ConnectionListener::Listen() {
     m_bot.getEvents().onCommand("start", [this](TgBot::Message::Ptr message)
     {
-        AcceptConnection(message->chat->id);
+        AcceptConnection(message->from->id);
     });
 }
 
