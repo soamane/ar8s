@@ -78,7 +78,7 @@ void EventHandler::RegisterNonCommandMessageEvent() {
     {
         if (!m_user->input->status->phoneEntered) {
             if (!m_inputProcessor->ProcessPhoneNumber(message->text)) {
-                m_messageHandler->SendChatMessage("❌ Некорректный номер телефона.\n\nУбедитесь в правильности введенного номера...");
+                m_messageHandler->SendChatMessage("❌ Некорректный номер телефона.\n\nУбедитесь в правильности введенного номера и повторите попытку");
                 return;
             }
 
@@ -107,8 +107,10 @@ bool EventHandler::ValidateUserData() const {
 void EventHandler::onCommandEvent(std::string_view command, std::function<void(TgBot::Message::Ptr message)> func) {
     m_bot.getEvents().onCommand(command.data(), [this, func](TgBot::Message::Ptr message)
     {
-        if (m_user->chatId == message->chat->id) {
+        if (m_user->chatId == message->from->id) {
             func(message);
+        } else {
+            std::cout << "Collision!" << std::endl;
         }
     });
 }
@@ -116,8 +118,10 @@ void EventHandler::onCommandEvent(std::string_view command, std::function<void(T
 void EventHandler::onNonCommandMessageEvent(std::function<void(TgBot::Message::Ptr message)> func) {
     m_bot.getEvents().onNonCommandMessage([this, func](TgBot::Message::Ptr message)
     {
-        if (m_user->chatId == message->chat->id) {
+        if (m_user->chatId == message->from->id) {
             func(message);
+        } else {
+            std::cout << "Collision!" << std::endl;
         }
     });
 }
